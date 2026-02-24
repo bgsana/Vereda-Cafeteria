@@ -1,28 +1,25 @@
-
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Vereda_Cafeteria.Models;
 
-[Table("ProdutoCardapio")]
-public class ProdutoCardapio
+[Table("Evento")]
+public class Evento
 {
     [Key]
     public int Id { get; set; }
 
     [Required(ErrorMessage = "O nome é obrigatório")]
-    [StringLength(200)]
+    [StringLength(150)]
     public string Nome { get; set; }
 
     [Required(ErrorMessage = "A descrição é obrigatória")]
-    [StringLength(500)]
+    [StringLength(1000)]
     public string Descricao { get; set; }
 
-    [Column(TypeName = "decimal(10,2)")]
-    public decimal Preco { get; set; }
+    [Required(ErrorMessage = "A data é obrigatória")]
+    public string DataEvento { get; set; }
 
-    [StringLength(500)]
-    public string Foto { get; set; }
-
-    public bool PossuiSabor { get; set; } = false;
+    [Required(ErrorMessage = "A imagem é obrigatória")]
+    public string ImagemUrlEvento { get; set; }
 }
