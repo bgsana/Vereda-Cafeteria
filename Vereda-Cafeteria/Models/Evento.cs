@@ -7,19 +7,23 @@ namespace Vereda_Cafeteria.Models;
 public class Evento
 {
     [Key]
-    public int Id { get; set; }
+    public int EventoId { get; set; }
 
-    [Required(ErrorMessage = "O nome é obrigatório")]
-    [StringLength(150)]
-    public string Nome { get; set; }
+    [Required(ErrorMessage = "O título é obrigatório")]
+    [StringLength(200, MinimumLength = 3, ErrorMessage = "O título deve ter no mínimo 3 caracteres")]
+    [Display(Name = "Título do Evento")]
+    public string Titulo { get; set; }
 
     [Required(ErrorMessage = "A descrição é obrigatória")]
-    [StringLength(1000)]
+    [StringLength(1000, ErrorMessage = "A descrição deve ter no máximo 1000 caracteres")]
+    [Display(Name = "Descrição")]
     public string Descricao { get; set; }
 
-    [Required(ErrorMessage = "A data é obrigatória")]
-    public string DataEvento { get; set; }
-
     [Required(ErrorMessage = "A imagem é obrigatória")]
-    public string ImagemUrlEvento { get; set; }
+    [Display(Name = "Imagem do Evento")]
+    public string? ImagemUrl { get; set; }
+
+    [Required]
+    [Display(Name = "Data do Evento")]
+    public string DataEvento { get; set; }
 }
