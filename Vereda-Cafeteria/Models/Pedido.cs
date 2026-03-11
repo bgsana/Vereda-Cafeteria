@@ -12,7 +12,7 @@ public class Pedido
     public int PedidoId { get; set; }
 
     [Required(ErrorMessage = "O nome é obrigatório")]
-    [StringLength(200)]
+    [StringLength(200, MinimumLength = 3, ErrorMessage = "O nome deve ter no mínimo 3 caracteres")]
     [Display(Name = "Nome do Cliente")]
     public string NomeCliente { get; set; }
     
@@ -23,7 +23,10 @@ public class Pedido
     public string Telefone { get; set; }
     
     [Required(ErrorMessage = "O valor total é obrigatório")]
+    [Range(0.01, 99999.99, ErrorMessage = "Valor inválido")]
+    [DataType(DataType.Currency)]
     [Display(Name = "Valor Total")]
+    [Column(TypeName = "decimal(10,2)")]
     public decimal ValorTotal { get; set; }
     
     [Required]

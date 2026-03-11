@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 namespace Vereda_Cafeteria.Models;
 
 [Table("Usuario")]
-public class UserApp : IdentityUser
+public class Usuario : IdentityUser
 {
     [Required]
     [StringLength(200)]

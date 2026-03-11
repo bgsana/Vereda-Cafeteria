@@ -16,7 +16,7 @@ public class Categoria
     
     [Required]
     [StringLength(20)]
-    [Display(Name = "Cor da Categoria")]
+    [Display(Name = "Cor da Categoria (Hexadecimal)")]
     public string CorHex { get; set; }
 
     // Relacionamento: uma categoria tem muitos produtos

@@ -19,6 +19,6 @@ public class Banner
     public string ImagemUrl { get; set; }
 
     [Required]
-    [Display(Name = "Ativo")]
+    [Display(Name = "O banner está ativo?")]
     public bool Ativo { get; set; }
 }
