@@ -24,6 +24,7 @@ public class Evento
     public string? ImagemUrl { get; set; }
 
     [Required]
+    [DataType(DataType.Date)]
     [Display(Name = "Data do Evento")]
-    public string DataEvento { get; set; }
+    public DateTime DataEvento { get; set; }
 }

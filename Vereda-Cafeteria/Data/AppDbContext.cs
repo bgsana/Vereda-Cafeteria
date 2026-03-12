@@ -18,5 +18,4 @@ public class AppDbContext : IdentityDbContext<Usuario>
     public DbSet<ItemPedido> ItensPedido { get; set; }
     public DbSet<Evento> Eventos { get; set; }
     public DbSet<Banner> Banners { get; set; }
-
 }

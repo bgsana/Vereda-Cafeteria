@@ -43,5 +43,5 @@ public class Pedido
     public FormaRecebimento FormaRecebimento { get; set; }
 
     // Relacionamento: um pedido tem muitos itens
-    public virtual Collection<ItemPedido> ItensPedido { get; set; }
+    public virtual Collection<ItemPedido> ItensPedido { get; set; } = new();
 }
