@@ -13,12 +13,10 @@ builder.Services.AddControllersWithViews();
 
 // Lê a Connection String
 string conexao = builder.Configuration.GetConnectionString("VeredaDb");
-//Detecta automaticamente a versão do MySQL
-var versao = ServerVersion.AutoDetect(conexao);
 // Registra o AppDbContext como serviço => permite injeção de dependência nos controllers
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseMySQL(conexao, versao)
-)
+    options.UseMySQL(conexao)
+);
 
 // --- CONFIGURAÇÃO DO IDENTITY (AUTENTICAÇÂO) ---
 
