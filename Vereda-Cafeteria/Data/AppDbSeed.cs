@@ -147,6 +147,31 @@ public class AppDbSeed
                 FotoPerfil = "/img/usuarios/foto.png"
             }
         };
+        foreach (var user in usuarios)
+        {
+            // cria o gerador de hash de senha (Criptografada)
+            PasswordHasher<Usuario> pass = new();
+            // gera o hash da senha e salva no usuário
+            user.PasswordHash = pass.HashPassword(user, "vereda123");
+        }
+        builder.Entity<Usuario>().HasData(usuarios);
+        #endregion
+    
+        #region Populate UserRole - Usuário com Perfil
+        List<IdentityUserRole<string>> userRoles = new()
+        {
+            new IdentityUserRole<string>()
+            {
+                UserId = "12863b4e-bf5a-47f5-b25a-7ac77689a976",
+                RoleId = "97feaad6-3218-404f-9c9e-23122c99985a"
+            },
+            new IdentityUserRole<string>()
+            {
+                UserId = "3eab78a4-3947-44f3-960c-865703a0c1da",
+                RoleId = "97feaad6-3218-404f-9c9e-23122c99985a"
+            }
+        };
+        builder.Entity<IdentityUserRole<string>>().HasData(userRoles);
         #endregion
     }
 }
