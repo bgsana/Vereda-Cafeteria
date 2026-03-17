@@ -133,7 +133,7 @@ public class AppDbSeed
                 EmailConfirmed = true,
                 Nome = "Ana Lívia",
                 FotoPerfil = "/img/usuarios/foto.png"
-            }
+            },
             new Usuario
             {
                 Id = "3eab78a4-3947-44f3-960c-865703a0c1da",
