@@ -2,6 +2,10 @@
     ViewData["Title"] = "Início";
 }
 
+@section Styles {
+  <link rel="stylesheet" href="~/css/home.css" />
+}
+
 <div id="carouselExampleIndicators" class="carousel slide">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -31,10 +35,10 @@
 
 <!-- CARD 1 - SOBRE NÓS -->
 <section class="home-section sobreNos">
-    <div class="container-fluid">
+    <div class="container">
     <div class="row align-items-center g-0">
 
-    <div class="col-md-5 text-content">
+    <div class="col-md-6 text-content">
         <div class="text-box">
             <h2>Sobre Nós</h2>
             <p>
@@ -51,7 +55,7 @@
         </div>
     </div>
 
-    <div class="col-md-7 fotos-container">
+    <div class="col-md-6 fotos-container">
         <div class="fotos-grid">
             <img src="~/img/Inicio/donos.jpg" class="foto-grande">
             <img src="~/img/Inicio/sobre2.JPG">
