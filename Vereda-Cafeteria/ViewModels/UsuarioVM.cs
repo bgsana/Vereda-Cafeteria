@@ -4,7 +4,7 @@ namespace Vereda_Cafeteria.ViewModels;
 // dados do usuário logado pela aplicação sem expor diretamente o AppUse
 public class UsuarioVM
 {
-    public int Id { get; set; }
+    public string Id { get; set; }
     public string UserName { get; set; }
     public string Nome { get; set; }
     public string Email { get; set; }

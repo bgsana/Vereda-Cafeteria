@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Vereda_Cafeteria.Data;
 using Vereda_Cafeteria.Models;
+using Vereda_Cafeteria.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +35,10 @@ builder.Services.AddIdentity<Usuario, IdentityRole>(options =>
 
 // Habilita geração de tokens (reset senha etc)
 .AddDefaultTokenProviders();
+
+// Registro do serviço de usuário
+// AddTransient(1 dos 3 tipos): uma nova instância do UserService será criada a cada vez que ele for solicitado
+builder.Services.AddTransient<IUsuarioService, UsuarioService>();
 
 // --- CRIA A APLICAÇÂO ---
 

@@ -13,6 +13,7 @@ public class AppDbContext : IdentityDbContext<Usuario>
     }
 
     // DbSet = representa uma tabela no banco de dados
+    public DbSet<Usuario> Usuarios { get; set; }
     public DbSet<Categoria> Categorias { get; set; }
     public DbSet<Produto> Produtos { get; set; }
     public DbSet<Pedido> Pedidos { get; set; }
