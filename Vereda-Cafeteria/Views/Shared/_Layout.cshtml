@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,89 +9,92 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Vereda_Cafeteria.styles.css" asp-append-version="true" />
     @RenderSection("Styles", required: false)
+    <link rel="icon" type="image/png" sizes="16x16"  href="~/img/favicon.ico">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
 </head>
 
 <body>
 
-<header class="site-header">
-  <div class="header-content">
+    <header class="site-header">
+        <div class="header-content">
 
-    <ul class="header-menu left">
-      <li><a asp-controller="Início" asp-action="#">Início</a></li>
-      <li><a asp-controller="Home" asp-action="#">Sobre Nós</a></li>
-      <li><a asp-controller="Home" asp-action="#">Nosso Ambiente</a></li>
-    </ul>
-
-    <div class="header-logo">
-      <img src="~/img/logo.png" alt="Logo Vereda" />
-    </div>
-
-    <ul class="header-menu right">
-      <li><a asp-controller="Home" asp-action="#">Menu</a></li>
-      <li><a asp-controller="Home" asp-action="#">Vereda Ateliê</a></li>
-      <li><a asp-controller="Home" asp-action="#">Eventos</a></li>
-    </ul>
-
-  </div>
-</header>
-<div class="container-fluid p-0">
-    @RenderBody()
-</div>
-
-<footer class="footer">
-    <div class="footer-container">
-
-        <div class="footer-logo">
-            <img height="180" src="~/img/logo.png" alt="Logo"/>
-        </div>
-
-        <div class="footer-column">
-            <h3>Menu institucional</h3>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Sobre nós</a></li>
-                <li><a href="#">Nosso Ambiente</a></li>
-                <li><a href="#">Menu</a></li>
-                <li><a href="#">Loja Vereda</a></li>
-                <li><a href="#">Eventos</a></li>
+            <ul class="header-menu left">
+                <li><a asp-controller="Home" asp-action="Index">Início</a></li>
+                <li><a asp-controller="Home" asp-action="#">Sobre Nós</a></li>
+                <li><a asp-controller="Home" asp-action="#">Nosso Ambiente</a></li>
             </ul>
-        </div>
 
-        <div class="footer-column">
-            <h3>Fale Conosco</h3>
-            <p>vereda.barrabonita@gmail.com</p>
-            <p>14 99885-9509</p>
-            <p>R. Primeiro de Março, 234 - Centro,<br>
-               Barra Bonita - SP, 17340-035</p>
-
-            <div class="social-icons">
-                <a href="#">insta</a>
-                <a href="#">face</a>
-                <a href="#">whats</a>
+            <div class="header-logo">
+                <img src="~/img/logo.png" alt="Logo Vereda" />
             </div>
-        </div>
 
-        <div class="footer-column">
-            <h3>Horário de Atendimento</h3>
-            <p class="highlight">Segunda à Sábado</p>
-            <p>9h às 18h</p>
-            <p class="highlight">Domingo</p>
-            <p>9h às 12h</p>
-        </div>
+            <ul class="header-menu right">
+                <li><a asp-controller="Home" asp-action="#">Menu</a></li>
+                <li><a asp-controller="Home" asp-action="#">Vereda Ateliê</a></li>
+                <li><a asp-controller="Home" asp-action="#">Eventos</a></li>
+            </ul>
 
+        </div>
+    </header>
+    <div class="container-fluid p-0">
+        @RenderBody()
     </div>
 
-    <div class="footer-bottom">
-        <a href="#">Política de Privacidade</a>
-        <a href="#">Termos de Uso</a>
-    </div>
-</footer>
+    <footer class="footer">
+        <div class="footer-container">
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+            <div class="footer-logo">
+                <img height="180" src="~/img/logo.png" alt="Logo" />
+            </div>
 
-</body>
+            <div class="footer-column">
+                <h3>Menu institucional</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Sobre nós</a></li>
+                    <li><a href="#">Nosso Ambiente</a></li>
+                    <li><a href="#">Menu</a></li>
+                    <li><a href="#">Loja Vereda</a></li>
+                    <li><a href="#">Eventos</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Fale Conosco</h3>
+                <p>vereda.barrabonita@gmail.com</p>
+                <p>14 99885-9509</p>
+                <p>R. Primeiro de Março, 234 - Centro,<br>
+                    Barra Bonita - SP, 17340-035</p>
+
+                    <div class="social-icons">
+                        <a href="#">insta</a>
+                        <a href="#">face</a>
+                        <a href="#">whats</a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Horário de Atendimento</h3>
+                    <p class="highlight">Segunda à Sábado</p>
+                    <p>9h às 18h</p>
+                    <p class="highlight">Domingo</p>
+                    <p>9h às 12h</p>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <a href="#">Política de Privacidade</a>
+                <a href="#">Termos de Uso</a>
+            </div>
+        </footer>
+
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        @await RenderSectionAsync("Scripts", required: false)
+
+    </body>
 
 </html>

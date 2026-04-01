@@ -3,171 +3,162 @@
 }
 
 @section Styles {
-  <link rel="stylesheet" href="~/css/home.css" />
+    <link rel="stylesheet" href="~/css/home.css" />
 }
 
 <div id="carouselExampleIndicators" class="carousel slide">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="~/img/teste1.png" class="d-block w-100" alt="...">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></button>
     </div>
-    <div class="carousel-item">
-      <img src="~/img/teste2.png" class="d-block w-100" alt="...">
+
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="~/img/teste1.png" class="d-block w-100">
+        </div>
+        <div class="carousel-item">
+            <img src="~/img/teste2.png" class="d-block w-100">
+        </div>
+        <div class="carousel-item">
+            <img src="~/img/teste3.png" class="d-block w-100">
+        </div>
     </div>
-    <div class="carousel-item">
-      <img src="~/img/teste3.png" class="d-block w-100" alt="...">
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
 </div>
 
-<!-- CARD 1 - SOBRE NÓS -->
-<section class="home-section sobreNos">
-    <div class="container">
-    <div class="row align-items-center g-0">
+<div class="divider"></div>
 
-    <div class="col-md-6 text-content">
-        <div class="text-box">
-            <h2>Sobre Nós</h2>
-            <p>
-                Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit.
-                In sit amet sollicitudin turpis.
-            </p>
+<!-- SOBRE NÓS -->
+<section class="section about" id="sobre">
+    <div class="panel panel-brown panel-text">
+        <h2>Sobre Nós</h2>
+        <p>
+            Lorem ipsum dolor sit amet,<br />
+            consectetur adipiscing elit.<br />
+            In sit amet sollicitudin turpis.
+        </p>
 
-            <a asp-controller="Sobre"
-               asp-action="Index"
-               class="btn-sobre">
-               Conheça nossa história
-            </a>
-        </div>
-    </div>
-
-    <div class="col-md-6 fotos-container">
-        <div class="fotos-grid">
-            <img src="~/img/Inicio/donos.jpg" class="foto-grande">
-            <img src="~/img/Inicio/sobre2.JPG">
-            <img src="~/img/Inicio/sobre3.jpeg">
-        </div>
-    </div>
-</div>
-</div>
-</section>
-
-<section class="home-section ambiente">
-    <div class="container">
-        <div class="row align-items-center">
-
-            <div class="col-md-6 fotos-container">
-                <div class="fotos-grid">
-                    <img src="~/img/Inicio/amb1.png" class="foto-grande">
-                    <img src="~/img/Inicio/amb2.png">
-                    <img src="~/img/Inicio/amb3.png">
-                </div>
-            </div>
-
-            <div class="col-md-6 text-content">
-                <div class="text-box">
-                    <h2>Nosso Ambiente</h2>
-                    <p>
-                        Um espaço pensado para acolher, inspirar e proporcionar
-                        momentos especiais.
-                    </p>
-
-                    <a asp-controller="Galeria"
-                       asp-action="Index"
-                       class="btn-ambiente">
-                       Galeria de fotos
-                    </a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<section class="home-section cardapio">
-    <div class="container">
-        <div class="row align-items-center">
-
-            <div class="col-md-6">
-                <h2>Cardápio</h2>
-                <p>
-                    Descubra sabores preparados com carinho.
-                </p>
-                <a asp-controller="Cardapio"
-                   asp-action="Index"
-                   class="btn-cardapio">
-                   Ver cardápio
-                </a>
-            </div>
-
-            <div class="col-md-6">
-                <video controls width="100%">
-                    <source src="~/img/Inicio/video.mov" type="video/mp4">
-                </video>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<section class="home-section loja-vereda">
-    <div class="container text-center">
-
-        <h2>Loja Vereda</h2>
-
-        <div id="carouselLoja" class="carousel slide" data-bs-ride="carousel">
-
-            <div class="carousel-inner">
-
-                <div class="carousel-item active">
-                    <div class="produtos-container">
-
-                        <div class="produto-card"></div>
-                        <div class="produto-card"></div>
-                        <div class="produto-card"></div>
-
-                    </div>
-                </div>
-
-                <div class="carousel-item">
-                    <div class="produtos-container">
-
-                        <div class="produto-card"></div>
-                        <div class="produto-card"></div>
-                        <div class="produto-card"></div>
-
-                    </div>
-                </div>
-
-            </div>
-
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselLoja" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-            </button>
-
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselLoja" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-            </button>
-
-        </div>
-
-        <a asp-controller="Loja" asp-action="Index" class="btn-loja">
-            Ver Loja Vereda
+        <a asp-controller="Sobre" asp-action="Index" class="btn-sobre">
+            Conheça nossa história
         </a>
+    </div>
 
+    <div class="photo-layout photo-layout-about">
+        <div class="photo photo-main">
+            <img src="~/img/Inicio/donos.jpg" />
+        </div>
+
+        <div class="photo-stack">
+            <div class="photo">
+                <img src="~/img/Inicio/sobre2.JPG" />
+            </div>
+            <div class="photo">
+                <img src="~/img/Inicio/sobre3.jpeg" />
+            </div>
+        </div>
     </div>
 </section>
+
+<div class="divider"></div>
+
+<!-- AMBIENTE -->
+<section class="section environment" id="ambiente">
+    <div class="photo-layout photo-layout-environment">
+        <div class="photo-stack left-stack">
+            <div class="photo">
+                <img src="~/img/Inicio/amb2.png" />
+            </div>
+            <div class="photo">
+                <img src="~/img/Inicio/amb3.png" />
+            </div>
+        </div>
+
+        <div class="photo photo-main vertical-main">
+            <img src="~/img/Inicio/amb1.png" />
+        </div>
+    </div>
+
+    <div class="panel panel-red panel-text">
+        <h2>Nosso Ambiente</h2>
+        <p>
+            Um espaço pensado para acolher,<br />
+            inspirar e proporcionar momentos especiais.
+        </p>
+
+        <a asp-controller="Galeria" asp-action="Index" class="btn-ambiente">
+            Galeria de fotos
+        </a>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CARDÁPIO -->
+<section class="section menu-section" id="cardapio">
+    <div class="panel panel-teal panel-text">
+        <h2>Cardápio</h2>
+        <p>
+            Descubra sabores preparados com carinho.
+        </p>
+
+        <a asp-controller="Cardapio" asp-action="" class="btn-cardapio">
+            Ver cardápio
+        </a>
+    </div>
+
+    <div class="photo single-photo">
+        <video controls width="100%">
+            <source src="~/img/Inicio/video.mov" type="video/mp4">
+        </video>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- LOJA -->
+<section class="store" id="loja">
+    <h2>Loja Vereda</h2>
+
+    <div id="carouselLoja" class="carousel slide">
+
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="store-track">
+                    <div class="store-card"></div>
+                    <div class="store-card"></div>
+                    <div class="store-card"></div>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="store-track">
+                    <div class="store-card"></div>
+                    <div class="store-card"></div>
+                    <div class="store-card"></div>
+                </div>
+            </div>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselLoja" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselLoja" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+
+    <a asp-controller="Loja" asp-action="Index" class="btn-loja">
+        Ver Loja Vereda
+    </a>
+</section>
+
+<div class="divider"></div>
