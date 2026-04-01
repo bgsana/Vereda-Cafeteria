@@ -5,11 +5,81 @@
 @font-face {
   font-family: 'Playlist Script';
   src: url('/fonts/PlaylistScript.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
 }
 
-/* COMPONENTES */
+/* VARIÁVEIS */
+:root {
+  --brown: #372314;
+  --deep-red: #730000;
+  --teal: #00464B;
+  --store-bg: #9fb6b6;
+  --white: #ffffff;
+}
+
+/* RESET */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+}
+
+/* DIVIDER */
+.divider {
+  height: 25px;
+}
+
+/* SECTIONS */
+.section {
+  width: 100%;
+}
+
+#cardapio {
+  background-color: var(--teal);
+}
+
+.about,
+.environment,
+.menu-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 450px; /* DIMINUI A ALTURA */
+}
+
+/* PAINEL TEXTO */
+.panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+  color: white;
+}
+
+.panel-text {
+  flex-direction: column;
+}
+
+.panel h2 {
+  font-family: 'Playlist Script';
+  font-size: 42px;
+  margin-bottom: 15px;
+}
+
+.panel p {
+  font-size: 17px;
+  max-width: 420px;
+}
+
+/* CORES */
+.panel-brown { background: var(--brown); }
+.panel-red { background: var(--deep-red); }
+.panel-teal { background: var(--teal); }
+
+/* ===== BOTÕES ===== */
+
 .btn-sobre {
   border: 2px solid #271202;
   color: #ffffff;
@@ -70,127 +140,81 @@
   background-color: #6A9898;
 }
 
-.text-content{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+/* ===== FOTOS ===== */
 
-.text-box{
-  max-width: 420px;
-  text-align: center;
-}
-
-.text-box p {
-  margin-top: 15px;
-}
-
-/* SECTIONS HOME */
-.home-section {
-  width: 100%;
-  margin-bottom: 20px;
-}
-
-.home-section .row {
-  align-items: center;
-}
-
-/* ===== SOBRE NÓS ===== */
-
-.home-section.sobreNos {
-  background-color: #372314;
-  color: #ffffff;
-  font-size: 17px;
-}
-
-.fotos-container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.fotos-grid {
+.photo-layout-about {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  grid-template-rows: 190px 190px;
-  gap: 16px;
-  width: 100%;
-  max-width: 600px;
+  height: 450px;
 }
 
-.foto-grande {
-  grid-row: span 2;
+.photo-layout-environment {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  height: 450px;
 }
 
-.fotos-grid img {
+.photo-main,
+.vertical-main {
+  height: 450px;
+}
+
+.photo-stack {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  height: 450px;
+}
+
+.photo,
+.single-photo {
+  overflow: hidden;
+}
+
+.photo img,
+.single-photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-/* ===== AMBIENTE ===== */
-
-.home-section.ambiente{
-  background-color: #730000;
-  color: white;
-  
-}
-
-.ambiente .fotos-container{
-  justify-content: flex-start;
-}
-
-.ambiente .fotos-grid {
-  grid-template-columns: 1fr 2fr;
-}
-
-.ambiente .foto-grande {
-  grid-column: 2;
-  grid-row: 1 / span 2;
-}
-
-/* ===== CARDÁPIO ===== */
-
-.cardapio {
-  background-color: #00464B;
-  color: white;
-}
-
-.cardapio video {
+/* CARDÁPIO VIDEO */
+.single-photo video {
   width: 100%;
-  height: 396px; /* 190 + 190 + 16 gap */
+  height: 450px;
   object-fit: cover;
-  border-radius: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  display: block;
 }
 
-/* ===== LOJA ===== */
-
-.loja-vereda {
-  background-color: #9fb6b6;
+/* LOJA */
+.store {
+  background: var(--store-bg);
+  height: 450px;
   text-align: center;
+  padding: 30px;
 }
 
-.loja-vereda h2 {
-  color: #ffffff;
-  margin-bottom: 40px;
+.store h2 {
+  font-family: 'Playlist Script';
+  font-size: 42px;
+  color: white;
+  margin-bottom: 25px;
 }
 
-.produtos-container {
+.store-track {
   display: flex;
   justify-content: center;
-  gap: 40px;
-  margin-bottom: 30px;
+  gap: 30px;
+  margin-bottom: 25px;
 }
 
-.produto-card {
+.store-card {
   width: 130px;
   height: 130px;
   background-color: #c2185b;
   border-radius: 12px;
 }
 
-.btn-loja {
-  margin-top: 20px;
+.carousel img {
+  height: 540px;
+  object-fit: cover;
 }
