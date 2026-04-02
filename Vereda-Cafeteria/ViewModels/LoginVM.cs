@@ -20,5 +20,5 @@ public class LoginVM
     public bool ManterConectado { get; set; } = false;
 
     [HiddenInput]
-    public string UrlRetorno { get; set; } // armazena para qual página o usuário deve ser redirecionado após o login
+    public string ReturnUrl { get; set; } // armazena para qual página o usuário deve ser redirecionado após o login
 }
