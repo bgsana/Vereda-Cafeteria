@@ -18,6 +18,7 @@ public class ContaController : Controller // dá acesso a View(), RedirectToActi
         _logger = logger;
         _usuarioService = usuarioService;
     }
+
     [HttpGet] // responde quando o usuário ACESSA a página /Account/Login pelo navegador
     public IActionResult Login(string returnUrl)
     {
@@ -26,7 +27,7 @@ public class ContaController : Controller // dá acesso a View(), RedirectToActi
         // uma página protegida por [Authorize] sem estar logado
         LoginVM loginVM = new()
         {
-              // Se returnUrl for null (acesso direto ao login), usa a raiz do site "~/"
+            // Se returnUrl for null (acesso direto ao login), usa a raiz do site "~/"
             ReturnUrl = returnUrl ?? Url.Content("~/")
         };
 
@@ -34,14 +35,53 @@ public class ContaController : Controller // dá acesso a View(), RedirectToActi
         return View(loginVM);
     }
 
-    public IActionResult Index()
+    [HttpPost]
+    [ValidateAntiForgeryToken] // Valida o token oculto gerado automaticamente no formulário (proteção CSRF)
+    public async Task<IActionResult> Login(LoginVM loginVM)
     {
-        return View();
+        if (ModelState.IsValid) // verifica se os campos passaram nas validações do ViewModel
+        {
+            // Atribui a responsabilidade da autenticação ao UserService
+            // O Controller só sabe o resultado e não como funciona
+            var result = await _usuarioService.Login(loginVM);
+
+            // Analisa o resultado e define a mensagem de feedback para o usuário
+            // TempData: dicionário que sobrevive a apenas UMA requisição
+            // Útil para exibir mensagens após redirecionamentos
+            if (result.Succeeded)
+                TempData["Success"] = "Login realizado com sucesso! Redirecionando...";
+
+            else if (result.IsLockedOut)
+                TempData["Failure"] = "Usuário bloqueado por muitas tentativas.";
+            // Conta bloqueada após N tentativas erradas (configurado no Program.cs)
+
+            else if (result.IsNotAllowed)
+                TempData["Failure"] = "Usuário sem permissão para acessar o sistema.";
+            // Ex: e-mail não confirmado (se RequireConfirmedAccount = true)
+
+            else
+                TempData["Failure"] = "E-mail ou senha incorretos. Tente novamente";
+            // Credenciais simplesmente erradas
+        }
+        else
+            // O ViewModel chegou com dados inválidos (campo vazio, formato errado, etc.)
+            TempData["Failure"] = "Dados inválidos. Verifique os campos preenchidos.";
+
+        // Retorna a mesma View com o loginVM — mantém os dados preenchidos no formulário
+        // e permite que a View exiba as mensagens do TempData
+        return View(loginVM);
     }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
+    // Logout só aceita POST — nunca GET
+    [HttpPost]
+    [ValidateAntiForgeryToken] // também com proteção CSRF
+    public async Task<IActionResult> Logout()
     {
-        return View("Error!");
+        // // Atribui a responsabilidade de logout ao UserService (que chama SignOutAsync internamente)
+        await _usuarioService.Logout();
+
+        // Após deslogar, redireciona para a tela de login
+        // RedirectToAction("Action", "Controller") — sem o sufixo "Controller"
+        return RedirectToAction("Login", "Conta");
     }
 }
