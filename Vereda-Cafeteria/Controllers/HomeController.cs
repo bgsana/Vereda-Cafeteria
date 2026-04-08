@@ -1,11 +1,20 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Vereda_Cafeteria.Data;
 using Vereda_Cafeteria.Models;
 
 namespace Vereda_Cafeteria.Controllers;
 
 public class HomeController : Controller
 {
+    private readonly AppDbContext _context;
+
+    public HomeController(AppDbContext context)
+    {
+        _context = context;
+    }
+
     public IActionResult Index()
     {
         return View();
@@ -14,6 +23,16 @@ public class HomeController : Controller
     public IActionResult Privacy()
     {
         return View();
+    }
+
+    public ActionResult NossoAmbiente()
+    {
+        var imagens = _context.AmbienteImagens
+            .Where(i => i.Ativo)
+            .OrderBy(i => i.Ordem)
+            .ToList();
+
+        return View(imagens);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
