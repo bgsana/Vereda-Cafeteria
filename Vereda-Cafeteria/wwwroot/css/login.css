@@ -1,0 +1,68 @@
+/* IMPORTAÇÕES E FONTES */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Style+Script&display=swap');
+
+@font-face {
+  font-family: 'Playlist Script';
+  src: url('/fonts/PlaylistScript.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+body {
+    background: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 100vh;
+}
+
+.coluna-esquerda {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45%;
+    background-color: rgb(255, 255, 255);
+}
+
+.coluna-esquerda img {
+    width: 100%;
+    max-width: 705px;
+    height: 98%;
+    border-radius: 25px;
+}
+
+.coluna-direita {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(211, 211, 211);
+    width: 55%;
+    height: 100%;
+}
+
+.login-card {
+    background-color: rgb(170, 170, 170);
+    border-radius: 40px;
+    width: 500px;
+    height: 580px;
+}
+
+.form-titulo {
+    font-family: 'Playlist Script';
+}
