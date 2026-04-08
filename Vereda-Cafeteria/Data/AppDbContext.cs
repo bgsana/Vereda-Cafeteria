@@ -7,6 +7,10 @@ namespace Vereda_Cafeteria.Data;
 
 public class AppDbContext : IdentityDbContext<Usuario>
 {
+    public AppDbContext()
+    {
+    }
+
     // Construtor que recebe as opções do banco
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
@@ -20,6 +24,7 @@ public class AppDbContext : IdentityDbContext<Usuario>
     public DbSet<ItemPedido> ItensPedido { get; set; }
     public DbSet<Evento> Eventos { get; set; }
     public DbSet<Banner> Banners { get; set; }
+    public DbSet<AmbienteImagem> AmbienteImagens { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
