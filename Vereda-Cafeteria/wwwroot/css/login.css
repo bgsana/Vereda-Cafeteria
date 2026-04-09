@@ -3,36 +3,143 @@
 @import url('https://fonts.googleapis.com/css2?family=Style+Script&display=swap');
 
 @font-face {
-  font-family: 'Playlist Script';
-  src: url('/fonts/PlaylistScript.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'Playlist Script';
+    src: url('/fonts/PlaylistScript.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
+    /* padding não aumenta o tamanho */
 }
 
 body {
+    font-family: 'Montserrat', sans-serif;
     background: rgb(255, 255, 255);
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    font-family: 'Montserrat', sans-serif;
+    /* 100% da altura da tela */
 }
 
 .container {
     display: flex;
-    flex-direction: row;
     width: 100vw;
     height: 100vh;
 }
 
 .coluna-esquerda {
+    background-color: rgb(255, 255, 255);
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    /* empilha filhos verticalmente */
+    align-items: center;
+    justify-content: center;
+}
+
+.titulo {
+    font-family: 'Playlist Script', cursive;
+    color: #730000;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 36px;
+    /* altura da linha = 1.2× o font-size */
+    /* sem isso as linhas ficam muito juntas */
+    line-height: 1.2;
+}
+
+.subtitulo {
+  font-size: 13px;
+  color: #bdbdbd;
+}
+
+.titulo, .subtitulo {
+    width: 50%;
+    text-align: left;
+}
+
+/* FORMULÁRIO */
+.grupo-inputs {
+    width: 50%;
+    margin-top: 10px;
+}
+
+/* INPUT GROUP */
+.grupo-input,
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+}
+
+.input-label {
+    font-size: 13px;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.input-input {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    outline: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.input-input:focus {
+    border-color: #730000;
+    box-shadow: 0 0 0 2px rgba(123, 63, 228, 0.1);
+}
+
+/* CHECKBOX + LINK */
+.manter-conectado {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    margin: 10px 0 20px;
+}
+
+.manter-conectado input {
+    margin-right: 7px;
+    accent-color: #730000; /* muda o azul para vermelho */
+    cursor: pointer;
+}
+.manter-conectado input:hover {
+    accent-color: #00ff37; /* muda o azul para vermelho */
+}
+.manter-conectado input:active {
+    accent-color: #006eff; /* muda o azul para vermelho */
+}
+
+.form-label {
+    color: #555;
+}
+
+/* BOTÃO */
+.btn-entrar {
+    width: 160px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #730000;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-entrar:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.coluna-direita {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -40,29 +147,14 @@ body {
     background-color: rgb(255, 255, 255);
 }
 
-.coluna-esquerda img {
+.coluna-direita img {
     width: 100%;
-    max-width: 705px;
-    height: 98%;
-    border-radius: 25px;
-}
-
-.coluna-direita {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(211, 211, 211);
-    width: 55%;
     height: 100%;
 }
 
-.login-card {
-    background-color: rgb(170, 170, 170);
-    border-radius: 40px;
-    width: 500px;
-    height: 580px;
-}
-
-.form-titulo {
-    font-family: 'Playlist Script';
+/* ERROS */
+.mensagem-erro {
+    font-size: 12px;
+    color: red;
+    margin-top: 3px;
 }

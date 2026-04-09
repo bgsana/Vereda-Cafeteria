@@ -16,14 +16,37 @@
 
     <div class="container">
         <div class="coluna-esquerda">
-            <img src="~/img/imglogin.png" alt="imagem-teste">
+            <h1 class="titulo">Bem-vindo à Área Administrativa</h2>
+            <p class="subtitulo">Faça o login e tenha acesso</p>
+
+            <form class="grupo-inputs" id="loginForm" asp-action="Login">
+
+                <input asp-for="ReturnUrl">
+
+                <div class="grupo-input">
+                    <label class="input-label" asp-for="Email"></label>
+                    <input class="input-input" asp-for="Email">
+                    <span class="mensagem-erro" asp-validationfor="Email"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label class="input-label" asp-for="Senha"></label>
+                    <input class="input-input" asp-for="Senha">
+                    <span class="mensagem-erro" asp-validationfor="Senha"></span>
+                </div>
+
+                <label class="manter-conectado">
+                    <input type="checkbox" asp-for="ManterConectado">
+                    <label class="form-label" asp-for="ManterConectado"></label>
+                </label>
+
+                <button type="submit" class="btn-entrar" disabled="@(TempData["Success"] != null)">Entrar</button>
+
+            </form>
         </div>
 
         <div class="coluna-direita">
-            <div class="login-card">
-                <h1 class="form-titulo">Bem-vindo a Área Administrativa</h2>
-                <form action=""></form>
-            </div>
+            <img src="~/img/imglogin.png" alt="imagem-teste">
         </div>
     </div>
 
