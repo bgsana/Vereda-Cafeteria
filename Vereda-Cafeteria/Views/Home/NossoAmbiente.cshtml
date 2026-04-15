@@ -1,13 +1,13 @@
 @model IEnumerable<Vereda_Cafeteria.Models.AmbienteImagem>
 
 @{
-    ViewData["Title"] = "Nosso Ambiente";
+    ViewData[index: "Title"] = "Nosso Ambiente";
 }
 
 <section class="nosso-ambiente">
     <div class="nosso-ambiente-header">
         <h2>Nosso Ambiente</h2>
-        <h5>Um estilo no coração de Barra Bonita</h5>
+        <h5>Um oásis no coração de Barra Bonita</h5>
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor 
             incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
@@ -16,7 +16,7 @@
     </div>
 
     <div class="nosso-ambiente-grid">
-        @foreach (var imagem in Model)
+        @foreach (AmbienteImagem imagem in Model)
         {
             <div class="nosso-ambiente-item">
                 <img src="@Url.Content(imagem.CaminhoImagem)"/>

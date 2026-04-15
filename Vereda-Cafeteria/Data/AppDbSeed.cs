@@ -173,5 +173,27 @@ public class AppDbSeed
         };
         builder.Entity<IdentityUserRole<string>>().HasData(userRoles);
         #endregion
+        
+        #region Popular Banners
+        List<AmbienteImagem> ambienteImagems = new()
+        {
+            new AmbienteImagem
+            {
+                Id = 1,
+                CaminhoImagem = "/img/NossoAmbiente/amb1.png",
+                Ativo = true,
+                Ordem = 1
+            },
+            new AmbienteImagem
+            {
+                Id = 2,
+                CaminhoImagem = "/img/NossoAmbiente/amb2.png",
+                Ativo = true,
+                Ordem = 2
+            },
+        };
+
+        builder.Entity<Banner>().HasData(banners);
+        #endregion
     }
 }
