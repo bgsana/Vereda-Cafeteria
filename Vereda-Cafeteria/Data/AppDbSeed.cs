@@ -175,7 +175,7 @@ public class AppDbSeed
         #endregion
         
         #region Popular Banners
-        List<AmbienteImagem> ambienteImagems = new()
+        List<AmbienteImagem> ambienteImagens = new()
         {
             new AmbienteImagem
             {
@@ -193,7 +193,7 @@ public class AppDbSeed
             },
         };
 
-        builder.Entity<Banner>().HasData(banners);
+        builder.Entity<AmbienteImagem>().HasData(ambienteImagens);
         #endregion
     }
 }
