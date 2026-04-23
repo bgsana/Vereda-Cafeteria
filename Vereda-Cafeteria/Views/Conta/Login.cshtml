@@ -1,6 +1,6 @@
 @model LoginVM
 @{
-    Layout = null; // Não usa o layout compartilhado
+    Layout = null;
 }
 
 
@@ -10,39 +10,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="~/css/login.css">
+    <link rel="icon" type="image/png" sizes="16x16"  href="~/img/favicon.ico">
     <title>Vereda Cafeteria - Login</title>
 </head>
 <body>
 
     <div class="container">
         <div class="coluna-esquerda">
-            <h1 class="titulo">Bem-vindo à Área Administrativa</h2>
-            <p class="subtitulo">Faça o login e tenha acesso</p>
+            <div class="caixa-login">
+                <h1 class="caixa-login-titulo">Bem-vindo à Área Administrativa</h2>
+                <p class="caixa-login-subtitulo">Faça login para acessar o painel administrativo</p>
 
-            <form class="grupo-inputs" id="loginForm" asp-action="Login">
+                <form class="caixa-login-form" id="loginForm" asp-action="Login">
 
-                <input asp-for="ReturnUrl">
+                    <input asp-for="ReturnUrl">
 
-                <div class="grupo-input">
-                    <label class="input-label" asp-for="Email"></label>
-                    <input class="input-input" asp-for="Email">
-                    <span class="mensagem-erro" asp-validationfor="Email"></span>
-                </div>
-                
-                <div class="form-group">
-                    <label class="input-label" asp-for="Senha"></label>
-                    <input class="input-input" asp-for="Senha">
-                    <span class="mensagem-erro" asp-validationfor="Senha"></span>
-                </div>
+                    <div class="campo">
+                        <label class="campo-label" asp-for="Email"></label>
+                        <input class="campo-input" asp-for="Email">
+                        <span class="campo-erro" asp-validationfor="Email"></span>
+                    </div>
+                    
+                    <div class="campo">
+                        <label class="campo-label" asp-for="Senha"></label>
+                        <input class="campo-input" asp-for="Senha">
+                        <span class="campo-erro" asp-validationfor="Senha"></span>
+                    </div>
 
-                <label class="manter-conectado">
-                    <input type="checkbox" asp-for="ManterConectado">
-                    <label class="form-label" asp-for="ManterConectado"></label>
-                </label>
+                    <label class="campo-checkbox">
+                        <input type="checkbox" asp-for="ManterConectado">
+                        <label class="campo-checkbox-label" asp-for="ManterConectado"></label>
+                    </label>
 
-                <button type="submit" class="btn-entrar" disabled="@(TempData["Success"] != null)">Entrar</button>
+                    <button type="submit" class="btn-entrar" disabled="@(TempData["Success"] != null)">Entrar</button>
 
-            </form>
+                </form>
+            </div>
         </div>
 
         <div class="coluna-direita">

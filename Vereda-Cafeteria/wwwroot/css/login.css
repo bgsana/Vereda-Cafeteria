@@ -1,4 +1,3 @@
-/* IMPORTAÇÕES E FONTES */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Style+Script&display=swap');
 
@@ -13,7 +12,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* padding não aumenta o tamanho */
 }
 
 body {
@@ -23,7 +21,6 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    /* 100% da altura da tela */
 }
 
 .container {
@@ -33,57 +30,63 @@ body {
 }
 
 .coluna-esquerda {
-    background-color: rgb(255, 255, 255);
-    width: 55%;
+    background-color: #ffffff;
+    width: 50%;
     display: flex;
     flex-direction: column;
-    /* empilha filhos verticalmente */
     align-items: center;
     justify-content: center;
 }
 
-.titulo {
+.caixa-login {
+    width: 65%;
+    background: #ffffff;
+    padding: 70px 30px 70px 30px;
+    border-radius: 16px;
+    box-shadow: rgba(0, 0, 0, 0.10) 0px 3px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.caixa-login-titulo {
     font-family: 'Playlist Script', cursive;
     color: #730000;
     font-weight: normal;
     font-style: normal;
     font-size: 36px;
-    /* altura da linha = 1.2× o font-size */
-    /* sem isso as linhas ficam muito juntas */
-    line-height: 1.2;
+    line-height: 0.9;
 }
 
-.subtitulo {
-  font-size: 13px;
-  color: #bdbdbd;
+.caixa-login-subtitulo {
+    font-size: 13px;
+    color: #9e9e9e;
 }
 
-.titulo, .subtitulo {
-    width: 50%;
-    text-align: left;
+.caixa-login-titulo, .caixa-login-subtitulo {
+    text-align: center;
+    width: 100%;
 }
 
-/* FORMULÁRIO */
-.grupo-inputs {
-    width: 50%;
+.caixa-login-form {
+    width: 100%;
     margin-top: 10px;
 }
 
-/* INPUT GROUP */
-.grupo-input,
-.form-group {
+.campo {
     display: flex;
     flex-direction: column;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
-.input-label {
+.campo-label {
     font-size: 13px;
     margin-bottom: 5px;
     color: #555;
 }
 
-.input-input {
+.campo-input {
     padding: 12px;
     border-radius: 8px;
     border: 1px solid #ddd;
@@ -92,38 +95,40 @@ body {
     transition: 0.3s;
 }
 
-.input-input:focus {
+.campo-input:focus {
     border-color: #730000;
     box-shadow: 0 0 0 2px rgba(123, 63, 228, 0.1);
 }
 
-/* CHECKBOX + LINK */
-.manter-conectado {
+.campo-checkbox {
     display: flex;
     align-items: center;
     font-size: 13px;
-    margin: 10px 0 20px;
+    margin: 10px 2px 20px;
 }
 
-.manter-conectado input {
+.campo-checkbox input {
     margin-right: 7px;
-    accent-color: #730000; /* muda o azul para vermelho */
+    accent-color: #730000;
     cursor: pointer;
 }
-.manter-conectado input:hover {
-    accent-color: #00ff37; /* muda o azul para vermelho */
-}
-.manter-conectado input:active {
-    accent-color: #006eff; /* muda o azul para vermelho */
+
+.campo-checkbox input:active {
+    accent-color: #3b0000;
 }
 
-.form-label {
+.campo-checkbox-label {
     color: #555;
 }
 
-/* BOTÃO */
+.campo-erro {
+    font-size: 12px;
+    color: red;
+    margin-top: 3px;
+}
+
 .btn-entrar {
-    width: 160px;
+    width: 100%;
     padding: 12px;
     border: none;
     border-radius: 8px;
@@ -135,26 +140,18 @@ body {
 }
 
 .btn-entrar:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
+    opacity: 0.95;
 }
 
 .coluna-direita {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 45%;
-    background-color: rgb(255, 255, 255);
+    width: 50%;
+    background-color: #ffffff;
 }
 
 .coluna-direita img {
     width: 100%;
     height: 100%;
-}
-
-/* ERROS */
-.mensagem-erro {
-    font-size: 12px;
-    color: red;
-    margin-top: 3px;
 }
