@@ -1,99 +1,172 @@
-/* IMPORTAÇÕES E FONTES */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Style+Script&display=swap');
 
 @font-face {
-  font-family: 'Playlist Script';
-  src: url('/fonts/PlaylistScript.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'Playlist Script';
+    src: url('/fonts/PlaylistScript.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: rgb(255, 255, 255);
 }
 
 h1 {
-  font-family: 'Playlist Script', cursive;
-  font-size: 55px;
-  color: #00464B;
-  text-align: center;
-  margin-top: 30px;
+    font-family: 'Playlist Script', cursive;
+    color: #730000;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 52px;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 0;
 }
 
+/* --- BARRA DE CATEGORIAS --- */
 .barra-categorias {
-  position: sticky;
-  top: 35px; /* 👈 distância do topo */
-
-  z-index: 1000; /* 👈 garante que fique por cima */
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  max-width: 950px;
-  margin: 20px auto;
-  margin-top: 20px;
-  background-color: #ebdbbd;
-  padding: 10px 0px;
-  border-radius: 18px;
+    position: sticky;
+    top: 35px;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    max-width: 950px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 8px;
+    padding: 12px 0;
+    border-radius: 16px;
 }
 
-.barra-categorias button {
-  border: none;
-  padding: 6px 16px;
-  border-radius: 15px;
-  cursor: pointer;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 550;
-  font-size: 15px;
-  color: #f5e6c8;
-  background-color: #730000;
+.barra-categorias a {
+    border: none;
+    text-decoration: none;
+    padding: 6px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 550;
+    font-size: 15px;
+    color: #ffffff;
+    background-color: #730000;
+    transition: 0.5s;
 }
 
+.barra-categorias a:hover{
+    background-color: #800000;
+}
+
+.carrinho {
+    position: relative;
+}
+
+.carrinho-icon {
+    color: #730000;
+    font-size: 32px;
+    margin-left: 15px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.carrinho:hover {
+    .carrinho-icon {
+        color: #800000;
+    }
+    .carrinho-badge {
+        background-color: #800000;
+    }
+}
+
+.carrinho-badge {
+    position: absolute;
+    top: -4px;
+    right: -18px;
+    background-color: #730000;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 650;
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+/* --- SEÇÕES DO CARDÁPIO --- */
 .secao {
-  width: 100%;
-  max-width: 1000px;
-  margin: 30px auto;
+    width: 100%;
+    max-width: 1000px;
+    margin: 30px auto;
+    scroll-margin-top: 100px;
 }
 
 .secao h3 {
-  font-family: 'Playlist Script', cursive;
-  font-size: 35px;
-  color: #730000;
-  text-align: left;
-
-  margin-left: 33px;
+    font-family: 'Playlist Script', cursive;
+    font-weight: normal;
+    font-style: normal;
+    color: #730000;
+    font-size: 34px;
+    text-align: left;
+    margin-left: 33px;
+    margin-bottom: 0;
 }
 
+/* --- CARDS --- */
 .secao-cards {
-  display: grid;
-  grid-template-columns: repeat(3, 300px);
-  gap: 25px;
-  justify-content: center;
-  margin-top: 25px;
-  margin-bottom: 30px;
+    display: grid;
+    grid-template-columns: repeat(3, 300px);
+    gap: 25px;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
 }
 
 .card {
-  border-radius: 20px;
-  overflow: hidden; /* Imagem segue o arredondamento */
-  background: none;
+    border-radius: 16px;
+    overflow: hidden;
+    background: none;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 8px;
+    transition: 0.5s;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    .card-footer {
+    background-color: #800000;
+    }
 }
 
 .card img {
-  width: 100%;
-  height: 300px;
-  display: block;
+    width: 100%;
+    height: 300px;
+    display: block;
+    object-fit: cover;
 }
 
 .card-footer {
-  height: 50px;
-  background-color: #730000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    height: 50px;
+    background-color: #730000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s;
 }
 
 .card-footer h5 {
-  margin: 0;
-  color: #f5e6c8;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 450;
-  font-size: 19px;
+    margin: 0;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 450;
+    font-size: 18px;
 }

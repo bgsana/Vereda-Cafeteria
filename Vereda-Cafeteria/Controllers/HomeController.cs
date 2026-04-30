@@ -31,6 +31,12 @@ public class HomeController : Controller
         return View();
     }
 
+    [Route("Menu")]
+    public IActionResult Menu()
+    {
+        return View();
+    }
+
     public ActionResult NossoAmbiente()
     {
         var imagens = _context.AmbienteImagens
