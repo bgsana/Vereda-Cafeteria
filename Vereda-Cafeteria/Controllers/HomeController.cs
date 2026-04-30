@@ -24,6 +24,12 @@ public class HomeController : Controller
     {
         return View();
     }
+    
+    [Route("SobreNos")]
+    public IActionResult SobreNos()
+    {
+        return View();
+    }
 
     public ActionResult NossoAmbiente()
     {

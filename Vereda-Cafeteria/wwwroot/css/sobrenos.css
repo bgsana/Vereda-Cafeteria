@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Style+Script&display=swap');
+
+@font-face {
+    font-family: 'Playlist Script';
+    src: url('/fonts/PlaylistScript.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: rgb(255, 255, 255);
+}
+
+h1 {
+    font-family: 'Playlist Script', cursive;
+    color: #730000;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 52px;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: -10px
+}
+
+/* --- HISTÓRIA ---*/
+.historia {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.historia h3 {
+    font-family: 'Playlist Script', cursive;
+    font-weight: normal;
+    font-style: normal;
+    color: #00464B;
+    font-size: 34px;
+    margin: 0;
+    margin-bottom: 7px
+}
+
+.historia p {
+    color: #000000;
+    line-height: 1.65;
+    margin-bottom: 10px;
+    text-align: justify;
+}
+
+.historia p:last-of-type {
+    text-align: center;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+.historia iframe {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1000px;
+    height: 562px;
+    border: none;
+}
+
+.proposito,
+.missao,
+.visao,
+.valores {
+    display: flex;
+    width: 100%;
+    max-height: 580px;
+    margin-top: 20px;
+}
+
+.proposito-esquerda,
+.missao-esquerda,
+.visao-esquerda,
+.valores-esquerda {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px;
+    text-align: center;
+    gap: 7px;
+}
+
+.proposito-esquerda { background-color: #4b2a14; }
+.missao-esquerda { background-color: #730000; }
+.visao-esquerda { background-color: #00464B; }
+.valores-esquerda { background-color: #96B9B9; }
+
+.proposito-esquerda h4,
+.missao-esquerda h4,
+.visao-esquerda h4,
+.valores-esquerda h4 {
+    font-family: 'Playlist Script', cursive;
+    font-weight: normal;
+    font-style: normal;
+    color: #fff;
+    font-size: 58px;
+    margin: 0;
+}
+
+.titulo-icone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+}
+
+.titulo-icone i {
+    font-family: 'tabler-icons';
+    font-style: normal;
+    font-size: 58px;
+    line-height: 1;
+}
+
+.titulo-icone i.icon-maior {
+    font-size: 64px;
+}
+
+
+.titulo-icone span {
+    font-family: 'Playlist Script', cursive;
+    font-weight: normal;
+    font-style: normal;
+    color: #fff;
+}
+
+.proposito-esquerda p,
+.missao-esquerda p,
+.visao-esquerda p,
+.valores-esquerda p {
+    color: #ddd;
+    line-height: 1.6;
+    max-width: 510px;
+    margin: 0;
+    font-size: 18px;
+}
+
+.proposito-direita,
+.missao-direita,
+.visao-direita,
+.valores-direita {
+    width: 50%;
+}
+
+.proposito-direita img,
+.missao-direita img,
+.visao-direita img,
+.valores-direita img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
