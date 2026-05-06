@@ -1,52 +1,69 @@
-/* ===== Nosso Ambiente ===== */
+/* SEÇÃO */
 .nosso-ambiente {
-    padding: 3rem 2rem;
-    max-width: 900px;
-    margin: 0 auto;
+    padding: 60px 20px;
 }
 
+/* HEADER */
 .nosso-ambiente-header {
     text-align: center;
-    margin-bottom: 2rem;
+    max-width: 800px;
+    margin: 0 auto 50px auto;
 }
 
 .nosso-ambiente-header h2 {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
+    font-size: 48px;
+    margin-bottom: 10px;
+    color:#00464B;
 }
 
 .nosso-ambiente-header h5 {
-    color: #888;
-    margin-bottom: 1rem;
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-weight: 600;
 }
 
 .nosso-ambiente-header p {
-    max-width: 650px;
-    margin: 0 auto;
-    color: #555;
+    line-height: 1.6;
 }
 
+/* 🔥 GALERIA MASONRY (IGUAL AO PRINT) */
 .nosso-ambiente-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 6px;
+    column-count: 3;
+    column-gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
+/* ITENS */
+.nosso-ambiente-item {
+    break-inside: avoid;
+    margin-bottom: 25px;
+    border-radius: 6px;
+    overflow: hidden;
+    transition: 0.3s ease;
+}
+
+/* IMAGENS */
 .nosso-ambiente-item img {
     width: 100%;
-    height: 130px;
-    object-fit: cover;
+    height: auto;
     display: block;
 }
 
-@media (max-width: 768px) {
+/* HOVER SUAVE */
+.nosso-ambiente-item:hover {
+    transform: translateY(-4px);
+}
+
+/* RESPONSIVO */
+@media (max-width: 992px) {
     .nosso-ambiente-grid {
-        grid-template-columns: repeat(3, 1fr);
+        column-count: 2;
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 576px) {
     .nosso-ambiente-grid {
-        grid-template-columns: repeat(2, 1fr);
+        column-count: 1;
     }
 }

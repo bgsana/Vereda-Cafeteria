@@ -1,0 +1,32 @@
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Admin</title>
+
+    <link rel="stylesheet" href="~/css/admin.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>☕ Vereda</h2>
+    <a asp-controller="Admin" asp-action="Index">Dashboard</a>
+    <a asp-controller="Produto" asp-action="Index">Produtos</a>
+    <a asp-controller="Pedido" asp-action="Index">Pedidos</a>
+    <a asp-controller="Usuario" asp-action="Index">Usuários</a>
+</div>
+
+<div class="main">
+    <div class="topbar">
+        <h1>@ViewData["Title"]</h1>
+        <div class="user">Admin</div>
+    </div>
+
+    <div class="content">
+        @RenderBody()
+    </div>
+</div>
+
+</body>
+</html>

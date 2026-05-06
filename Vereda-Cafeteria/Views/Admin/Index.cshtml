@@ -1,0 +1,38 @@
+@{
+    Layout = "~/Views/Admin/_LayoutAdmin.cshtml";
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="cards">
+    <div class="card">
+        <h3>Vendas Hoje</h3>
+        <p>R$ @ViewBag.VendasHoje</p>
+    </div>
+
+    <div class="card">
+        <h3>Pedidos</h3>
+        <p>@ViewBag.TotalPedidos</p>
+    </div>
+</div>
+
+<div class="chart-container">
+    <h2>Vendas da Semana</h2>
+    <canvas id="salesChart"></canvas>
+</div>
+
+<script>
+    const dados = @Html.Raw(Json.Serialize(ViewBag.VendasSemana));
+
+    new Chart(document.getElementById('salesChart'), {
+        type: 'line',
+        data: {
+            labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+            datasets: [{
+                label: 'Vendas',
+                data: dados,
+                borderWidth: 2,
+                tension: 0.4
+            }]
+        }
+    });
+</script>
