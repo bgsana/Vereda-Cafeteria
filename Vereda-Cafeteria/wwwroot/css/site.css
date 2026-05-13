@@ -182,20 +182,50 @@ main{
   line-height: 1.5;
 }
 
+.contatos-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.contatos-info i {
+  font-size: 19px;
+  margin-right: 2px;
+  flex-shrink: 0;
+  margin-top: 2px; /* alinha com a primeira linha do texto */
+  color: #CDA05A;
+  transform: translateY(-1px);
+}
+
+.contatos-info-loc i {
+  transform: translateY(8px);
+}
+
 .footer-column .highlight {
   color: #ffffff;
   font-weight: 600;
 }
 
 .social-icons {
-  margin-top: 12px;
+  margin-top: 6px;
 }
 
 .social-icons a {
+  display: inline-block;
   margin-right: 12px;
-  font-size: 18px;
+  font-size: 24px;
   text-decoration: none;
   color: #CDA05A;
+  transition: 0.3s;
+}
+
+.social-icons a:hover {
+  transform: translateY(-1px);
+  color: #dfaf62;
+}
+
+.icon-facebook {
+    font-size: 22px;
 }
 
 .footer-bottom {
@@ -211,4 +241,12 @@ main{
   text-decoration: none;
   text-decoration: underline;
   text-underline-offset: 2px;
+}
+
+.linha-divisor {
+    border: none;
+    border-top: 1.5px solid #ffffffc9;
+    max-width: 750px;
+    margin: 18px auto;
+    margin-bottom: -10px;
 }

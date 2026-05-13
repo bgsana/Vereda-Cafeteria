@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Vereda_Cafeteria.styles.css" asp-append-version="true" />
     @RenderSection("Styles", required: false)
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="icon" type="image/png" sizes="16x16"  href="~/img/favicon.ico">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
@@ -62,15 +64,14 @@
 
             <div class="footer-column">
                 <h3>Fale Conosco</h3>
-                <p>vereda.barrabonita@gmail.com</p>
-                <p>14 99885-9509</p>
-                <p>R. Primeiro de Março, 234 - Centro,<br>
-                    Barra Bonita - SP, 17340-035</p>
+                <p class="contatos-info"><i class="ti ti-mail"></i>vereda.barrabonita@gmail.com</p>
+                <p class="contatos-info"><i class="ti ti-phone"></i>14 99885-9509</p>
+                <p class="contatos-info contatos-info-loc"><i class="ti ti-map-pin"></i>R. Primeiro de Março, 234 - Centro,<br>Barra Bonita - SP, 17340-035</p>
 
                     <div class="social-icons">
-                        <a href="#">insta</a>
-                        <a href="#">face</a>
-                        <a href="#">whats</a>
+                        <a href="https://www.instagram.com/veredacafeteria/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/veredacafeteria/?locale=pt_BR" target="_blank"><i class="fa-brands fa-facebook icon-facebook"></i></a>
+                        <a href="https://wa.me/5514998859509" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
                     </div>
                 </div>
 
@@ -83,6 +84,8 @@
                 </div>
 
             </div>
+
+            <div class="linha-divisor"></div>
 
             <div class="footer-bottom">
                 <a href="#">Política de Privacidade</a>
