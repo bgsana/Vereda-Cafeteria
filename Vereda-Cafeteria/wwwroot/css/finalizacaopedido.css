@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Style+Script&display=swap');
+
+@font-face {
+    font-family: 'Playlist Script';
+    src: url('/fonts/PlaylistScript.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.carrinho-container {
+    width: 100%;
+    max-width: 700px;
+    text-align: center;
+    margin: 65px auto;   /* ← centraliza horizontalmente */
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.titulo {
+    font-family: 'Playlist Script', cursive;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 48px;
+    color: #0b4d4d;
+    margin-bottom: 20px;
+}
+
+.form-grupo {
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    gap: 24px;
+}
+
+.form-campo {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 6px;
+}
+
+.form-campo:first-child {
+    flex: 2;
+}
+
+.form-campo:last-child {
+    flex: 1;
+}
+
+.form-campo label {
+    font-size: 15px;
+    color: #730000;
+    font-family: 'Montserrat', sans-serif;
+    text-align: left;
+    padding-left: 3px;
+}
+
+.form-campo input {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    outline: none;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    transition: 0.3s;
+    background: #fff;
+}
+
+.form-campo input:focus {
+    border-color: #730000;
+    box-shadow: 0 0 0 2px rgba(115, 0, 0, 0.1);
+}
+
+.form-campo input::placeholder {
+    color: #aaa;
+    font-size: 13px;
+}

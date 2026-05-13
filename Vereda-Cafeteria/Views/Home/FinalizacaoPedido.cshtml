@@ -1,0 +1,39 @@
+@{
+    ViewData["Title"] = "Finalização do Pedido";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/finalizacaopedido.css" />
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@tabler/icons-webfont@latest/tabler-icons.min.css">
+
+<section class="carrinho-container">
+
+    <h1 class="titulo">Finalização do Pedido</h1>
+    <div class="form-grupo">
+        <div class="form-campo campo-nome">
+            <label>Nome Completo</label>
+            <input type="text" placeholder="Digite seu nome completo">
+        </div>
+        <div class="form-campo">
+            <label>Telefone</label>
+            <input type="text" placeholder="(14) 99999-9999">
+        </div>
+    </div>
+
+    <h2>Forma de Pagamento</h2>
+    <div class="caixa-pagamento">
+        <label class="opcao">
+            <span>Pix</span>
+            <input type="checkbox">
+        </label>
+        <label class="opcao">
+            <span>Dinheiro</span>
+            <input type="checkbox">
+        </label>
+        <label class="opcao">
+            <span>Cartão</span>
+            <input type="checkbox">
+        </label>
+    </div>

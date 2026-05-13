@@ -43,6 +43,12 @@ public class HomeController : Controller
         return View();
     }
 
+    [Route("FinalizacaoPedido")]
+    public IActionResult FinalizacaoPedido()
+    {
+        return View();
+    }
+
     public ActionResult NossoAmbiente()
     {
         var imagens = _context.AmbienteImagens
