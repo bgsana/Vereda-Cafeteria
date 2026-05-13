@@ -1,279 +1,273 @@
 @{
-  ViewData["Title"] = "Menu";
+    ViewData["Title"] = "Menu";
 }
 
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="~/css/menu.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@tabler/icons-webfont@latest/tabler-icons.min.css">
-    <title>Vereda Cafeteria - Cardápio</title>
-</head>
-<body>
-    <h1>Cardápio</h1>
+@section Styles {
+    <link rel="stylesheet" href="~/css/menu.css" />
+}
 
-    <nav class="barra-categorias">
-        <a href="#pratos-salgados">Pratos Salgados</a>
-        <a href="#pratos-doces">Pratos Doces</a>
-        <a href="#cafes">Cafés</a>
-        <a href="#inspirados">Inspirados</a>
-        <a href="#bebidas">Bebidas</a>
-        <div class="carrinho">
-          <i class="ti ti-shopping-cart-filled carrinho-icon"></i>
-          <span class="carrinho-badge">15</span>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@tabler/icons-webfont@latest/tabler-icons.min.css">
+
+<h1>Cardápio</h1>
+
+<nav class="barra-categorias">
+    <a href="#pratos-salgados">Pratos Salgados</a>
+    <a href="#pratos-doces">Pratos Doces</a>
+    <a href="#cafes">Cafés</a>
+    <a href="#inspirados">Inspirados</a>
+    <a href="#bebidas">Bebidas</a>
+    <a class="carrinho" asp-controller="Home" asp-action="Carrinho">
+        <i class="ti ti-shopping-cart-filled carrinho-icon"></i>
+        <span class="carrinho-badge">15</span>
+    </a>
+</nav>
+
+<section class="secao" id="pratos-salgados">
+    <h3>Pratos Salgados</h3>
+
+    <div class="secao-cards">
+
+        <div class="card">
+            <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
+            <div class="card-footer">
+                <h5>Pão na chapa</h5>
+            </div>
         </div>
-    </nav>
 
-    <section class="secao" id="pratos-salgados">
-        <h3>Pratos Salgados</h3>
-
-        <div class="secao-cards">
-
-            <div class="card">
-                <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
-                <div class="card-footer">
-                    <h5>Pão na chapa</h5>
-                </div>
+        <div class="card">
+            <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
+            <div class="card-footer">
+                <h5>Pão na chapa</h5>
             </div>
-
-            <div class="card">
-                <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
-                <div class="card-footer">
-                    <h5>Pão na chapa</h5>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
-                <div class="card-footer">
-                    <h5>Pão na chapa</h5>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
-                <div class="card-footer">
-                    <h5>Pão na chapa</h5>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
-                <div class="card-footer">
-                    <h5>Pão na chapa</h5>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
-                <div class="card-footer">
-                    <h5>Pão na chapa</h5>
-                </div>
-            </div>
-
         </div>
-    </section>
 
-    <section class="secao" id="pratos-doces">
-        <h3>Pratos Doces</h3>
-
-        <div class="secao-cards">
-
-            <div class="card">
-                <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
-                <div class="card-footer">
-                    <h5>Pão na chapa</h5>
-                </div>
+        <div class="card">
+            <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
+            <div class="card-footer">
+                <h5>Pão na chapa</h5>
             </div>
-
-            <div class="card">
-                <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
-                <div class="card-footer">
-                    <h5>Pão na chapa</h5>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
-                <div class="card-footer">
-                    <h5>Pão na chapa</h5>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
-                <div class="card-footer">
-                    <h5>Pão na chapa</h5>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
-                <div class="card-footer">
-                    <h5>Pão na chapa</h5>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
-                <div class="card-footer">
-                    <h5>Pão na chapa</h5>
-                </div>
-            </div>
-
         </div>
-    </section>
 
-    <section class="secao" id="cafes">
-        <h3>Cafés</h3>
-
-        <div class="secao-cards">
-
-            <div class="card">
-                <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
-                <div class="card-footer">
-                    <h5>Pão na chapa</h5>
-                </div>
+        <div class="card">
+            <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
+            <div class="card-footer">
+                <h5>Pão na chapa</h5>
             </div>
-
-            <div class="card">
-                <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
-                <div class="card-footer">
-                    <h5>Pão na chapa</h5>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
-                <div class="card-footer">
-                    <h5>Pão na chapa</h5>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
-                <div class="card-footer">
-                    <h5>Pão na chapa</h5>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
-                <div class="card-footer">
-                    <h5>Pão na chapa</h5>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
-                <div class="card-footer">
-                    <h5>Pão na chapa</h5>
-                </div>
-            </div>
-
         </div>
-    </section>
 
-    <section class="secao" id="inspirados">
-        <h3>Inspirados</h3>
-
-        <div class="secao-cards">
-
-            <div class="card">
-                <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
-                <div class="card-footer">
-                    <h5>Pão na chapa</h5>
-                </div>
+        <div class="card">
+            <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
+            <div class="card-footer">
+                <h5>Pão na chapa</h5>
             </div>
-
-            <div class="card">
-                <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
-                <div class="card-footer">
-                    <h5>Pão na chapa</h5>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
-                <div class="card-footer">
-                    <h5>Pão na chapa</h5>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
-                <div class="card-footer">
-                    <h5>Pão na chapa</h5>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
-                <div class="card-footer">
-                    <h5>Pão na chapa</h5>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
-                <div class="card-footer">
-                    <h5>Pão na chapa</h5>
-                </div>
-            </div>
-
         </div>
-    </section>
 
-    <section class="secao" id="bebidas">
-        <h3>Bebidas</h3>
-
-        <div class="secao-cards">
-
-            <div class="card">
-                <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
-                <div class="card-footer">
-                    <h5>Pão na chapa</h5>
-                </div>
+        <div class="card">
+            <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
+            <div class="card-footer">
+                <h5>Pão na chapa</h5>
             </div>
-
-            <div class="card">
-                <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
-                <div class="card-footer">
-                    <h5>Pão na chapa</h5>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
-                <div class="card-footer">
-                    <h5>Pão na chapa</h5>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
-                <div class="card-footer">
-                    <h5>Pão na chapa</h5>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
-                <div class="card-footer">
-                    <h5>Pão na chapa</h5>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
-                <div class="card-footer">
-                    <h5>Pão na chapa</h5>
-                </div>
-            </div>
-
         </div>
-    </section>
-</body>
-</html>
+
+    </div>
+</section>
+
+<section class="secao" id="pratos-doces">
+    <h3>Pratos Doces</h3>
+
+    <div class="secao-cards">
+
+        <div class="card">
+            <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
+            <div class="card-footer">
+                <h5>Pão na chapa</h5>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
+            <div class="card-footer">
+                <h5>Pão na chapa</h5>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
+            <div class="card-footer">
+                <h5>Pão na chapa</h5>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
+            <div class="card-footer">
+                <h5>Pão na chapa</h5>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
+            <div class="card-footer">
+                <h5>Pão na chapa</h5>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
+            <div class="card-footer">
+                <h5>Pão na chapa</h5>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="secao" id="cafes">
+    <h3>Cafés</h3>
+
+    <div class="secao-cards">
+
+        <div class="card">
+            <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
+            <div class="card-footer">
+                <h5>Pão na chapa</h5>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
+            <div class="card-footer">
+                <h5>Pão na chapa</h5>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
+            <div class="card-footer">
+                <h5>Pão na chapa</h5>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
+            <div class="card-footer">
+                <h5>Pão na chapa</h5>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
+            <div class="card-footer">
+                <h5>Pão na chapa</h5>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
+            <div class="card-footer">
+                <h5>Pão na chapa</h5>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="secao" id="inspirados">
+    <h3>Inspirados</h3>
+
+    <div class="secao-cards">
+
+        <div class="card">
+            <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
+            <div class="card-footer">
+                <h5>Pão na chapa</h5>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
+            <div class="card-footer">
+                <h5>Pão na chapa</h5>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
+            <div class="card-footer">
+                <h5>Pão na chapa</h5>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
+            <div class="card-footer">
+                <h5>Pão na chapa</h5>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
+            <div class="card-footer">
+                <h5>Pão na chapa</h5>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
+            <div class="card-footer">
+                <h5>Pão na chapa</h5>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="secao" id="bebidas">
+    <h3>Bebidas</h3>
+
+    <div class="secao-cards">
+
+        <div class="card">
+            <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
+            <div class="card-footer">
+                <h5>Pão na chapa</h5>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
+            <div class="card-footer">
+                <h5>Pão na chapa</h5>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
+            <div class="card-footer">
+                <h5>Pão na chapa</h5>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
+            <div class="card-footer">
+                <h5>Pão na chapa</h5>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
+            <div class="card-footer">
+                <h5>Pão na chapa</h5>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="~/img/pao-teste.jpg" alt="Pão na Chapa">
+            <div class="card-footer">
+                <h5>Pão na chapa</h5>
+            </div>
+        </div>
+
+    </div>
+</section>

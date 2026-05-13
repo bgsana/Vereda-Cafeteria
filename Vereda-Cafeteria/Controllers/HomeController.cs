@@ -37,6 +37,12 @@ public class HomeController : Controller
         return View();
     }
 
+    [Route("Carrinho")]
+    public IActionResult Carrinho()
+    {
+        return View();
+    }
+
     public ActionResult NossoAmbiente()
     {
         var imagens = _context.AmbienteImagens
