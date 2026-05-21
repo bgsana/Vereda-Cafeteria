@@ -19,7 +19,7 @@ public class ContaController : Controller // dá acesso a View(), RedirectToActi
         _usuarioService = usuarioService;
     }
 
-    [HttpGet] // responde quando o usuário ACESSA a página /Account/Login pelo navegador
+    [HttpGet("Login")] // responde quando o usuário ACESSA a página /Account/Login pelo navegador
     public IActionResult Login(string returnUrl)
     {
         // Cria o ViewModel já com a URL de retorno preenchida
@@ -35,45 +35,33 @@ public class ContaController : Controller // dá acesso a View(), RedirectToActi
         return View(loginVM);
     }
 
-    [HttpPost]
-    [ValidateAntiForgeryToken] // Valida o token oculto gerado automaticamente no formulário (proteção CSRF)
+    [HttpPost("Login")]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Login(LoginVM loginVM)
     {
-        if (ModelState.IsValid) // verifica se os campos passaram nas validações do ViewModel
+        if (ModelState.IsValid)
         {
-            // Atribui a responsabilidade da autenticação ao UserService
-            // O Controller só sabe o resultado e não como funciona
             var result = await _usuarioService.Login(loginVM);
 
-            // Analisa o resultado e define a mensagem de feedback para o usuário
-            // TempData: dicionário que sobrevive a apenas UMA requisição
-            // Útil para exibir mensagens após redirecionamentos
             if (result.Succeeded)
-                TempData["Success"] = "Login realizado com sucesso! Redirecionando...";
-
+            {
+                return RedirectToAction("Index", "Admin"); // ← redireciona para o painel
+            }
             else if (result.IsLockedOut)
                 TempData["Failure"] = "Usuário bloqueado por muitas tentativas.";
-            // Conta bloqueada após N tentativas erradas (configurado no Program.cs)
-
             else if (result.IsNotAllowed)
                 TempData["Failure"] = "Usuário sem permissão para acessar o sistema.";
-            // Ex: e-mail não confirmado (se RequireConfirmedAccount = true)
-
             else
                 TempData["Failure"] = "E-mail ou senha incorretos. Tente novamente";
-            // Credenciais simplesmente erradas
         }
         else
-            // O ViewModel chegou com dados inválidos (campo vazio, formato errado, etc.)
             TempData["Failure"] = "Dados inválidos. Verifique os campos preenchidos.";
 
-        // Retorna a mesma View com o loginVM — mantém os dados preenchidos no formulário
-        // e permite que a View exiba as mensagens do TempData
         return View(loginVM);
     }
 
     // Logout só aceita POST — nunca GET
-    [HttpPost]
+    [HttpPost("Logout")]
     [ValidateAntiForgeryToken] // também com proteção CSRF
     public async Task<IActionResult> Logout()
     {

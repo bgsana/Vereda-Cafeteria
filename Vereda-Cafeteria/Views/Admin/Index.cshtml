@@ -3,36 +3,222 @@
     ViewData["Title"] = "Dashboard";
 }
 
-<div class="cards">
-    <div class="card">
-        <h3>Vendas Hoje</h3>
-        <p>R$ @ViewBag.VendasHoje</p>
-    </div>
+@{
+    Layout = "~/Views/Admin/_LayoutAdmin.cshtml";
+    ViewData["Title"] = "Dashboard";
+}
 
-    <div class="card">
-        <h3>Pedidos</h3>
-        <p>@ViewBag.TotalPedidos</p>
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin-dashboard.css" asp-append-version="true" />
+}
+
+<div class="topbar">
+    <div>
+        <div class="page-eyebrow">visão geral · hoje</div>
+        <div class="page-title">Bom dia, Vereda!</div>
+    </div>
+    <div class="topbar-right">
+        <span class="date-badge">@DateTime.Now.ToString("dddd, d MMMM yyyy", new System.Globalization.CultureInfo("pt-BR"))</span>
+        <button class="btn btn-ghost">↓ Exportar</button>
+        <button class="btn btn-primary">+ Novo Pedido</button>
     </div>
 </div>
 
-<div class="chart-container">
-    <h2>Vendas da Semana</h2>
-    <canvas id="salesChart"></canvas>
+<div class="kpi-grid">
+    <div class="kpi-card k1">
+        <div class="kpi-label">Faturamento hoje</div>
+        <div class="kpi-value">R$1.842</div>
+        <div class="kpi-change up">↑ 18% vs ontem</div>
+    </div>
+    <div class="kpi-card k2">
+        <div class="kpi-label">Pedidos</div>
+        <div class="kpi-value">137</div>
+        <div class="kpi-change up">↑ 11 a mais</div>
+    </div>
+    <div class="kpi-card k3">
+        <div class="kpi-label">Ticket médio</div>
+        <div class="kpi-value">R$13,4</div>
+        <div class="kpi-change down">↓ R$0,60</div>
+    </div>
+    <div class="kpi-card k4">
+        <div class="kpi-label">Item mais pedido</div>
+        <div class="kpi-value">Bolinho da Vovó Nice</div>
+        <div class="kpi-change up">↑ 4 pedidos hoje</div>
+    </div>
+</div>
+
+<div class="row2">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Faturamento da Semana</div>
+            <span class="card-sub">últimos 7 dias</span>
+        </div>
+        <div class="chart-area">
+            <svg class="chart-svg" id="lineChart" viewBox="0 0 600 150" preserveAspectRatio="none"></svg>
+        </div>
+        <div class="x-labels">
+            <span class="x-label">seg</span><span class="x-label">ter</span><span class="x-label">qua</span>
+            <span class="x-label">qui</span><span class="x-label">sex</span><span class="x-label">sáb</span><span class="x-label">dom</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Top Produtos</div>
+            <span class="card-sub">hoje</span>
+        </div>
+        <div class="product-list">
+            <div class="product-row">
+                <span class="product-rank">1</span><span class="product-emoji">☕</span>
+                <div class="product-info"><div class="product-name">Cappuccino</div><div class="product-cat">café</div></div>
+                <div class="product-bar-wrap">
+                    <div class="product-bar-bg"><div class="product-bar-fill" style="width:100%;background:var(--verde);animation-delay:.3s"></div></div>
+                    <span class="product-val">42</span>
+                </div>
+            </div>
+            <div class="product-row">
+                <span class="product-rank">2</span><span class="product-emoji">🥐</span>
+                <div class="product-info"><div class="product-name">Croissant</div><div class="product-cat">pão</div></div>
+                <div class="product-bar-wrap">
+                    <div class="product-bar-bg"><div class="product-bar-fill" style="width:78%;background:var(--terra);animation-delay:.4s"></div></div>
+                    <span class="product-val">33</span>
+                </div>
+            </div>
+            <div class="product-row">
+                <span class="product-rank">3</span><span class="product-emoji">🍫</span>
+                <div class="product-info"><div class="product-name">Chocolate Quente</div><div class="product-cat">bebida</div></div>
+                <div class="product-bar-wrap">
+                    <div class="product-bar-bg"><div class="product-bar-fill" style="width:62%;background:var(--vinho);animation-delay:.5s"></div></div>
+                    <span class="product-val">26</span>
+                </div>
+            </div>
+            <div class="product-row">
+                <span class="product-rank">4</span><span class="product-emoji">🧁</span>
+                <div class="product-info"><div class="product-name">Muffin Baunilha</div><div class="product-cat">doce</div></div>
+                <div class="product-bar-wrap">
+                    <div class="product-bar-bg"><div class="product-bar-fill" style="width:48%;background:var(--agua);animation-delay:.6s"></div></div>
+                    <span class="product-val">20</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row3">
+    <div class="card" style="animation-delay:.42s">
+        <div class="card-header"><div class="card-title">Pedidos Recentes</div></div>
+        <table class="orders-table">
+            <thead><tr><th>#</th><th>Item</th><th>Status</th></tr></thead>
+            <tbody>
+                <tr><td style="color:var(--muted);font-size:12px">#137</td><td>Espresso duplo</td><td><span class="badge b-done">Pronto</span></td></tr>
+                <tr><td style="color:var(--muted);font-size:12px">#136</td><td>Croissant + café</td><td><span class="badge b-prep">Preparo</span></td></tr>
+                <tr><td style="color:var(--muted);font-size:12px">#135</td><td>Muffin baunilha</td><td><span class="badge b-done">Pronto</span></td></tr>
+                <tr><td style="color:var(--muted);font-size:12px">#134</td><td>Choc. quente G</td><td><span class="badge b-prep">Preparo</span></td></tr>
+                <tr><td style="color:var(--muted);font-size:12px">#133</td><td>Cappuccino</td><td><span class="badge b-cancel">Cancelado</span></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="card" style="animation-delay:.54s">
+        <div class="card-header"><div class="card-title">Metas</div></div>
+        <div class="mini-stats">
+            <div>
+                <div class="mini-stat">
+                    <div class="mini-stat-label"><div class="mini-stat-dot" style="background:var(--verde)"></div>Meta mensal</div>
+                    <div class="mini-stat-val">68%</div>
+                </div>
+                <div class="mini-progress"><div class="mini-fill" style="width:68%;background:var(--verde);animation-delay:.5s"></div></div>
+            </div>
+            <div>
+                <div class="mini-stat">
+                    <div class="mini-stat-label"><div class="mini-stat-dot" style="background:var(--vinho)"></div>Satisfação</div>
+                    <div class="mini-stat-val">94%</div>
+                </div>
+                <div class="mini-progress"><div class="mini-fill" style="width:94%;background:var(--vinho);animation-delay:.6s"></div></div>
+            </div>
+            <div>
+                <div class="mini-stat">
+                    <div class="mini-stat-label"><div class="mini-stat-dot" style="background:var(--terra)"></div>Estoque OK</div>
+                    <div class="mini-stat-val">81%</div>
+                </div>
+                <div class="mini-progress"><div class="mini-fill" style="width:81%;background:var(--terra);animation-delay:.7s"></div></div>
+            </div>
+            <div>
+                <div class="mini-stat">
+                    <div class="mini-stat-label"><div class="mini-stat-dot" style="background:var(--agua)"></div>Fidelidade</div>
+                    <div class="mini-stat-val">52%</div>
+                </div>
+                <div class="mini-progress"><div class="mini-fill" style="width:52%;background:var(--agua);animation-delay:.8s"></div></div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
-    const dados = @Html.Raw(Json.Serialize(ViewBag.VendasSemana));
+    // LINE CHART
+    const vals = [1240, 980, 1580, 1320, 1710, 2100, 1842];
+    const svgEl = document.getElementById('lineChart');
+    const W = 600, H = 150, pad = 20;
+    const maxV = Math.max(...vals);
+    const pts = vals.map((v, i) => [pad + (i / (vals.length - 1)) * (W - pad * 2), H - pad - ((v / maxV) * (H - pad * 2))]);
 
-    new Chart(document.getElementById('salesChart'), {
-        type: 'line',
-        data: {
-            labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
-            datasets: [{
-                label: 'Vendas',
-                data: dados,
-                borderWidth: 2,
-                tension: 0.4
-            }]
+    const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+    defs.innerHTML = `<linearGradient id="ag" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#00464B" stop-opacity=".22"/>
+        <stop offset="100%" stop-color="#00464B" stop-opacity="0"/>
+    </linearGradient>`;
+    svgEl.appendChild(defs);
+
+    [0, .5, 1].forEach(f => {
+        const y = pad + (1 - f) * (H - pad * 2);
+        const g = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        g.setAttribute('x1', pad); g.setAttribute('x2', W - pad);
+        g.setAttribute('y1', y); g.setAttribute('y2', y);
+        g.setAttribute('stroke', 'rgba(55,35,20,.07)'); g.setAttribute('stroke-width', '1');
+        svgEl.appendChild(g);
+    });
+
+    const area = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    area.setAttribute('d', `M${pts[0][0]},${H - pad} ${pts.map(p => `L${p[0]},${p[1]}`).join(' ')} L${pts[pts.length - 1][0]},${H - pad} Z`);
+    area.setAttribute('fill', 'url(#ag)');
+    svgEl.appendChild(area);
+
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    line.setAttribute('d', `M${pts.map(p => `${p[0]},${p[1]}`).join(' L')}`);
+    line.setAttribute('fill', 'none'); line.setAttribute('stroke', '#00464B');
+    line.setAttribute('stroke-width', '2.5'); line.setAttribute('stroke-linejoin', 'round'); line.setAttribute('stroke-linecap', 'round');
+    svgEl.appendChild(line);
+
+    pts.forEach(([x, y], i) => {
+        const isLast = i === pts.length - 1;
+        const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        c.setAttribute('cx', x); c.setAttribute('cy', y); c.setAttribute('r', isLast ? 5 : 3.5);
+        c.setAttribute('fill', isLast ? '#00464B' : '#FDFAF6');
+        c.setAttribute('stroke', '#00464B'); c.setAttribute('stroke-width', '2');
+        svgEl.appendChild(c);
+        if (isLast) {
+            const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            t.setAttribute('x', x); t.setAttribute('y', y - 11); t.setAttribute('text-anchor', 'middle');
+            t.setAttribute('fill', '#372314'); t.setAttribute('font-size', '11');
+            t.setAttribute('font-family', 'Karla,sans-serif'); t.setAttribute('font-weight', '600');
+            t.textContent = `R$${vals[i].toLocaleString('pt-BR')}`;
+            svgEl.appendChild(t);
         }
+    });
+
+    // HEATMAP
+    const intensities = [
+        [3,4,5,5,5,4,3],[4,5,5,4,5,5,4],[3,4,4,3,4,4,3],
+        [2,3,3,2,3,4,3],[2,3,4,3,4,3,2],[1,2,3,3,3,2,1]
+    ];
+    const heatEl = document.getElementById('heatmap');
+    intensities.forEach(row => {
+        row.forEach(v => {
+            const cell = document.createElement('div');
+            cell.className = 'heat-cell';
+            const a = (v / 5) * 0.85 + 0.08;
+            cell.style.background = `rgba(0,70,75,${a.toFixed(2)})`;
+            heatEl.appendChild(cell);
+        });
     });
 </script>

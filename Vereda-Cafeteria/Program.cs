@@ -40,6 +40,11 @@ builder.Services.AddIdentity<Usuario, IdentityRole>(options =>
 // AddTransient(1 dos 3 tipos): uma nova instância do UserService será criada a cada vez que ele for solicitado
 builder.Services.AddTransient<IUsuarioService, UsuarioService>();
 
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Conta/Login"; // ← aponta para o seu controller
+    options.AccessDeniedPath = "/Conta/Login";
+});
 // --- CRIA A APLICAÇÂO ---
 
 var app = builder.Build();
@@ -87,6 +92,11 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
+
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
 
 // --- INICIA A APLICAÇÃO ---
 app.Run();

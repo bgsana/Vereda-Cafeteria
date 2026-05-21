@@ -2,9 +2,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Vereda_Cafeteria.Data;
 using Vereda_Cafeteria.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Vereda_Cafeteria.Controllers;
 
+[Authorize]
+[Route("Admin/NossoAmbiente/[action]")]
 public class NossoAmbienteController : Controller
 {
     private readonly AppDbContext _context;

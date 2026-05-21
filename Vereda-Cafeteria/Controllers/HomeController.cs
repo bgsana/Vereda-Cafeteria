@@ -30,7 +30,7 @@ public class HomeController : Controller
     {
         return View();
     }
-
+    
     [Route("Menu")]
     public IActionResult Menu()
     {
@@ -49,6 +49,7 @@ public class HomeController : Controller
         return View();
     }
 
+    [Route("NossoAmbiente")]
     public ActionResult NossoAmbiente()
     {
         var imagens = _context.AmbienteImagens
