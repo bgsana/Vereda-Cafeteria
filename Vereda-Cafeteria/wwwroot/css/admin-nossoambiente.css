@@ -1,0 +1,714 @@
+/* ============================================================
+   admin-nossoambiente.css
+   CRUD — Nosso Ambiente · Vereda Admin
+   ============================================================ */
+
+/* --- IMPORTS --- */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css');
+
+@font-face {
+    font-family: 'Playlist Script';
+    src: url('/fonts/PlaylistScript.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* --- TOKENS --- */
+:root {
+    --vinho:       #730000;
+    --vinho-light: #9a1a1a;
+    --vinho-muted: rgba(115, 0, 0, 0.08);
+
+    --verde:       #00464B;
+    --verde-light: #005c63;
+    --verde-muted: rgba(0, 70, 75, 0.08);
+
+    --terra:       #372314;
+    --terra-light: #5a3c25;
+    --terra-muted: rgba(55, 35, 20, 0.06);
+
+    --agua:        #96B9B9;
+    --agua-light:  #b8d4d4;
+    --agua-muted:  rgba(150, 185, 185, 0.20);
+
+    --bg:          #f5f2ee;
+    --surface:     #ffffff;
+    --border:      rgba(55, 35, 20, 0.12);
+    --border-focus: var(--verde);
+
+    --radius-sm:   6px;
+    --radius-md:   10px;
+    --radius-lg:   16px;
+
+    --shadow-card: 0 2px 12px rgba(55, 35, 20, 0.08), 0 1px 3px rgba(55, 35, 20, 0.06);
+    --shadow-btn:  0 2px 8px rgba(0, 70, 75, 0.25);
+
+    --font-main:   'Montserrat', sans-serif;
+    --font-script: 'Playlist Script', cursive;
+
+    --transition: 0.2s ease;
+}
+
+/* ============================================================
+   WRAPPER DA PÁGINA
+   ============================================================ */
+
+.na-page {
+    font-family: var(--font-main);
+    color: var(--terra);
+    padding: 2rem 2.5rem;
+    min-height: 100%;
+    animation: naFadeIn 0.35s ease both;
+}
+
+@keyframes naFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   PAGE HEADER
+   ============================================================ */
+
+.na-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 2px solid var(--border);
+}
+
+.na-header__title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.na-header__eyebrow {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--agua);
+}
+
+.na-header__title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--terra);
+    line-height: 1.1;
+    margin: 0;
+}
+
+.na-header__title span {
+    font-family: var(--font-script);
+    font-size: 2rem;
+    color: var(--verde);
+    font-weight: normal;
+}
+
+/* ============================================================
+   BOTÕES
+   ============================================================ */
+
+/* Botão primário (verde) */
+.na-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.55rem 1.25rem;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-main);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    transition: all var(--transition);
+    white-space: nowrap;
+}
+
+.na-btn--primary {
+    background: var(--verde);
+    color: #fff;
+    box-shadow: var(--shadow-btn);
+}
+
+.na-btn--primary:hover {
+    background: var(--verde-light);
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(0, 70, 75, 0.35);
+    text-decoration: none;
+}
+
+/* Botão perigo (vinho) */
+.na-btn--danger {
+    background: var(--vinho);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(115, 0, 0, 0.25);
+}
+
+.na-btn--danger:hover {
+    background: var(--vinho-light);
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(115, 0, 0, 0.35);
+    text-decoration: none;
+}
+
+/* Botão ghost */
+.na-btn--ghost {
+    background: transparent;
+    color: var(--terra);
+    border: 1.5px solid var(--border);
+}
+
+.na-btn--ghost:hover {
+    background: var(--terra-muted);
+    color: var(--terra);
+    border-color: var(--terra);
+    text-decoration: none;
+}
+
+/* Botão outline verde */
+.na-btn--outline {
+    background: transparent;
+    color: var(--verde);
+    border: 1.5px solid var(--verde);
+}
+
+.na-btn--outline:hover {
+    background: var(--verde-muted);
+    color: var(--verde);
+    text-decoration: none;
+}
+
+/* Ícone dentro de botão */
+.na-btn i { font-size: 1em; }
+
+/* ============================================================
+   CARD / SURFACE
+   ============================================================ */
+
+.na-card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--border);
+    overflow: hidden;
+}
+
+.na-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--terra-muted);
+}
+
+.na-card__header-title {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--terra);
+}
+
+.na-card__body {
+    padding: 1.75rem;
+}
+
+/* ============================================================
+   TABELA — INDEX
+   ============================================================ */
+
+.na-table-wrapper {
+    overflow-x: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--border);
+}
+
+.na-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    background: var(--surface);
+}
+
+/* Cabeçalho */
+.na-table thead tr {
+    background: var(--verde);
+}
+
+.na-table thead th {
+    padding: 0.85rem 1.2rem;
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: none;
+    white-space: nowrap;
+}
+
+.na-table thead th:first-child { border-radius: var(--radius-lg) 0 0 0; }
+.na-table thead th:last-child  { border-radius: 0 var(--radius-lg) 0 0; }
+
+/* Linhas */
+.na-table tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background var(--transition);
+}
+
+.na-table tbody tr:last-child { border-bottom: none; }
+
+.na-table tbody tr:hover {
+    background: var(--agua-muted);
+}
+
+.na-table tbody td {
+    padding: 0.9rem 1.2rem;
+    color: var(--terra);
+    vertical-align: middle;
+}
+
+/* Coluna de imagem — preview */
+.na-table .na-img-preview {
+    width: 52px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+}
+
+.na-table .na-img-path {
+    font-size: 0.78rem;
+    color: var(--terra-light);
+    max-width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Badge Ordem */
+.na-badge-ordem {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--agua-muted);
+    border: 1.5px solid var(--agua);
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--verde);
+}
+
+/* Badge Ativo */
+.na-badge-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.25rem 0.65rem;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+}
+
+.na-badge-status--on {
+    background: rgba(0, 70, 75, 0.1);
+    color: var(--verde);
+    border: 1px solid rgba(0, 70, 75, 0.2);
+}
+
+.na-badge-status--off {
+    background: rgba(115, 0, 0, 0.08);
+    color: var(--vinho);
+    border: 1px solid rgba(115, 0, 0, 0.15);
+}
+
+.na-badge-status i { font-size: 0.75em; }
+
+/* Ações da tabela */
+.na-table-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.na-action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid transparent;
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all var(--transition);
+}
+
+.na-action-btn--edit {
+    color: var(--verde);
+    border-color: rgba(0, 70, 75, 0.2);
+    background: var(--verde-muted);
+}
+
+.na-action-btn--edit:hover {
+    background: var(--verde);
+    color: #fff;
+    border-color: var(--verde);
+    text-decoration: none;
+}
+
+.na-action-btn--details {
+    color: var(--terra-light);
+    border-color: var(--border);
+    background: var(--terra-muted);
+}
+
+.na-action-btn--details:hover {
+    background: var(--agua);
+    color: var(--terra);
+    border-color: var(--agua);
+    text-decoration: none;
+}
+
+.na-action-btn--delete {
+    color: var(--vinho);
+    border-color: rgba(115, 0, 0, 0.15);
+    background: var(--vinho-muted);
+}
+
+.na-action-btn--delete:hover {
+    background: var(--vinho);
+    color: #fff;
+    border-color: var(--vinho);
+    text-decoration: none;
+}
+
+/* ============================================================
+   FORMULÁRIO — CREATE / EDIT
+   ============================================================ */
+
+.na-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    max-width: 560px;
+}
+
+.na-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.na-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--terra-light);
+}
+
+.na-input,
+.na-select,
+.na-textarea {
+    width: 100%;
+    padding: 0.65rem 0.95rem;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg);
+    font-family: var(--font-main);
+    font-size: 0.875rem;
+    color: var(--terra);
+    transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+    outline: none;
+}
+
+.na-input:focus,
+.na-select:focus,
+.na-textarea:focus {
+    border-color: var(--verde);
+    background: var(--surface);
+    box-shadow: 0 0 0 3px rgba(0, 70, 75, 0.12);
+}
+
+.na-input.input-validation-error,
+.na-select.input-validation-error {
+    border-color: var(--vinho);
+    background: rgba(115, 0, 0, 0.03);
+}
+
+.na-input.input-validation-error:focus {
+    box-shadow: 0 0 0 3px rgba(115, 0, 0, 0.12);
+}
+
+.na-textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+
+/* Validação */
+.na-validation-message {
+    font-size: 0.75rem;
+    color: var(--vinho);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.na-validation-message::before {
+    content: '\F341'; /* bi-exclamation-circle */
+    font-family: 'bootstrap-icons';
+    font-size: 0.8em;
+}
+
+/* Resumo de validação */
+.na-validation-summary {
+    background: rgba(115, 0, 0, 0.06);
+    border: 1px solid rgba(115, 0, 0, 0.2);
+    border-left: 3px solid var(--vinho);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 1rem;
+    font-size: 0.82rem;
+    color: var(--vinho);
+    margin-bottom: 0.5rem;
+}
+
+/* Checkbox Ativo */
+.na-check-group {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.65rem 0.95rem;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: border-color var(--transition), background var(--transition);
+    user-select: none;
+}
+
+.na-check-group:hover {
+    border-color: var(--verde);
+    background: var(--verde-muted);
+}
+
+.na-check-input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--verde);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.na-check-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--terra);
+    cursor: pointer;
+    margin: 0;
+}
+
+/* Botões do formulário */
+.na-form-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-top: 0.5rem;
+    flex-wrap: wrap;
+}
+
+/* ============================================================
+   DETAILS / DELETE — DL/DT/DD
+   ============================================================ */
+
+.na-detail-list {
+    display: grid;
+    gap: 0;
+    margin: 0;
+}
+
+.na-detail-row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    align-items: start;
+}
+
+.na-detail-row:last-child {
+    border-bottom: none;
+}
+
+.na-detail-term {
+    padding: 0.95rem 1.2rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--terra-light);
+    background: var(--terra-muted);
+    border-right: 1px solid var(--border);
+}
+
+.na-detail-value {
+    padding: 0.95rem 1.4rem;
+    font-size: 0.875rem;
+    color: var(--terra);
+    word-break: break-word;
+}
+
+/* ============================================================
+   ALERTA DE EXCLUSÃO — Delete
+   ============================================================ */
+
+.na-delete-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    background: rgba(115, 0, 0, 0.05);
+    border: 1px solid rgba(115, 0, 0, 0.18);
+    border-left: 4px solid var(--vinho);
+    border-radius: var(--radius-md);
+    padding: 1.1rem 1.4rem;
+    margin-bottom: 1.5rem;
+}
+
+.na-delete-alert__icon {
+    font-size: 1.6rem;
+    color: var(--vinho);
+    flex-shrink: 0;
+    line-height: 1;
+    margin-top: 1px;
+}
+
+.na-delete-alert__title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--vinho);
+    margin: 0 0 0.25rem;
+}
+
+.na-delete-alert__text {
+    font-size: 0.82rem;
+    color: var(--terra);
+    margin: 0;
+    opacity: 0.85;
+}
+
+/* ============================================================
+   BREADCRUMB
+   ============================================================ */
+
+.na-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    color: var(--agua);
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.na-breadcrumb a {
+    color: var(--agua);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color var(--transition);
+}
+
+.na-breadcrumb a:hover {
+    color: var(--verde);
+}
+
+.na-breadcrumb__sep {
+    font-size: 0.65rem;
+    opacity: 0.5;
+}
+
+.na-breadcrumb__current {
+    color: var(--terra);
+    font-weight: 600;
+}
+
+/* ============================================================
+   DIVIDER
+   ============================================================ */
+
+.na-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 1.5rem 0;
+}
+
+/* ============================================================
+   EMPTY STATE — tabela vazia
+   ============================================================ */
+
+.na-empty {
+    text-align: center;
+    padding: 3.5rem 1.5rem;
+    color: var(--agua);
+}
+
+.na-empty__icon {
+    font-size: 3rem;
+    opacity: 0.4;
+    margin-bottom: 0.75rem;
+}
+
+.na-empty__text {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* ============================================================
+   UTILITÁRIOS
+   ============================================================ */
+
+.na-text-danger { color: var(--vinho) !important; }
+.na-text-success { color: var(--verde) !important; }
+.na-text-muted { color: var(--agua) !important; font-size: 0.82rem; }
+
+/* ============================================================
+   RESPONSIVO
+   ============================================================ */
+
+@media (max-width: 768px) {
+    .na-page {
+        padding: 1.25rem 1rem;
+    }
+
+    .na-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .na-detail-row {
+        grid-template-columns: 1fr;
+    }
+
+    .na-detail-term {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 0.5rem;
+    }
+
+    .na-form {
+        max-width: 100%;
+    }
+}
