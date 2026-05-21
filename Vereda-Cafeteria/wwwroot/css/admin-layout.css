@@ -79,11 +79,11 @@ button { cursor: pointer; }
     transition: transform 0.3s ease;
 }
 
-.sidebar-header {
-    height: var(--topbar-height);
-    display: flex;
-    align-items: center;
-    padding: 0 1.5rem;
+.sidebar-header img{
+    height: 95px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 15px;
 }
 
 .logo {

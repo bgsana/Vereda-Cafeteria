@@ -58,7 +58,7 @@ body {
     align-items: flex-end;
     margin-bottom: 2rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid var(--border);
+    background-color: var(--bg-page);
 }
 
 .page-eyebrow {
@@ -87,10 +87,8 @@ body {
 .date-badge {
     font-size: 0.875rem;
     color: var(--terra);
-    background: var(--white);
     padding: 0.5rem 1rem;
     border-radius: 20px;
-    border: 1px solid var(--border);
     font-weight: 500;
 }
 
@@ -147,7 +145,6 @@ body {
     background: var(--white);
     padding: 1.5rem;
     border-radius: 12px;
-    box-shadow: var(--shadow);
     border: 1px solid var(--border);
     position: relative;
     overflow: hidden;
@@ -174,13 +171,6 @@ body {
 .k2::before { background: var(--verde); }
 .k3::before { background: var(--terra); }
 .k4::before { background: var(--agua); }
-
-.kpi-icon {
-    font-size: 1.25rem;
-    display: block;
-    margin-bottom: 0.75rem;
-    filter: grayscale(0.1);
-}
 
 .kpi-label {
     font-size: 0.8rem;
