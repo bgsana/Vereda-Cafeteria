@@ -2,10 +2,10 @@
 
 @{
     ViewData["Title"] = "Nosso Ambiente";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";  // ← adicione isso
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml"; // ← adicione isso
 }
 
-<h1>Index</h1>
+<h1>Nosso Ambiente</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,36 +13,36 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CaminhoImagem)
-            </th>
+            <th>Imagem</th>
             <th>
                 @Html.DisplayNameFor(model => model.Ordem)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Ativo)
             </th>
-            <th></th>
+            <th>Ações</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CaminhoImagem)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ordem)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ativo)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="text-align:center;">
+                    <img src="@item.CaminhoImagem" alt="Imagem"
+                         style="width:160px;height:100px;object-fit:cover;border-radius:6px;border:1px solid rgba(55,35,20,0.12);" />
+                </td>
+                <td style="text-align:center;">
+                    @Html.DisplayFor(modelItem => item.Ordem)
+                </td>
+                <td style="text-align:center;">
+                    @Html.DisplayFor(modelItem => item.Ativo)
+                </td>
+                <td style="text-align:center;">
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

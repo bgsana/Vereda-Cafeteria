@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
     <link rel="stylesheet" href="~/css/admin-layout.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/admin-nossoambiente.css" asp-append-version="true" />
 
     @RenderSection("Styles", required: false)
 </head>
@@ -129,29 +130,18 @@
         <div class="sidebar-footer">
             
             <div class="topbar-right">
-                               <button class="icon-btn" type="button">
-                    <i class="bi bi-bell"></i>
-                    <span class="notification-dot"></span>
-                </button>
-
                 <button class="profile-btn" type="button">
                     <div class="profile-avatar"><span>VR</span></div>
                     <div class="profile-info">
                         <span class="profile-name">Vereda</span>
                         <span class="profile-role">Admin</span>
                     </div>
-                    <i class="bi bi-chevron-down"></i>
                 </button> 
             </div>
         </div>
     </aside>
 
     <main class="main-wrapper">
-        <header class="topbar">
-
-            </div>
-        </header>
-
         <div class="content-wrapper">
             @RenderBody()
         </div>
