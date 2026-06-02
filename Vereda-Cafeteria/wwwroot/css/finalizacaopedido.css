@@ -8,11 +8,29 @@
     font-style: normal;
 }
 
+/* ── Variáveis ── */
+:root {
+    --vermelho: #730000;
+    --vermelho-claro: rgba(115, 0, 0, 0.08);
+    --vermelho-hover: rgba(115, 0, 0, 0.12);
+    --teal: #0b4d4d;
+    --teal-hover: #0d5e5e;
+    --borda: #e8d0d0;
+    --borda-focus: #730000;
+    --texto: #730000;
+    --placeholder: #c09090;
+    --sombra: rgba(0, 0, 0, 0.08);
+    --radius-card: 16px;
+    --radius-input: 10px;
+    --radius-btn: 10px;
+}
+
+/* ── Container principal ── */
 .carrinho-container {
     width: 100%;
-    max-width: 700px;
+    max-width: 960px;
     text-align: center;
-    margin: 65px auto;   /* ← centraliza horizontalmente */
+    margin: 65px auto;
     padding: 0 20px;
     box-sizing: border-box;
 }
@@ -22,14 +40,31 @@
     font-weight: normal;
     font-style: normal;
     font-size: 48px;
-    color: #0b4d4d;
-    margin-bottom: 20px;
+    color: var(--teal);
+    margin-bottom: 28px;
 }
 
-.form-grupo {
-    font-family: 'Montserrat', sans-serif;
+/* ── Layout principal ── */
+.layout-principal {
     display: flex;
     gap: 24px;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.coluna-itens {
+    flex: 1;
+    min-width: 0;
+    text-align: left;
+}
+
+/* ════════════════════════════════════════
+   Campos de nome e telefone
+   ════════════════════════════════════════ */
+.form-grupo {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 22px;
 }
 
 .form-campo {
@@ -39,39 +74,385 @@
     gap: 6px;
 }
 
-.form-campo:first-child {
+.form-campo.campo-nome {
     flex: 2;
 }
 
-.form-campo:last-child {
-    flex: 1;
-}
-
 .form-campo label {
-    font-size: 15px;
-    color: #730000;
+    font-size: 13px;
+    color: var(--vermelho);
     font-family: 'Montserrat', sans-serif;
-    text-align: left;
-    padding-left: 3px;
+    font-weight: 600;
+    padding-left: 4px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
 }
 
 .form-campo input {
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
+    padding: 11px 14px;
+    border-radius: var(--radius-input);
+    border: 1.5px solid var(--borda);
     outline: none;
     font-size: 14px;
     font-family: 'Montserrat', sans-serif;
-    transition: 0.3s;
+    font-weight: 400;
+    color: #333;
+    transition: border-color 0.2s, box-shadow 0.2s;
     background: #fff;
+    box-sizing: border-box;
+    box-shadow: 0 1px 3px var(--sombra);
 }
 
 .form-campo input:focus {
-    border-color: #730000;
-    box-shadow: 0 0 0 2px rgba(115, 0, 0, 0.1);
+    border-color: var(--borda-focus);
+    box-shadow: 0 0 0 3px rgba(115, 0, 0, 0.08);
 }
 
 .form-campo input::placeholder {
-    color: #aaa;
+    color: var(--placeholder);
     font-size: 13px;
+    font-weight: 400;
+}
+
+/* ════════════════════════════════════════
+   Grupo de dois cards
+   ════════════════════════════════════════ */
+.grupo-cards {
+    display: flex;
+    gap: 16px;
+    align-items: stretch;
+}
+
+.card-secao {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.secao-titulo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--vermelho);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin: 0 0 10px 4px;
+}
+
+/* ════════════════════════════════════════
+   Card de pagamento
+   ════════════════════════════════════════ */
+.caixa-pagamento {
+    flex: 1;
+    background: #fff;
+    box-shadow: 0 2px 10px var(--sombra);
+    border-radius: var(--radius-card);
+    border: 1.5px solid var(--borda);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 16px 18px;
+    box-sizing: border-box;
+}
+
+.opcao {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.opcao:hover {
+    background-color: var(--vermelho-claro);
+}
+
+.opcao input[type="radio"] {
+    accent-color: var(--vermelho);
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.opcao span {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--texto);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.icon-pag {
+    font-size: 18px;
+    width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* ════════════════════════════════════════
+   Card de recebimento
+   ════════════════════════════════════════ */
+.caixa-recebimento {
+    flex: 1;
+    background: #fff;
+    box-shadow: 0 2px 10px var(--sombra);
+    border-radius: var(--radius-card);
+    border: 1.5px solid var(--borda);
+    padding: 16px 18px;
+    box-sizing: border-box;
+}
+
+/* Botões Retirada / Entrega */
+.entrega-opcoes {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.btn-opcao {
+    font-family: 'Montserrat', sans-serif;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 9px 6px;
+    border-radius: var(--radius-btn);
+    border: 1.5px solid var(--borda);
+    background: transparent;
+    color: var(--placeholder);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-opcao i {
+    font-size: 17px;
+}
+
+.btn-opcao.ativo {
+    background: var(--vermelho);
+    border-color: var(--vermelho);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(115, 0, 0, 0.25);
+}
+
+.btn-opcao:not(.ativo):hover {
+    border-color: var(--vermelho);
+    color: var(--vermelho);
+    background: var(--vermelho-claro);
+}
+
+/* ════════════════════════════════════════
+   Info de retirada (endereço da loja)
+   ════════════════════════════════════════ */
+.info-retirada {
+    display: none;
+    align-items: flex-start;
+    gap: 10px;
+    background: var(--vermelho-claro);
+    border: 1.5px solid var(--borda);
+    border-radius: var(--radius-input);
+    padding: 12px 14px;
+    animation: slideDown 0.25s ease;
+}
+
+.info-retirada.visivel {
+    display: flex;
+}
+
+.info-retirada > i {
+    font-size: 20px;
+    color: var(--vermelho);
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.info-retirada > div {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.retirada-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--vermelho);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.retirada-endereco {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: #555;
+    line-height: 1.5;
+}
+
+/* ════════════════════════════════════════
+   Campos de endereço (entrega)
+   ════════════════════════════════════════ */
+.campos-endereco {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    overflow: hidden;
+}
+
+.campos-endereco.visivel {
+    display: flex;
+    animation: slideDown 0.25s ease;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.campo-endereco {
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    border: 1.5px solid var(--borda);
+    border-radius: var(--radius-input);
+    padding: 9px 12px;
+    font-size: 13px;
+    color: #333;
+    background: #fff;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 1px 3px var(--sombra);
+}
+
+.campo-endereco::placeholder {
+    color: var(--placeholder);
+}
+
+.campo-endereco:focus {
+    border-color: var(--borda-focus);
+    box-shadow: 0 0 0 3px rgba(115, 0, 0, 0.08);
+}
+
+.linha-dois-campos {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.campo-numero {
+    flex: 0 0 60px;
+    min-width: 0;
+}
+
+.campo-bairro {
+    flex: 1;
+    min-width: 0;
+}
+
+.campo-cidade {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23c09090' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 30px;
+    cursor: pointer;
+    color: var(--placeholder);
+}
+
+.campo-cidade:focus {
+    color: #333;
+}
+
+.campo-cidade option {
+    color: #333;
+}
+
+/* ════════════════════════════════════════
+   Caixa de resumo
+   ════════════════════════════════════════ */
+.caixa-resumo {
+    width: 260px;
+    flex-shrink: 0;
+    background: #fff;
+    box-shadow: 0 2px 10px var(--sombra);
+    border-radius: var(--radius-card);
+    border: 1.5px solid var(--borda);
+    padding: 22px 20px;
+    text-align: left;
+}
+
+.resumo-titulo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--teal);
+    margin: 0 0 12px 0;
+    letter-spacing: 0.01em;
+}
+
+.resumo-linha {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--texto);
+    margin-bottom: 12px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.desconto {
+    color: #1a7a1a;
+}
+
+.resumo-divisor {
+    border: none;
+    border-top: 1.5px solid var(--borda);
+    margin-bottom: 14px;
+}
+
+.resumo-total {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--teal);
+    margin-bottom: 18px;
+}
+
+/* ── Botão Confirmar Pedido ── */
+.btn-finalizar {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--teal);
+    color: #fff;
+    border: none;
+    padding: 13px 0;
+    border-radius: var(--radius-btn);
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 14px;
+    width: 100%;
+    letter-spacing: 0.02em;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+    box-shadow: 0 2px 8px rgba(11, 77, 77, 0.25);
+}
+
+.btn-finalizar:hover {
+    background: var(--teal-hover);
+    box-shadow: 0 4px 14px rgba(11, 77, 77, 0.3);
+}
+
+.btn-finalizar:active {
+    transform: scale(0.98);
 }

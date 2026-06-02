@@ -7,33 +7,150 @@
 }
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@tabler/icons-webfont@latest/tabler-icons.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <section class="carrinho-container">
 
     <h1 class="titulo">Finalização do Pedido</h1>
-    <div class="form-grupo">
-        <div class="form-campo campo-nome">
-            <label>Nome Completo</label>
-            <input type="text" placeholder="Digite seu nome completo">
+
+    <div class="layout-principal">
+
+        <div class="coluna-itens">
+
+            <!-- Nome e Telefone -->
+            <div class="form-grupo">
+                <div class="form-campo campo-nome">
+                    <label>Nome Completo</label>
+                    <input type="text" placeholder="Digite seu nome completo">
+                </div>
+                <div class="form-campo">
+                    <label>Telefone</label>
+                    <input type="text" placeholder="(14) 99999-9999">
+                </div>
+            </div>
+
+            <!-- Forma de Pagamento + Forma de Recebimento lado a lado -->
+            <div class="grupo-cards">
+
+                <div class="card-secao">
+                    <h2 class="secao-titulo">Forma de Pagamento</h2>
+                    <div class="caixa-pagamento">
+                        <label class="opcao">
+                            <input type="radio" name="pagamento" checked>
+                            <span><i class="fa-brands fa-pix icon-pag"></i>Pix</span>
+                        </label>
+                        <label class="opcao">
+                            <input type="radio" name="pagamento">
+                            <span><i class="ti ti-coin-filled icon-pag"></i>Dinheiro</span>
+                        </label>
+                        <label class="opcao">
+                            <input type="radio" name="pagamento">
+                            <span><i class="fa-solid fa-credit-card icon-pag"></i>Cartão</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="card-secao">
+                    <h2 class="secao-titulo">Forma de Recebimento</h2>
+                    <div class="caixa-recebimento">
+
+                        <div class="entrega-opcoes">
+                            <button class="btn-opcao ativo" id="btn-retirada" onclick="selecionarOpcao('retirada')">
+                                <i class="ti ti-building-store"></i>
+                                <span>Retirada</span>
+                            </button>
+                            <button class="btn-opcao" id="btn-entrega" onclick="selecionarOpcao('entrega')">
+                                <i class="ti ti-bike"></i>
+                                <span>Entrega</span>
+                            </button>
+                        </div>
+
+                        <!-- Endereço de retirada (visível por padrão) -->
+                        <div class="info-retirada visivel" id="info-retirada">
+                            <i class="ti ti-map-pin"></i>
+                            <div>
+                                <span class="retirada-label">Retire no local</span>
+                                <span class="retirada-endereco">R. Primeiro de Março, 234 — Centro<br>Barra Bonita - SP, 17340-035</span>
+                            </div>
+                        </div>
+
+                        <!-- Campos de endereço para entrega -->
+                        <div class="campos-endereco" id="campos-endereco">
+                            <select class="campo-endereco campo-cidade">
+                                <option value="" disabled selected>Cidade</option>
+                                <option value="barra-bonita">Barra Bonita</option>
+                                <option value="igaracu">Igaraçu do Tietê</option>
+                            </select>
+                            <input type="text" class="campo-endereco" placeholder="Rua / Avenida">
+                            <div class="linha-dois-campos">
+                                <input type="text" class="campo-endereco campo-numero" placeholder="Nº" maxlength="4">
+                                <input type="text" class="campo-endereco campo-bairro" placeholder="Bairro">
+                            </div>
+                            <input type="text" class="campo-endereco" placeholder="Complemento (opcional)">
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
         </div>
-        <div class="form-campo">
-            <label>Telefone</label>
-            <input type="text" placeholder="(14) 99999-9999">
+
+        <!-- Caixa de resumo -->
+        <div class="caixa-resumo">
+            <h2 class="resumo-titulo">Resumo do pedido</h2>
+
+            <div class="resumo-linha">
+                <span>2x Pão de Queijo</span>
+                <span>2x Pão de Queijo</span>
+            </div>
+
+            <div class="resumo-linha" id="linha-taxa" style="display: none;">
+                <span>Taxa de entrega</span>
+                <span>R$8,00</span>
+            </div>
+
+            <div class="resumo-divisor"></div>
+
+            <div class="resumo-total">
+                <span>Total</span>
+                <span id="valor-total">R$10,00</span>
+            </div>
+
+            <button class="btn-finalizar">Confirmar pedido</button>
         </div>
+
     </div>
 
-    <h2>Forma de Pagamento</h2>
-    <div class="caixa-pagamento">
-        <label class="opcao">
-            <span>Pix</span>
-            <input type="checkbox">
-        </label>
-        <label class="opcao">
-            <span>Dinheiro</span>
-            <input type="checkbox">
-        </label>
-        <label class="opcao">
-            <span>Cartão</span>
-            <input type="checkbox">
-        </label>
-    </div>
+</section>
+
+<script>
+    const SUBTOTAL = 10;
+    const TAXA_ENTREGA = 8;
+
+    function selecionarOpcao(opcao) {
+        const btnRetirada = document.getElementById('btn-retirada');
+        const btnEntrega = document.getElementById('btn-entrega');
+        const camposEndereco = document.getElementById('campos-endereco');
+        const infoRetirada = document.getElementById('info-retirada');
+        const linhaTaxa = document.getElementById('linha-taxa');
+        const valorTotal = document.getElementById('valor-total');
+
+        if (opcao === 'retirada') {
+            btnRetirada.classList.add('ativo');
+            btnEntrega.classList.remove('ativo');
+            camposEndereco.classList.remove('visivel');
+            infoRetirada.classList.add('visivel');
+            linhaTaxa.style.display = 'none';
+            valorTotal.textContent = `R$${SUBTOTAL.toFixed(2).replace('.', ',')}`;
+        } else {
+            btnEntrega.classList.add('ativo');
+            btnRetirada.classList.remove('ativo');
+            camposEndereco.classList.add('visivel');
+            infoRetirada.classList.remove('visivel');
+            linhaTaxa.style.display = 'flex';
+            const total = SUBTOTAL + TAXA_ENTREGA;
+            valorTotal.textContent = `R$${total.toFixed(2).replace('.', ',')}`;
+        }
+    }
+</script>

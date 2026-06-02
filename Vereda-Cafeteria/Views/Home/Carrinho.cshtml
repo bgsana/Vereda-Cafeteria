@@ -34,6 +34,10 @@
                                 <i class="ti ti-edit"></i>
                                 <span class="texto-editar">Editar</span>
                             </button>
+
+                            <button class="btn-excluir">
+                                <i class="ti ti-trash"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -61,6 +65,10 @@
                                 <i class="ti ti-edit"></i>
                                 <span class="texto-editar">Editar</span>
                             </button>
+
+                            <button class="btn-excluir">
+                                <i class="ti ti-trash"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -75,49 +83,16 @@
         <div class="caixa-resumo">
             <h2 class="resumo-titulo">Resumo do pedido</h2>
 
-            <!-- Seleção de entrega/retirada -->
-            <div class="entrega-opcoes">
-                <button class="btn-opcao ativo" id="btn-retirada" onclick="selecionarOpcao('retirada')">
-                    <i class="ti ti-building-store"></i>
-                    <span>Retirada</span>
-                </button>
-                <button class="btn-opcao" id="btn-entrega" onclick="selecionarOpcao('entrega')">
-                    <i class="ti ti-bike"></i>
-                    <span>Entrega</span>
-                </button>
-            </div>
-
-            <!-- Campos de endereço (ocultos por padrão) -->
-            <div class="campos-endereco" id="campos-endereco">
-                <select class="campo-endereco campo-cidade">
-                    <option value="" disabled selected>Cidade</option>
-                    <option value="barra-bonita">Barra Bonita</option>
-                    <option value="igaracu">Igaraçu do Tietê</option>
-                </select>
-                <input type="text" class="campo-endereco" placeholder="Rua / Avenida">
-                <div class="linha-dois-campos">
-                    <input type="text" class="campo-endereco campo-numero" placeholder="Nº" maxlength="4">
-                    <input type="text" class="campo-endereco campo-bairro" placeholder="Bairro">
-                </div>
-                <input type="text" class="campo-endereco" placeholder="Complemento (opcional)">
-            </div>
-
-            <div class="resumo-linhas">
-                <div class="resumo-linha">
-                    <span>Subtotal</span>
-                    <span>R$10,00</span>
-                </div>
-                <div class="resumo-linha" id="linha-taxa" style="display: none;">
-                    <span>Taxa de entrega</span>
-                    <span>R$8,00</span>
-                </div>
+            <div class="resumo-linha">
+                <span>2x Pão de Queijo</span>
+                <span>2x Pão de Queijo</span>
             </div>
 
             <div class="resumo-divisor"></div>
 
             <div class="resumo-total">
                 <span>Total</span>
-                <span id="valor-total">R$10,00</span>
+                <span>R$10,00</span>
             </div>
 
             <button class="btn-finalizar">Finalizar pedido</button>
@@ -126,31 +101,3 @@
     </div>
 
 </section>
-
-<script>
-    const SUBTOTAL = 10;
-    const TAXA_ENTREGA = 8;
-
-    function selecionarOpcao(opcao) {
-        const btnRetirada = document.getElementById('btn-retirada');
-        const btnEntrega = document.getElementById('btn-entrega');
-        const camposEndereco = document.getElementById('campos-endereco');
-        const linhaTaxa = document.getElementById('linha-taxa');
-        const valorTotal = document.getElementById('valor-total');
-
-        if (opcao === 'retirada') {
-            btnRetirada.classList.add('ativo');
-            btnEntrega.classList.remove('ativo');
-            camposEndereco.classList.remove('visivel');
-            linhaTaxa.style.display = 'none';
-            valorTotal.textContent = `R$${SUBTOTAL.toFixed(2).replace('.', ',')}`;
-        } else {
-            btnEntrega.classList.add('ativo');
-            btnRetirada.classList.remove('ativo');
-            camposEndereco.classList.add('visivel');
-            linhaTaxa.style.display = 'flex';
-            const total = SUBTOTAL + TAXA_ENTREGA;
-            valorTotal.textContent = `R$${total.toFixed(2).replace('.', ',')}`;
-        }
-    }
-</script>
