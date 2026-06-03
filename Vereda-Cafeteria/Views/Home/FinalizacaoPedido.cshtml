@@ -29,19 +29,19 @@
                 </div>
             </div>
 
-            <!-- Forma de Pagamento + Forma de Recebimento lado a lado -->
             <div class="grupo-cards">
 
+                <!-- Forma de Pagamento -->
                 <div class="card-secao">
                     <h2 class="secao-titulo">Forma de Pagamento</h2>
                     <div class="caixa-pagamento">
                         <label class="opcao">
                             <input type="radio" name="pagamento" checked>
-                            <span><i class="fa-brands fa-pix icon-pag"></i>Pix</span>
+                            <span><i class="fa-brands fa-pix icon-pag icon-pix"></i>Pix</span>
                         </label>
                         <label class="opcao">
                             <input type="radio" name="pagamento">
-                            <span><i class="ti ti-coin-filled icon-pag"></i>Dinheiro</span>
+                            <span><i class="ti ti-coin-filled icon-pag icon-dinheiro"></i>Dinheiro</span>
                         </label>
                         <label class="opcao">
                             <input type="radio" name="pagamento">
@@ -50,6 +50,7 @@
                     </div>
                 </div>
 
+                <!-- Forma de Recebimento -->
                 <div class="card-secao">
                     <h2 class="secao-titulo">Forma de Recebimento</h2>
                     <div class="caixa-recebimento">
@@ -65,7 +66,7 @@
                             </button>
                         </div>
 
-                        <!-- Endereço de retirada (visível por padrão) -->
+                        <!-- Endereço de retirada -->
                         <div class="info-retirada visivel" id="info-retirada">
                             <i class="ti ti-map-pin"></i>
                             <div>
@@ -76,14 +77,14 @@
 
                         <!-- Campos de endereço para entrega -->
                         <div class="campos-endereco" id="campos-endereco">
-                            <select class="campo-endereco campo-cidade">
+                            <select class="campo-endereco campo-cidade" onchange="this.classList.add('selecionado')">
                                 <option value="" disabled selected>Cidade</option>
                                 <option value="barra-bonita">Barra Bonita</option>
                                 <option value="igaracu">Igaraçu do Tietê</option>
                             </select>
                             <input type="text" class="campo-endereco" placeholder="Rua / Avenida">
                             <div class="linha-dois-campos">
-                                <input type="text" class="campo-endereco campo-numero" placeholder="Nº" maxlength="4">
+                                <input type="text" class="campo-endereco campo-numero" placeholder="Nº" maxlength="6" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                                 <input type="text" class="campo-endereco campo-bairro" placeholder="Bairro">
                             </div>
                             <input type="text" class="campo-endereco" placeholder="Complemento (opcional)">
@@ -93,7 +94,6 @@
                 </div>
 
             </div>
-
         </div>
 
         <!-- Caixa de resumo -->
@@ -106,7 +106,7 @@
             </div>
 
             <div class="resumo-linha" id="linha-taxa" style="display: none;">
-                <span>Taxa de entrega</span>
+                <span style="font-weight: 600;">Taxa de entrega</span>
                 <span>R$8,00</span>
             </div>
 

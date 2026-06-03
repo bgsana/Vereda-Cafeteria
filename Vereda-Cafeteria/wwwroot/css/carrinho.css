@@ -230,7 +230,7 @@
 /* botão finalizar */
 .btn-finalizar {
     font-family: 'Montserrat', sans-serif;
-    background-color: #0b4d4d;
+    background: #0b4d4d;
     color: white;
     border: none;
     padding: 13px 0;
@@ -239,4 +239,10 @@
     cursor: pointer;
     font-size: 14px;
     width: 100%;
+    letter-spacing: 0.02em;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.btn-finalizar:hover {
+    background: #0d5e5e;
 }
