@@ -37,6 +37,12 @@ public class HomeController : Controller
         return View();
     }
 
+    [Route("Eventos")]
+    public IActionResult Eventos()
+    {
+        return View();
+    }
+
     [Route("Carrinho")]
     public IActionResult Carrinho()
     {
