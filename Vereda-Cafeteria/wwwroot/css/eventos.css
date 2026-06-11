@@ -13,7 +13,7 @@ h1 {
     color: #0b4d4d;
     font-size: 3rem;
     text-align: center;
-    margin: 28px;
+    margin: 50px 0 25px 0;
 }
 
 /* ========== BANNER ========== */
@@ -21,7 +21,7 @@ h1 {
     background-color: #f5f5f5;
     border-radius: 16px;
     width: 100%;
-    min-height: 400px;
+    min-height: 450px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -76,7 +76,7 @@ h1 {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background-color: #1a6b5e;
+    background-color: #0b4d4d;
     color: #fff;
     text-decoration: none;
     padding: 8px 42px;
@@ -87,7 +87,7 @@ h1 {
 }
 
 .evento-vereda a:hover {
-    background-color: #145549;
+    background-color: #0e5f5f;
 }
 
 .evento-vereda a i {
@@ -106,31 +106,23 @@ h1 {
     color: #7b1a1a;
     font-size: 2.4rem;
     text-align: center;
-    margin-bottom: 24px;
+    margin-bottom: 30px;
 }
 
 /* ---- Cards ---- */
 .eventos-cards {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 25px;
 }
 
 .evento-item {
+    background-color: #d6dfa0;
     display: flex;
     align-items: stretch;
     gap: 65px;
     border-radius: 16px;
     padding: 35px;
-}
-
-/* Cores alternadas por nth-child */
-.evento-item:nth-child(odd) {
-    background-color: #d6dfa0; /* verde-oliva claro */
-}
-
-.evento-item:nth-child(even) {
-    background-color: #f5c6d0; /* rosa claro */
 }
 
 /* ---- Conteúdo de texto ---- */
@@ -158,12 +150,12 @@ h1 {
 }
 
 .evento-conteudo span {
-    font-size: 0.85rem;
+    font-size: 14px;
     color: #555;
     font-weight: 600;
     background-color: rgba(0,0,0,0.08);
-    padding: 4px 12px;
-    border-radius: 20px;
+    padding: 6px 24px;
+    border-radius: 12px;
     display: inline-block;
     align-self: flex-start;
 }
@@ -171,11 +163,11 @@ h1 {
 /* ---- Imagem placeholder ---- */
 .evento-imagem {
     flex-shrink: 0;
-    width: 200px;
-    height: 200px;
+    width: 320px;
+    height: 250px;
     border-radius: 10px;
     overflow: hidden;
-    background-color: rgba(0,0,0,0.15); /* placeholder visível */
+    background-color: rgba(0,0,0,0.15);
 }
 
 .evento-imagem img {
