@@ -124,41 +124,122 @@
 <div class="divider"></div>
 
 <!-- LOJA -->
-<section class="store" id="loja">
-    <h2>Loja Vereda</h2>
+<section class="store py-5" id="loja">
+    <div class="container">
+        <h2 class="text-center mb-5 display-5 fw-bold text-success">Loja Vereda</h2>
 
-    <div id="carouselLoja" class="carousel slide">
-
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="store-track">
-                    <div class="store-card"></div>
-                    <div class="store-card"></div>
-                    <div class="store-card"></div>
-                </div>
+        <div id="carouselLoja" class="carousel slide" data-bs-ride="carousel">
+            
+            <!-- Indicadores (opcional) -->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselLoja" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#carouselLoja" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#carouselLoja" data-bs-slide-to="2"></button>
             </div>
 
-            <div class="carousel-item">
-                <div class="store-track">
-                    <div class="store-card"></div>
-                    <div class="store-card"></div>
-                    <div class="store-card"></div>
+            <div class="carousel-inner">
+
+                <!-- Slide 1 -->
+                <div class="carousel-item active">
+                    <div class="store-track row g-4 justify-content-center">
+                        <div class="col-md-4 col-sm-6">
+                            <div class="store-card card h-100 shadow-sm border-0">
+                                <img src="https://picsum.photos/id/1060/400/300" class="card-img-top" alt="Café Especial">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Café Especial Vereda</h5>
+                                    <p class="card-text text-muted small">Torra média • 250g</p>
+                                    <h5 class="text-success fw-bold">R$ 18,90</h5>
+                                    <a href="#" class="btn btn-success btn-sm mt-2">Adicionar</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-sm-6">
+                            <div class="store-card card h-100 shadow-sm border-0">
+                                <img src="https://picsum.photos/id/292/400/300" class="card-img-top" alt="Pão de Queijo">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Pão de Queijo Mineiro</h5>
+                                    <p class="card-text text-muted small">Pacote com 20 unidades</p>
+                                    <h5 class="text-success fw-bold">R$ 22,00</h5>
+                                    <a href="#" class="btn btn-success btn-sm mt-2">Adicionar</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-sm-6">
+                            <div class="store-card card h-100 shadow-sm border-0">
+                                <img src="https://picsum.photos/id/431/400/300" class="card-img-top" alt="Doce de Leite">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Doce de Leite Artesanal</h5>
+                                    <p class="card-text text-muted small">350g • Tradicional</p>
+                                    <h5 class="text-success fw-bold">R$ 14,90</h5>
+                                    <a href="#" class="btn btn-success btn-sm mt-2">Adicionar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Slide 2 -->
+                <div class="carousel-item">
+                    <div class="store-track row g-4 justify-content-center">
+                        <div class="col-md-4 col-sm-6">
+                            <div class="store-card card h-100 shadow-sm border-0">
+                                <img src="https://picsum.photos/id/669/400/300" class="card-img-top" alt="Bolo de Fubá">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Bolo de Fubá com Goiabada</h5>
+                                    <p class="card-text text-muted small">Inteiro (1,2kg)</p>
+                                    <h5 class="text-success fw-bold">R$ 45,00</h5>
+                                    <a href="#" class="btn btn-success btn-sm mt-2">Adicionar</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-sm-6">
+                            <div class="store-card card h-100 shadow-sm border-0">
+                                <img src="https://picsum.photos/id/870/400/300" class="card-img-top" alt="Queijo Canastra">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Queijo Canastra</h5>
+                                    <p class="card-text text-muted small">Peça ≈ 800g</p>
+                                    <h5 class="text-success fw-bold">R$ 68,00</h5>
+                                    <a href="#" class="btn btn-success btn-sm mt-2">Adicionar</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-sm-6">
+                            <div class="store-card card h-100 shadow-sm border-0">
+                                <img src="https://picsum.photos/id/201/400/300" class="card-img-top" alt="Chá">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">Chá de Ervas Orgânicas</h5>
+                                    <p class="card-text text-muted small">Caixa com 20 sachês</p>
+                                    <h5 class="text-success fw-bold">R$ 12,90</h5>
+                                    <a href="#" class="btn btn-success btn-sm mt-2">Adicionar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
+
+            <!-- Controles -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselLoja" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselLoja" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Próximo</span>
+            </button>
         </div>
 
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselLoja" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-        </button>
-
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselLoja" data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
-        </button>
+        <div class="text-center mt-5">
+            <a asp-controller="Loja" asp-action="Index" class="btn btn-success btn-lg px-5">
+                Ver Toda a Loja Vereda →
+            </a>
+        </div>
     </div>
-
-    <a asp-controller="Loja" asp-action="Index" class="btn-loja">
-        Ver Loja Vereda
-    </a>
 </section>
 
 <div class="divider"></div>

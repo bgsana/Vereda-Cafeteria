@@ -1,0 +1,599 @@
+/* ============================================================
+   admin-menu.css
+   CRUD — Produtos · Vereda Admin
+   Baseado em admin-nossoambiente.css
+   ============================================================ */
+
+/* --- TOKENS --- */
+:root {
+    --vinho:       #730000;
+    --vinho-light: #9a1a1a;
+    --vinho-muted: rgba(115, 0, 0, 0.08);
+
+    --verde:       #00464B;
+    --verde-light: #005c63;
+    --verde-muted: rgba(0, 70, 75, 0.08);
+
+    --terra:       #372314;
+    --terra-light: #5a3c25;
+    --terra-muted: rgba(55, 35, 20, 0.06);
+
+    --agua:        #96B9B9;
+    --agua-light:  #b8d4d4;
+    --agua-muted:  rgba(150, 185, 185, 0.20);
+
+    --bg:          #f5f2ee;
+    --surface:     #ffffff;
+    --border:      rgba(55, 35, 20, 0.12);
+
+    --radius-sm:   6px;
+    --radius-md:   10px;
+    --radius-lg:   16px;
+
+    --shadow-card: 0 2px 12px rgba(55, 35, 20, 0.08), 0 1px 3px rgba(55, 35, 20, 0.06);
+    --shadow-btn:  0 2px 8px rgba(0, 70, 75, 0.25);
+
+    --font-main:   'Montserrat', sans-serif;
+
+    --transition: 0.2s ease;
+}
+
+/* ============================================================
+   BODY / PÁGINA
+   ============================================================ */
+
+body {
+    background: var(--bg);
+    font-family: var(--font-main);
+    color: var(--terra);
+}
+
+.content-wrapper {
+    padding: 2rem 2.5rem;
+    animation: fadeIn 0.3s ease both;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   HEADINGS
+   ============================================================ */
+
+h1 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--terra);
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 1.5rem;
+}
+
+h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--vinho);
+    margin-bottom: 1rem;
+}
+
+h4 {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--terra-light);
+    margin-bottom: 0;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0.75rem 0 1.5rem;
+}
+
+/* ============================================================
+   BOTÃO "Adicionar"
+   ============================================================ */
+
+p > a[href*="Create"],
+p > a[href*="create"] {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.55rem 1.2rem;
+    background: var(--verde);
+    color: #fff;
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    box-shadow: var(--shadow-btn);
+    transition: all var(--transition);
+    margin-bottom: 1.25rem;
+}
+
+p > a[href*="Create"]:hover,
+p > a[href*="create"]:hover {
+    background: var(--verde-light);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(0, 70, 75, 0.35);
+    color: #fff;
+}
+
+/* ============================================================
+   TABELA — Index
+   ============================================================ */
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--border);
+}
+
+.table thead tr {
+    background: var(--verde);
+}
+
+.table thead th {
+    padding: 0.85rem 1.2rem;
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: none;
+    white-space: nowrap;
+}
+
+.table tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background var(--transition);
+}
+
+.table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.table tbody tr:hover {
+    background: var(--agua-muted);
+}
+
+.table tbody td {
+    padding: 0.9rem 1.2rem;
+    color: var(--terra);
+    vertical-align: middle;
+    border: none;
+}
+
+/* Imagem do produto na tabela */
+.table tbody td img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    display: block;
+}
+
+/* Links de ação */
+.table tbody td a {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.28rem 0.65rem;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid transparent;
+    transition: all var(--transition);
+    display: inline-block;
+    margin-right: 0.25rem;
+}
+
+.table tbody td a[href*="Edit"] {
+    color: var(--verde);
+    border-color: rgba(0, 70, 75, 0.25);
+    background: var(--verde-muted);
+}
+
+.table tbody td a[href*="Edit"]:hover {
+    background: var(--verde);
+    color: #fff;
+    border-color: var(--verde);
+}
+
+.table tbody td a[href*="Details"] {
+    color: var(--terra-light);
+    border-color: var(--border);
+    background: var(--terra-muted);
+}
+
+.table tbody td a[href*="Details"]:hover {
+    background: var(--agua);
+    color: var(--terra);
+    border-color: var(--agua);
+}
+
+.table tbody td a[href*="Delete"] {
+    color: var(--vinho);
+    border-color: rgba(115, 0, 0, 0.18);
+    background: var(--vinho-muted);
+}
+
+.table tbody td a[href*="Delete"]:hover {
+    background: var(--vinho);
+    color: #fff;
+    border-color: var(--vinho);
+}
+
+/* ============================================================
+   FORMULÁRIO — Create / Edit
+   ============================================================ */
+
+.row > .col-md-4 {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    max-width: 520px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 1.25rem;
+}
+
+.control-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--terra-light);
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.65rem 0.95rem;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg);
+    font-family: var(--font-main);
+    font-size: 0.875rem;
+    color: var(--terra);
+    transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+    outline: none;
+    box-shadow: none;
+}
+
+.form-control:focus {
+    border-color: var(--verde);
+    background: var(--surface);
+    box-shadow: 0 0 0 3px rgba(0, 70, 75, 0.12);
+}
+
+.form-control.input-validation-error {
+    border-color: var(--vinho);
+    background: rgba(115, 0, 0, 0.03);
+}
+
+.form-control.input-validation-error:focus {
+    box-shadow: 0 0 0 3px rgba(115, 0, 0, 0.12);
+}
+
+/* Preview da imagem atual no Edit */
+.img-preview {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+/* Checkbox */
+.form-group.form-check {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.65rem 0.95rem;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: border-color var(--transition), background var(--transition);
+    margin-bottom: 1.25rem;
+}
+
+.form-group.form-check:hover {
+    border-color: var(--verde);
+    background: var(--verde-muted);
+}
+
+.form-check-label {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--terra);
+    cursor: pointer;
+    margin: 0;
+    user-select: none;
+}
+
+.form-check-input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--verde);
+    cursor: pointer;
+    flex-shrink: 0;
+    margin: 0;
+}
+
+/* Validação */
+.field-validation-error,
+.text-danger {
+    font-size: 0.75rem;
+    color: var(--vinho) !important;
+}
+
+[data-valmsg-summary] ul,
+.validation-summary-errors ul {
+    background: rgba(115, 0, 0, 0.06);
+    border: 1px solid rgba(115, 0, 0, 0.2);
+    border-left: 3px solid var(--vinho);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 1rem 0.75rem 2rem;
+    font-size: 0.82rem;
+    color: var(--vinho);
+    margin-bottom: 1rem;
+    list-style: disc;
+}
+
+/* ============================================================
+   BOTÕES
+   ============================================================ */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.55rem 1.25rem;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-main);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    transition: all var(--transition);
+    white-space: nowrap;
+    line-height: 1.4;
+}
+
+.btn-primary {
+    background: var(--verde) !important;
+    color: #fff !important;
+    border-color: var(--verde) !important;
+    box-shadow: var(--shadow-btn);
+}
+
+.btn-primary:hover {
+    background: var(--verde-light) !important;
+    border-color: var(--verde-light) !important;
+    color: #fff !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(0, 70, 75, 0.35);
+}
+
+.btn-secondary {
+    background: var(--terra-muted) !important;
+    color: var(--terra) !important;
+    border: 1.5px solid var(--border) !important;
+}
+
+.btn-secondary:hover {
+    background: var(--agua-muted) !important;
+    border-color: var(--agua) !important;
+    color: var(--terra) !important;
+}
+
+.btn-danger {
+    background: var(--vinho) !important;
+    color: #fff !important;
+    border-color: var(--vinho) !important;
+    box-shadow: 0 2px 8px rgba(115, 0, 0, 0.25);
+}
+
+.btn-danger:hover {
+    background: var(--vinho-light) !important;
+    border-color: var(--vinho-light) !important;
+    color: #fff !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(115, 0, 0, 0.35);
+}
+
+/* ============================================================
+   DL.ROW — Details / Delete
+   ============================================================ */
+
+dl.row {
+    margin: 0;
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--border);
+    overflow: hidden;
+}
+
+dl.row .col-sm-2 {
+    padding: 0.95rem 1.2rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--terra-light);
+    background: var(--terra-muted);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+}
+
+dl.row .col-sm-10 {
+    padding: 0.95rem 1.4rem;
+    font-size: 0.875rem;
+    color: var(--terra);
+    border-bottom: 1px solid var(--border);
+    word-break: break-word;
+    display: flex;
+    align-items: center;
+}
+
+dl.row .col-sm-2:last-of-type,
+dl.row .col-sm-10:last-of-type {
+    border-bottom: none;
+}
+
+/* Imagem dentro do dl.row (Details/Delete) */
+dl.row .col-sm-10 img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+}
+
+/* ============================================================
+   ALERTA DE EXCLUSÃO — Delete
+   ============================================================ */
+
+.container > div > h3,
+h4.delete-warning {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.9rem 1.2rem;
+    background: rgba(115, 0, 0, 0.05);
+    border: 1px solid rgba(115, 0, 0, 0.18);
+    border-left: 4px solid var(--vinho);
+    border-radius: var(--radius-md);
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--vinho);
+    width: 100%;
+}
+
+form[action*="Delete"],
+form[action*="delete"] {
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+/* ============================================================
+   LINKS FORA DA TABELA — Back to List / Edit (Details)
+   ============================================================ */
+
+div > a[href*="Index"],
+div > a[href*="index"] {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1.25rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--terra-light);
+    text-decoration: none;
+    padding: 0.45rem 1rem;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--terra-muted);
+    transition: all var(--transition);
+}
+
+div > a[href*="Index"]:hover,
+div > a[href*="index"]:hover {
+    background: var(--agua-muted);
+    border-color: var(--agua);
+    color: var(--terra);
+}
+
+div > a[href*="Edit"] {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1.25rem;
+    margin-right: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--verde);
+    text-decoration: none;
+    padding: 0.45rem 1rem;
+    border: 1.5px solid rgba(0, 70, 75, 0.25);
+    border-radius: var(--radius-sm);
+    background: var(--verde-muted);
+    transition: all var(--transition);
+}
+
+div > a[href*="Edit"]:hover {
+    background: var(--verde);
+    border-color: var(--verde);
+    color: #fff;
+}
+
+/* ============================================================
+   RESPONSIVO
+   ============================================================ */
+
+@media (max-width: 768px) {
+    .content-wrapper {
+        padding: 1.25rem 1rem;
+    }
+
+    .row > .col-md-4 {
+        max-width: 100%;
+        padding: 1.25rem;
+    }
+
+    dl.row .col-sm-2,
+    dl.row .col-sm-10 {
+        width: 100%;
+    }
+
+    dl.row .col-sm-2 {
+        border-bottom: none;
+        padding-bottom: 0.3rem;
+    }
+
+    dl.row .col-sm-10 {
+        padding-top: 0.4rem;
+        padding-left: 1.2rem;
+    }
+
+    .table {
+        font-size: 0.78rem;
+    }
+
+    .table thead th,
+    .table tbody td {
+        padding: 0.65rem 0.75rem;
+    }
+
+    .table tbody td img {
+        width: 55px;
+        height: 55px;
+    }
+}

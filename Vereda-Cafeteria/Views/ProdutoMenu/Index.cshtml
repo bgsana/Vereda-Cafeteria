@@ -1,0 +1,48 @@
+@model IEnumerable<Vereda_Cafeteria.Models.Produto>
+
+@{
+    ViewData["Title"] = "Produtos";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin-menu.css" />
+}
+
+<h1>Produtos</h1>
+
+<p>
+    <a asp-action="Create">Adicionar</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th style="width:100px;">Imagem</th>
+            <th>@Html.DisplayNameFor(model => model.Nome)</th>
+            <th style="text-align:center;">@Html.DisplayNameFor(model => model.QtdEstoque)</th>
+            <th style="text-align:center;">@Html.DisplayNameFor(model => model.Ativo)</th>
+            <th>@Html.DisplayNameFor(model => model.Categoria)</th>
+            <th style="text-align:center;">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@item.ImagemUrl" alt="@item.Nome"
+                         style="width:80px;height:80px;object-fit:cover;border-radius:6px;border:1px solid rgba(55,35,20,0.12);" />
+                </td>
+                <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                <td style="text-align:center;">@Html.DisplayFor(modelItem => item.QtdEstoque)</td>
+                <td style="text-align:center;">@Html.DisplayFor(modelItem => item.Ativo)</td>
+                <td>@Html.DisplayFor(modelItem => item.Categoria!.Nome)</td>
+                <td style="text-align:center;">
+                    <a asp-action="Edit" asp-route-id="@item.ProdutoId">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.ProdutoId">Detalhes</a>
+                    <a asp-action="Delete" asp-route-id="@item.ProdutoId">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

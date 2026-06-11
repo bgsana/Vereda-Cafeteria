@@ -24,17 +24,23 @@ public class HomeController : Controller
     {
         return View();
     }
-    
+
     [Route("SobreNos")]
     public IActionResult SobreNos()
     {
         return View();
     }
-    
+
     [Route("Menu")]
-    public IActionResult Menu()
+    public async Task<IActionResult> Menu()
     {
-        return View();
+        // Busca todas as categorias com seus produtos ativos
+        var categorias = await _context.Categorias
+            .Include(c => c.Produtos!.Where(p => p.Ativo))
+            .OrderBy(c => c.CategoriaId)
+            .ToListAsync();
+
+        return View(categorias);
     }
 
     [Route("Eventos")]

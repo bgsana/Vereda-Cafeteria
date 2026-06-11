@@ -45,7 +45,8 @@ body {
 .menu-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 450px; /* DIMINUI A ALTURA */
+  min-height: 450px;
+  /* DIMINUI A ALTURA */
 }
 
 /* PAINEL TEXTO */
@@ -74,9 +75,17 @@ body {
 }
 
 /* CORES */
-.panel-brown { background: var(--brown); }
-.panel-red { background: var(--deep-red); }
-.panel-teal { background: var(--teal); }
+.panel-brown {
+  background: var(--brown);
+}
+
+.panel-red {
+  background: var(--deep-red);
+}
+
+.panel-teal {
+  background: var(--teal);
+}
 
 /* ===== BOTÕES ===== */
 
@@ -200,21 +209,31 @@ body {
   margin-bottom: 25px;
 }
 
-.store-track {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  margin-bottom: 25px;
-}
-
-.store-card {
-  width: 130px;
-  height: 130px;
-  background-color: #c2185b;
-  border-radius: 12px;
-}
-
 .carousel img {
   height: 540px;
   object-fit: cover;
+}
+
+.store-track {
+  padding: 20px 0;
+}
+
+.store-card {
+  transition: all 0.3s ease;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.store-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+.store-card img {
+  height: 220px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 1.25rem;
 }
