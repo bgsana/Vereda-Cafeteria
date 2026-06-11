@@ -71,14 +71,18 @@ h1 {
 .valores {
     display: flex;
     width: 100%;
-    max-height: 580px;
-    margin-top: 20px;
+    max-height: 450px;
+    margin-top: 25px;
 }
 
-.proposito-esquerda,
-.missao-esquerda,
-.visao-esquerda,
-.valores-esquerda {
+.valores {
+    margin-bottom: 25px;
+}
+
+.proposito-conteudo,
+.missao-conteudo,
+.visao-conteudo,
+.valores-conteudo {
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -89,15 +93,15 @@ h1 {
     gap: 7px;
 }
 
-.proposito-esquerda { background-color: #4b2a14; }
-.missao-esquerda { background-color: #730000; }
-.visao-esquerda { background-color: #00464B; }
-.valores-esquerda { background-color: #96B9B9; }
+.proposito-conteudo { background-color: #4b2a14; }
+.missao-conteudo { background-color: #730000; }
+.visao-conteudo { background-color: #00464B; }
+.valores-conteudo { background-color: #96B9B9; }
 
-.proposito-esquerda h4,
-.missao-esquerda h4,
-.visao-esquerda h4,
-.valores-esquerda h4 {
+.proposito-conteudo h4,
+.missao-conteudo h4,
+.visao-conteudo h4,
+.valores-conteudo h4 {
     font-family: 'Playlist Script', cursive;
     font-weight: normal;
     font-style: normal;
@@ -132,28 +136,28 @@ h1 {
     color: #fff;
 }
 
-.proposito-esquerda p,
-.missao-esquerda p,
-.visao-esquerda p,
-.valores-esquerda p {
+.proposito-conteudo p,
+.missao-conteudo p,
+.visao-conteudo p,
+.valores-conteudo p {
     color: #ddd;
     line-height: 1.6;
-    max-width: 510px;
+    max-width: 520px;
     margin: 0;
     font-size: 18px;
 }
 
-.proposito-direita,
-.missao-direita,
-.visao-direita,
-.valores-direita {
+.proposito-imagem,
+.missao-imagem,
+.visao-imagem,
+.valores-imagem {
     width: 50%;
 }
 
-.proposito-direita img,
-.missao-direita img,
-.visao-direita img,
-.valores-direita img {
+.proposito-imagem img,
+.missao-imagem img,
+.visao-imagem img,
+.valores-imagem img {
     width: 100%;
     height: 100%;
     object-fit: cover;
