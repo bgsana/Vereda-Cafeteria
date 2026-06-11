@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+@font-face {
+    font-family: 'Playlist Script';
+    src: url('/fonts/PlaylistScript.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: #ffffff;
+}
+
+/* CONTAINER GERAL */
+.pagina-legal {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 50px 20px 80px;
+}
+
+/* TÍTULO PRINCIPAL */
+.pagina-legal h1 {
+    font-family: 'Playlist Script', cursive;
+    color: #730000;
+    font-weight: normal;
+    font-size: 52px;
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+/* CONTEÚDO */
+.conteudo-legal p {
+    color: #000000;
+    line-height: 1.65;
+    margin-bottom: 14px;
+    text-align: justify;
+}
+
+.conteudo-legal a {
+    color: #000000;
+    text-decoration: underline;
+}
+
+.conteudo-legal a:hover {
+    color: #730000;
+}
+
+/* H2 — seções principais (negrito, sem fonte script) */
+.conteudo-legal h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: #000000;
+    margin-top: 35px;
+    margin-bottom: 6px;
+}
+
+/* H3 — subseções (cor teal, sem negrito) */
+.conteudo-legal h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #00464B;
+    margin-top: 22px;
+    margin-bottom: 6px;
+}
+
+/* Itens de lista com letra (A, B, C) */
+.conteudo-legal .lista-letra {
+    margin-left: 10px;
+    margin-bottom: 6px;
+}
