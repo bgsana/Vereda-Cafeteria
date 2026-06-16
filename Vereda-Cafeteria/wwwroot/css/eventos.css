@@ -149,16 +149,7 @@ h1 {
     margin-bottom: 8px;
 }
 
-.evento-conteudo span {
-    font-size: 14px;
-    color: #555;
-    font-weight: 600;
-    background-color: rgba(0,0,0,0.08);
-    padding: 6px 24px;
-    border-radius: 12px;
-    display: inline-block;
-    align-self: flex-start;
-}
+
 
 /* ---- Imagem placeholder ---- */
 .evento-imagem {
@@ -176,6 +167,3 @@ h1 {
     object-fit: cover;
     display: block;
 }
-
-
-

@@ -15,7 +15,7 @@ public class SeedEvento
                 Titulo = "Vereda Chaves",
                 Descricao = "lorem ipsum",
                 ImagemUrl = "/img/usuarios/foto.png",
-                DataEvento = new DateTime(2025, 1, 22)
+                CorFundo = "#d6dfa0"
             },
             new Evento
             {
@@ -23,7 +23,7 @@ public class SeedEvento
                 Titulo = "Vereda do Amor",
                 Descricao = "lorem ipsum",
                 ImagemUrl = "/img/usuarios/foto.png",
-                DataEvento = new DateTime(2025, 2, 17)
+                CorFundo = "#f5c5a3"
             }
         };
 

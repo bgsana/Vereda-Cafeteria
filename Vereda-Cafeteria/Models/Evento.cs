@@ -23,8 +23,8 @@ public class Evento
     [Display(Name = "Imagem do Evento")]
     public string? ImagemUrl { get; set; }
 
-    [Required]
-    [DataType(DataType.Date)]
-    [Display(Name = "Data do Evento")]
-    public DateTime DataEvento { get; set; }
+    [Required(ErrorMessage = "A cor de fundo é obrigatória")]
+    [Display(Name = "Cor de Fundo do Card")]
+    [RegularExpression("^#([A-Fa-f0-9]{6})$", ErrorMessage = "Informe uma cor hexadecimal válida (ex: #d6dfa0)")]
+    public string CorFundo { get; set; } = "#d6dfa0";
 }
