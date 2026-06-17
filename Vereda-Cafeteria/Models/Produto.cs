@@ -49,4 +49,7 @@ public class Produto
 
     // Relacionamento: um produto pode estar em muitos itens de pedido
     public virtual ICollection<ItemPedido>? ItensPedido { get; set; }
+
+    // Relacionamento: um produto pode ter várias opções de escolha
+    public virtual ICollection<OpcaoProduto>? Opcoes { get; set; }
 }

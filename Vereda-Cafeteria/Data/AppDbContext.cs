@@ -25,6 +25,7 @@ public class AppDbContext : IdentityDbContext<Usuario>
     public DbSet<Evento> Eventos { get; set; }
     public DbSet<Banner> Banners { get; set; }
     public DbSet<AmbienteImagem> AmbienteImagens { get; set; }
+    public DbSet<OpcaoProduto> OpcoesProduto { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

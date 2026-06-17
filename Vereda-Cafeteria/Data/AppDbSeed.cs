@@ -13,5 +13,6 @@ public class AppDbSeed
         new SeedBanner(builder);
         new SeedUsuario(builder);
         new SeedAmbienteImagem(builder);
+        new SeedOpcaoProduto(builder);
     }
 }

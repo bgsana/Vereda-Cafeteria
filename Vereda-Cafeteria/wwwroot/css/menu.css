@@ -51,7 +51,6 @@ h1 {
     border-radius: 16px;
 }
 
-/* A cor de fundo de cada botão vem do inline style (CorHex) */
 .barra-categorias a:not(.carrinho) {
     border: none;
     text-decoration: none;
@@ -118,7 +117,6 @@ h1 {
     scroll-margin-top: 100px;
 }
 
-/* A cor do título vem do inline style (CorHex) */
 .secao h3 {
     font-family: 'Playlist Script', cursive;
     font-weight: normal;
@@ -154,7 +152,6 @@ h1 {
     transform: translateY(-2px);
 }
 
-/* O hover do card-footer escurece via filter para respeitar qualquer CorHex */
 .card:hover .card-footer {
     filter: brightness(1.15);
 }
@@ -166,7 +163,6 @@ h1 {
     object-fit: cover;
 }
 
-/* A cor de fundo do card-footer vem do inline style (CorHex) */
 .card-footer {
     height: 50px;
     display: flex;
@@ -182,7 +178,7 @@ h1 {
     font-family: 'Montserrat', sans-serif;
     font-weight: 450;
     font-size: 18px;
-    text-align: center; /* ← adicionar */
+    text-align: center;
     line-height: 1.2;
 }
 
@@ -214,6 +210,7 @@ h1 {
 
 .modal-coluna-esquerda {
     width: 50%;
+    flex-shrink: 0;
 }
 
 .modal-coluna-esquerda img {
@@ -231,6 +228,7 @@ h1 {
     align-items: center;
     padding: 32px;
     box-sizing: border-box;
+    overflow: hidden;
 }
 
 .modal-coluna-direita h2 {
@@ -256,12 +254,67 @@ h1 {
 .modal-coluna-direita h3 {
     font-family: 'Montserrat', sans-serif;
     font-size: 32px;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--cor-modal, #730000);
     text-align: center;
-    margin: 18px 0;
+    margin: 12px 0 18px 0;
 }
 
+/* --- SEÇÃO DE OPÇÕES --- */
+#modal-secao-opcoes {
+    display: none;
+    width: 85%;
+    margin: 15px 0 5px 0; /* ← espaçamento acima e abaixo da seção */
+}
+
+.modal-opcoes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 24px; /* ← mais espaço vertical entre linhas */
+}
+
+.modal-opcao-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    color: var(--cor-modal, #730000);
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.modal-opcao-label input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--cor-modal, #730000);
+    border-radius: 4px; /* ← quadrado arredondado como no protótipo */
+    cursor: pointer;
+    flex-shrink: 0;
+    position: relative;
+    transition: background-color 0.2s;
+}
+
+.modal-opcao-label input[type="radio"]:checked {
+    background-color: var(--cor-modal, #730000);
+}
+
+.modal-opcao-label input[type="radio"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 0px;
+    width: 5px;
+    height: 9px;
+    border: 2px solid #fff;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg);
+}
+
+/* --- BOTÕES DO MODAL --- */
 .modal-botoes {
     display: flex;
     justify-content: center;
@@ -269,7 +322,6 @@ h1 {
     flex-wrap: wrap;
 }
 
-/* botão quantidade — cor dinâmica via JS (--cor-categoria) */
 .btn-quantidade {
     font-family: 'Montserrat', sans-serif;
     display: flex;
@@ -309,7 +361,6 @@ h1 {
     transform: translateY(-2px);
 }
 
-/* botão adicionar ao carrinho — cor dinâmica via JS */
 .btn-carrinho {
     display: flex;
     align-items: center;
@@ -339,4 +390,29 @@ h1 {
     font-size: 20px;
     font-weight: 100;
     margin-left: 0;
+}
+
+/* --- ANIMAÇÃO DO MODAL --- */
+@keyframes modal-entrada {
+    from {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes overlay-entrada {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.modal-overlay.ativo {
+    animation: overlay-entrada 0.25s ease forwards;
+}
+
+.modal-overlay.ativo .modal-produto {
+    animation: modal-entrada 0.25s ease forwards;
 }

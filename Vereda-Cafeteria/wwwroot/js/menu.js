@@ -27,8 +27,6 @@ function atualizarBadge() {
 }
 
 // --- Scroll lock sem layout shift ---
-// Calcula a largura da scrollbar antes de bloquear o scroll,
-// compensando com padding para evitar deslocamento de conteúdo.
 
 function bloquearScroll() {
     const larguraScrollbar = window.innerWidth - document.documentElement.clientWidth;
@@ -46,13 +44,18 @@ function liberarScroll() {
 let produtoAtual = null;
 
 function abrirModal(card) {
+    const opcoesBruto = card.dataset.opcoes;
+    const opcoes = opcoesBruto ? JSON.parse(opcoesBruto) : [];
+
     produtoAtual = {
         id: parseInt(card.dataset.id),
         nome: card.dataset.nome,
         descricao: card.dataset.descricao,
         preco: parseFloat(card.dataset.preco),
         imagem: card.dataset.imagem,
-        cor: card.dataset.cor
+        cor: card.dataset.cor,
+        opcoes: opcoes,
+        opcaoSelecionada: opcoes.length > 0 ? opcoes[0].nome : null
     };
 
     document.getElementById('modal-nome').textContent = produtoAtual.nome;
@@ -62,12 +65,52 @@ function abrirModal(card) {
     document.getElementById('modal-imagem').alt = produtoAtual.nome;
     document.getElementById('modal-quantidade').textContent = '1';
 
-    // Aplica a cor da categoria nos botões do modal via CSS custom property
+    // Aplica cor da categoria
     const modal = document.querySelector('.modal-produto');
     modal.style.setProperty('--cor-modal', produtoAtual.cor);
 
+    // Seção de opções
+    const secaoOpcoes = document.getElementById('modal-secao-opcoes');
+    if (opcoes.length > 0) {
+        renderizarOpcoes(opcoes, produtoAtual.cor);
+        secaoOpcoes.style.display = 'block';
+    } else {
+        secaoOpcoes.style.display = 'none';
+        secaoOpcoes.innerHTML = '';
+    }
+
     document.getElementById('modal-overlay').classList.add('ativo');
     bloquearScroll();
+}
+
+function renderizarOpcoes(opcoes, cor) {
+    const secao = document.getElementById('modal-secao-opcoes');
+
+    let html = '<div class="modal-opcoes-grid">';
+    opcoes.forEach((opcao, index) => {
+        const checked = index === 0 ? 'checked' : '';
+        html += `
+            <label class="modal-opcao-label">
+                <input type="radio"
+                       name="opcao-produto"
+                       value="${opcao.nome}"
+                       ${checked}
+                       onchange="selecionarOpcao('${opcao.nome}')">
+                <span>${opcao.nome}</span>
+            </label>`;
+    });
+    html += '</div>';
+
+    secao.innerHTML = html;
+
+    // Aplica cor nos radios via CSS custom property na seção
+    secao.style.setProperty('--cor-modal', cor);
+}
+
+function selecionarOpcao(nome) {
+    if (produtoAtual) {
+        produtoAtual.opcaoSelecionada = nome;
+    }
 }
 
 function fecharModal() {
@@ -94,20 +137,33 @@ function alterarQuantidade(delta) {
 function adicionarAoCarrinho() {
     if (!produtoAtual) return;
 
+    // Valida que uma opção foi selecionada quando o produto exige
+    if (produtoAtual.opcoes.length > 0 && !produtoAtual.opcaoSelecionada) {
+        alert('Por favor, selecione uma opção antes de adicionar ao carrinho.');
+        return;
+    }
+
     const quantidade = parseInt(document.getElementById('modal-quantidade').textContent);
     const carrinho = obterCarrinho();
 
-    const indexExistente = carrinho.findIndex(item => item.id === produtoAtual.id);
+    // Chave única: id do produto + opção selecionada (se houver)
+    const chaveItem = produtoAtual.opcaoSelecionada
+        ? `${produtoAtual.id}_${produtoAtual.opcaoSelecionada}`
+        : `${produtoAtual.id}`;
+
+    const indexExistente = carrinho.findIndex(item => item.chave === chaveItem);
 
     if (indexExistente >= 0) {
         carrinho[indexExistente].quantidade += quantidade;
     } else {
         carrinho.push({
+            chave: chaveItem,
             id: produtoAtual.id,
             nome: produtoAtual.nome,
             preco: produtoAtual.preco,
             imagem: produtoAtual.imagem,
-            quantidade: quantidade
+            quantidade: quantidade,
+            opcao: produtoAtual.opcaoSelecionada || null
         });
     }
 

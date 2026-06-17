@@ -37,6 +37,7 @@ public class HomeController : Controller
         // Busca todas as categorias com seus produtos ativos
         var categorias = await _context.Categorias
             .Include(c => c.Produtos!.Where(p => p.Ativo))
+                .ThenInclude(p => p.Opcoes)
             .OrderBy(c => c.CategoriaId)
             .ToListAsync();
 
