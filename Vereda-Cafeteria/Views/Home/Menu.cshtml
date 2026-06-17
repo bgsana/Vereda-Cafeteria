@@ -1,43 +1,78 @@
 @model List<Categoria>
 
 @{
-    ViewData[index: "Title"] = "Menu";
+    ViewData["Title"] = "Menu";
 }
 
 @section Styles {
     <link rel="stylesheet" href="~/css/menu.css" />
 }
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@tabler/icons-webfont@latest/tabler-icons.min.css">
-
 <h1>Cardápio</h1>
 
 <nav class="barra-categorias">
     @foreach (Categoria categoria in Model)
     {
-        <a href="#categoria-@categoria.CategoriaId">@categoria.Nome</a>
+        <a href="#categoria-@categoria.CategoriaId"
+           style="background-color: @categoria.CorHex">@categoria.Nome</a>
     }
     <a class="carrinho" asp-controller="Home" asp-action="Carrinho">
         <i class="ti ti-shopping-cart-filled carrinho-icon"></i>
-        <span class="carrinho-badge">0</span>
+        <span class="carrinho-badge" id="badge-carrinho">0</span>
     </a>
 </nav>
 
 @foreach (Categoria categoria in Model)
 {
     <section class="secao" id="categoria-@categoria.CategoriaId">
-        <h3>@categoria.Nome</h3>
+        <h3 style="color: @categoria.CorHex">@categoria.Nome</h3>
 
         <div class="secao-cards">
             @foreach (Produto produto in categoria.Produtos!)
             {
-                <div class="card">
+                <div class="card"
+                     data-id="@produto.ProdutoId"
+                     data-nome="@produto.Nome"
+                     data-descricao="@produto.Descricao"
+                     data-preco="@produto.Preco.ToString("F2", System.Globalization.CultureInfo.InvariantCulture)"
+                     data-imagem="@produto.ImagemUrl"
+                     data-cor="@categoria.CorHex"
+                     onclick="abrirModal(this)">
                     <img src="@produto.ImagemUrl" alt="@produto.Nome">
-                    <div class="card-footer">
+                    <div class="card-footer" style="background-color: @categoria.CorHex">
                         <h5>@produto.Nome</h5>
                     </div>
                 </div>
             }
         </div>
     </section>
+}
+
+<!-- Modal do produto -->
+<div class="modal-overlay" id="modal-overlay" onclick="fecharModalOverlay(event)">
+    <div class="modal-produto">
+        <div class="modal-coluna-esquerda">
+            <img id="modal-imagem" src="" alt="Imagem do produto">
+        </div>
+        <div class="modal-coluna-direita">
+            <h2 id="modal-nome"></h2>
+            <p id="modal-descricao"></p>
+            <h3 id="modal-preco"></h3>
+            <div class="modal-botoes">
+                <div class="btn-quantidade" id="modal-btn-quantidade">
+                    <button class="btn-subtracao" onclick="alterarQuantidade(-1)">-</button>
+                    <span id="modal-quantidade">1</span>
+                    <button class="btn-adicao" onclick="alterarQuantidade(1)">+</button>
+                </div>
+                <button class="btn-carrinho" id="modal-btn-carrinho" onclick="adicionarAoCarrinho()">
+                    <i class="ti ti-shopping-cart carrinho-icon"></i>
+                    <span>Adicionar ao Carrinho</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/menu.js"></script>
 }
