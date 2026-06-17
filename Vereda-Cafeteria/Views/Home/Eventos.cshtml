@@ -1,3 +1,5 @@
+@model Vereda_Cafeteria.Models.EventosViewModel
+
 @{
     ViewData["Title"] = "Eventos";
 }
@@ -11,14 +13,20 @@
 <h1>Eventos</h1>
 
 <section class="banner">
-    <!-- Versão COM imagem (comentada por enquanto) -->
-    <img class="banner-imagem" src="~/img/Inicio/amb3.png" alt="Banner do evento">
+    @if (Model.BannerAtivo != null)
+    {
+        <img class="banner-imagem" src="@Model.BannerAtivo.ImagemUrl" alt="@Model.BannerAtivo.Titulo">
+    }
+    else
+    {
+        <span class="banner-vazio">Não há eventos disponíveis</span>
+    }
 </section>
 
 <section class="evento-vereda">
     <h3>Faça seu evento na Vereda!</h3>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt temporibus debitis cupiditate facere dolorem magni odio totam voluptatibus incidunt veritatis esse ad cum eius tempore qui voluptate, unde hic enim! voluptatibus incidunt veritatis esse ad cum eius tempore</p>
-    <a href="">
+    <a href="https://wa.link/s2u61n" target="_blank">
         <i class="fa-brands fa-whatsapp"></i>
         <span>Saiba mais</span>
     </a>
@@ -28,36 +36,23 @@
     <h3>Conheça nossos últimos eventos</h3>
 
     <div class="eventos-cards">
-        <div class="evento-item">
+        @foreach (var evento in Model.UltimosEventos)
+        {
+            @* Gera a cor do título levemente mais escura via CSS filter *@
+            <div class="evento-item" style="background-color: @evento.CorFundo;">
 
-            <div class="evento-conteudo">
-                <div>
-                    <h4>Vereda Chaves</h4>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis voluptatem assumenda praesentium quidem delectus deserunt fugit cum, ipsa officiis magnam temporibus dicta, veniam omnis molestiae alias, inventore et! Deleniti, accusantium. Lorem ipsum dolor sit amet consectetur adipisicing elit perspiciatis deserunt.</p>
+                <div class="evento-conteudo">
+                    <div>
+                        <h4 style="color: color-mix(in srgb, @evento.CorFundo 40%, #000 60%);">@evento.Titulo</h4>
+                        <p>@evento.Descricao</p>
+                    </div>
                 </div>
-                <span>26/06/2026</span>
-            </div>
 
-            <div class="evento-imagem">
-                <img src="~/img/Inicio/amb1.png" alt="Teste">
-            </div>
-
-        </div>
-
-        <div class="evento-item">
-
-            <div class="evento-conteudo">
-                <div>
-                    <h4>Vereda Chaves</h4>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis voluptatem assumenda praesentium quidem delectus deserunt fugit cum, ipsa officiis magnam temporibus dicta, veniam omnis molestiae alias, inventore et! Deleniti, accusantium. Lorem ipsum dolor sit amet consectetur adipisicing elit perspiciatis deserunt.</p>
+                <div class="evento-imagem">
+                    <img src="@evento.ImagemUrl" alt="@evento.Titulo">
                 </div>
-                <span>26/06/2026</span>
-            </div>
 
-            <div class="evento-imagem">
-                <img src="~/img/Inicio/amb2.png" alt="Teste">
             </div>
-
-        </div>
+        }
     </div>
 </section>

@@ -44,9 +44,20 @@ public class HomeController : Controller
     }
 
     [Route("Eventos")]
-    public IActionResult Eventos()
+    public async Task<IActionResult> Eventos()
     {
-        return View();
+        var viewModel = new EventosViewModel
+        {
+            BannerAtivo = await _context.Banners
+                .Where(b => b.Ativo)
+                .FirstOrDefaultAsync(),
+
+            UltimosEventos = await _context.Eventos
+                .OrderByDescending(e => e.EventoId)
+                .ToListAsync()
+        };
+
+        return View(viewModel);
     }
 
     [Route("Carrinho")]

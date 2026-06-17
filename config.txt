@@ -28,5 +28,5 @@ dotnet add package Pomelo.EntityFrameworkCore.MySql --version 9.0.0
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design --version 9.0.0
 
 
-dotnet aspnet-codegenerator controller -name NossoAmbienteController -m AmbienteImagem -dc AppDbContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
+dotnet aspnet-codegenerator controller -name EventoController -m Evento -dc AppDbContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
 

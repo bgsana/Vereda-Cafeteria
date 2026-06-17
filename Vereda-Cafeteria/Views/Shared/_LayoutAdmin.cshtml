@@ -49,26 +49,27 @@
 
             <div class="nav-section">
                 <span class="nav-section-title">Conteúdo Site</span>
-                <a href="/admin/sobrenos"
-                   class="nav-link @(Context.Request.Path.Value?.StartsWith("/admin/sobrenos") == true ? "active" : "")">
-                    <i class="bi bi-journal-text"></i>
-                    <span>Sobre Nós</span>
-                </a>
                 <a asp-controller="NossoAmbiente" asp-action="Index"
                    class="nav-link @(Context.Request.Path.Value?.StartsWith("/NossoAmbiente") == true ? "active" : "")">
                     <i class="bi bi-images"></i>
                     <span>Nosso Ambiente</span>
-                </a>
-                <a href="/admin/loja-vereda"
-                   class="nav-link @(Context.Request.Path.Value?.StartsWith("/admin/loja-vereda") == true ? "active" : "")">
-                    <i class="bi bi-bag-dash"></i>
-                    <span>Loja Vereda</span>
                 </a>
                 <a asp-controller="ProdutoMenu" asp-action="Index"
                    class="nav-link @(Context.Request.Path.Value?.StartsWith("/Admin/ProdutoMenu") == true ? "active" : "")">
                     <i class="bi bi-cup-hot"></i>
                     <span>Menu</span>
                 </a>
+                <a href="/admin/atelie-vereda"
+                   class="nav-link @(Context.Request.Path.Value?.StartsWith("/admin/loja-vereda") == true ? "active" : "")">
+                    <i class="bi bi-bag-dash"></i>
+                    <span>Ateliê Vereda</span>
+                </a>
+                <a asp-controller="Evento" asp-action="Index"
+                   class="nav-link @(Context.Request.Path.Value?.StartsWith("/Admin/Evento") == true ? "active" : "")">
+                    <i class="bi bi-bag-dash"></i>
+                    <span>Eventos</span>
+                </a>
+                
             </div>
 
             <div class="nav-section">
