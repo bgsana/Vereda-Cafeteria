@@ -19,7 +19,6 @@ public class Evento
     [Display(Name = "Descrição")]
     public string Descricao { get; set; }
 
-    [Required(ErrorMessage = "A imagem é obrigatória")]
     [Display(Name = "Imagem do Evento")]
     public string? ImagemUrl { get; set; }
 
