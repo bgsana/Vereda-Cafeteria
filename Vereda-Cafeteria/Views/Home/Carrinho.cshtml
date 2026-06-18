@@ -14,90 +14,59 @@
 
     <div class="layout-principal">
 
-        <div class="coluna-itens">
-
-            <div class="item-carrinho">
-                <div class="coluna-esquerda">
-                    <div class="info-item">
-                        <h2>Pão de Queijo</h2>
-                        <p>Escolha: presunto e queijo</p>
-                        <h3>R$5,00</h3>
-
-                        <div class="acoes">
-                            <div class="btn-quantidade">
-                                <button class="btn-subtracao">-</button>
-                                <span>1</span>
-                                <button class="btn-adicao">+</button>
-                            </div>
-
-                            <button class="btn-editar">
-                                <i class="ti ti-edit"></i>
-                                <span class="texto-editar">Editar</span>
-                            </button>
-
-                            <button class="btn-excluir">
-                                <i class="ti ti-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="coluna-direita">
-                    <img class="imagem-item" src="~/img/pao-teste.jpg" alt="img teste">
-                </div>
-            </div>
-
-            <div class="item-carrinho">
-                <div class="coluna-esquerda">
-                    <div class="info-item">
-                        <h2>Pão de Queijo</h2>
-                        <p>Escolha: presunto e queijo</p>
-                        <h3>R$5,00</h3>
-
-                        <div class="acoes">
-                            <div class="btn-quantidade">
-                                <button class="btn-subtracao">-</button>
-                                <span>1</span>
-                                <button class="btn-adicao">+</button>
-                            </div>
-
-                            <button class="btn-editar">
-                                <i class="ti ti-edit"></i>
-                                <span class="texto-editar">Editar</span>
-                            </button>
-
-                            <button class="btn-excluir">
-                                <i class="ti ti-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="coluna-direita">
-                    <img class="imagem-item" src="~/img/pao-teste.jpg" alt="img teste">
-                </div>
-            </div>
-
+        <!-- Coluna de itens -->
+        <div class="coluna-itens" id="coluna-itens">
+            <!-- Preenchido pelo carrinho.js -->
         </div>
 
+        <!-- Resumo do pedido -->
         <div class="caixa-resumo">
             <h2 class="resumo-titulo">Resumo do pedido</h2>
 
-            <div class="resumo-linha">
-                <span>2x Pão de Queijo</span>
-                <span>2x Pão de Queijo</span>
+            <div class="resumo-linha" id="resumo-linhas">
+                <!-- Preenchido pelo carrinho.js -->
             </div>
 
             <div class="resumo-divisor"></div>
 
             <div class="resumo-total">
                 <span>Total</span>
-                <span>R$10,00</span>
+                <span id="resumo-total-valor">R$ 0,00</span>
             </div>
 
-            <button class="btn-finalizar">Finalizar pedido</button>
+            <button class="btn-finalizar" id="btn-finalizar">Finalizar pedido</button>
         </div>
 
     </div>
 
 </section>
+
+<!-- Modal de detalhe (somente leitura) -->
+<div class="modal-overlay" id="modal-overlay" onclick="fecharModalOverlay(event)">
+    <div class="modal-produto">
+        <div class="modal-coluna-esquerda">
+            <img id="modal-imagem" src="" alt="Imagem do produto">
+        </div>
+        <div class="modal-coluna-direita">
+            <h2 id="modal-nome"></h2>
+            <p id="modal-descricao"></p>
+            <h3 id="modal-preco"></h3>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de edição de escolha -->
+<div class="modal-editar-overlay" id="modal-editar-overlay" onclick="fecharModalEditarOverlay(event)">
+    <div class="modal-editar">
+        <h2 id="modal-editar-nome"></h2>
+        <p id="modal-editar-descricao"></p>
+        <div id="modal-editar-opcoes"></div>
+        <button class="modal-editar-confirmar" id="modal-editar-confirmar" onclick="confirmarEdicao()">
+            Confirmar escolha
+        </button>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/carrinho.js"></script>
+}

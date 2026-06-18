@@ -3,17 +3,28 @@
 // Responsável: modal de produto + carrinho (localStorage)
 // =============================================
 
-const CHAVE_CARRINHO = 'vereda_carrinho';
+const CHAVE_CARRINHO  = 'vereda_carrinho';
+const CHAVE_TIMESTAMP = 'vereda_carrinho_ts';
+const EXPIRACAO_MS    = 4 * 60 * 60 * 1000; // 4 horas
 
 // --- Carrinho helpers ---
 
 function obterCarrinho() {
+    const ts = localStorage.getItem(CHAVE_TIMESTAMP);
+    if (ts && Date.now() - parseInt(ts) > EXPIRACAO_MS) {
+        localStorage.removeItem(CHAVE_CARRINHO);
+        localStorage.removeItem(CHAVE_TIMESTAMP);
+        return [];
+    }
     const dados = localStorage.getItem(CHAVE_CARRINHO);
     return dados ? JSON.parse(dados) : [];
 }
 
 function salvarCarrinho(carrinho) {
     localStorage.setItem(CHAVE_CARRINHO, JSON.stringify(carrinho));
+    if (!localStorage.getItem(CHAVE_TIMESTAMP)) {
+        localStorage.setItem(CHAVE_TIMESTAMP, Date.now().toString());
+    }
 }
 
 function totalItens(carrinho) {
@@ -65,11 +76,9 @@ function abrirModal(card) {
     document.getElementById('modal-imagem').alt = produtoAtual.nome;
     document.getElementById('modal-quantidade').textContent = '1';
 
-    // Aplica cor da categoria
     const modal = document.querySelector('.modal-produto');
     modal.style.setProperty('--cor-modal', produtoAtual.cor);
 
-    // Seção de opções
     const secaoOpcoes = document.getElementById('modal-secao-opcoes');
     if (opcoes.length > 0) {
         renderizarOpcoes(opcoes, produtoAtual.cor);
@@ -102,8 +111,6 @@ function renderizarOpcoes(opcoes, cor) {
     html += '</div>';
 
     secao.innerHTML = html;
-
-    // Aplica cor nos radios via CSS custom property na seção
     secao.style.setProperty('--cor-modal', cor);
 }
 
@@ -130,6 +137,11 @@ function alterarQuantidade(delta) {
     let qtd = parseInt(span.textContent) + delta;
     if (qtd < 1) qtd = 1;
     span.textContent = qtd;
+
+    if (produtoAtual) {
+        const total = produtoAtual.preco * qtd;
+        document.getElementById('modal-preco').textContent = 'R$ ' + total.toFixed(2).replace('.', ',');
+    }
 }
 
 // --- Adicionar ao carrinho ---
@@ -137,7 +149,6 @@ function alterarQuantidade(delta) {
 function adicionarAoCarrinho() {
     if (!produtoAtual) return;
 
-    // Valida que uma opção foi selecionada quando o produto exige
     if (produtoAtual.opcoes.length > 0 && !produtoAtual.opcaoSelecionada) {
         alert('Por favor, selecione uma opção antes de adicionar ao carrinho.');
         return;
@@ -146,7 +157,6 @@ function adicionarAoCarrinho() {
     const quantidade = parseInt(document.getElementById('modal-quantidade').textContent);
     const carrinho = obterCarrinho();
 
-    // Chave única: id do produto + opção selecionada (se houver)
     const chaveItem = produtoAtual.opcaoSelecionada
         ? `${produtoAtual.id}_${produtoAtual.opcaoSelecionada}`
         : `${produtoAtual.id}`;
@@ -160,10 +170,14 @@ function adicionarAoCarrinho() {
             chave: chaveItem,
             id: produtoAtual.id,
             nome: produtoAtual.nome,
+            descricao: produtoAtual.descricao,
             preco: produtoAtual.preco,
             imagem: produtoAtual.imagem,
+            cor: produtoAtual.cor,
             quantidade: quantidade,
-            opcao: produtoAtual.opcaoSelecionada || null
+            opcao: produtoAtual.opcaoSelecionada || null,
+            // Salva a lista completa de opções para o modal de edição no carrinho
+            todasOpcoes: produtoAtual.opcoes.map(o => o.nome)
         });
     }
 

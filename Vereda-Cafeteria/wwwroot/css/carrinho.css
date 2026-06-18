@@ -8,11 +8,16 @@
     font-style: normal;
 }
 
+body.modal-aberto {
+    overflow: hidden;
+    padding-right: var(--scrollbar-width, 0px);
+}
+
 .carrinho-container {
     width: 100%;
     max-width: 960px;
     text-align: center;
-    margin: 65px auto;   /* ← centraliza horizontalmente */
+    margin: 65px auto;
     padding: 0 20px;
     box-sizing: border-box;
 }
@@ -26,11 +31,11 @@
     margin-bottom: 20px;
 }
 
-/* Layout principal: itens + resumo lado a lado */
+/* Layout principal */
 .layout-principal {
     display: flex;
     gap: 24px;
-    align-items: flex-start;
+    align-items: stretch;
     justify-content: center;
 }
 
@@ -39,7 +44,57 @@
     min-width: 0;
 }
 
+/* Estado vazio */
+.carrinho-vazio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 20px;
+    color: #730000;
+    opacity: 0.75;
+    background-color: #ffffff;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 8px;
+    border-radius: 16px;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.carrinho-vazio i {
+    font-size: 52px;
+}
+
+.carrinho-vazio p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.carrinho-vazio a {
+    color: #730000;
+    font-weight: 600;
+}
+
 /* Cards dos itens */
+.item-carrinho {
+    height: 185px;
+    background-color: #ffffff;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 8px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.item-carrinho:hover {
+    transform: translateY(-2px);
+}
+
 .coluna-esquerda {
     width: 60%;
     padding: 20px 40px;
@@ -49,25 +104,11 @@
 
 .coluna-direita {
     width: 35%;
-    background-color: #d9a8a8;
     display: flex;
     justify-content: center;
     align-items: center;
     border-top-right-radius: 16px;
     border-bottom-right-radius: 16px;
-}
-
-.item-carrinho {
-    height: 185px;
-    background-color: #ffffff;
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 8px;
-    border-radius: 16px;
-    padding: 0px;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-    color: #730000;
     overflow: hidden;
 }
 
@@ -97,7 +138,7 @@
 .acoes {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
 }
 
 .btn-quantidade {
@@ -106,7 +147,6 @@
     align-items: center;
     justify-content: center;
     gap: 11px;
-    background-color: #730000;
     padding: 4px;
     border-radius: 10px;
 }
@@ -115,6 +155,8 @@
     font-family: 'Montserrat', sans-serif;
     color: #fff;
     font-weight: 700;
+    min-width: 28px;
+    text-align: center;
 }
 
 .btn-quantidade button {
@@ -129,6 +171,7 @@
     color: white;
     font-weight: 600;
     font-size: 17px;
+    cursor: pointer;
 }
 
 .btn-quantidade button.btn-subtracao {
@@ -136,12 +179,10 @@
     transform: translateY(-2px);
 }
 
-/* botão editar */
 .btn-editar {
     font-family: 'Montserrat', sans-serif;
     background: none;
     border: none;
-    color: #730000;
     font-size: 17px;
     font-weight: 500;
     display: flex;
@@ -160,11 +201,11 @@
     border: none;
     margin-top: 2px;
     margin-left: -6px;
+    cursor: pointer;
 }
 
 .btn-excluir i {
-    font-size: 19px;
-    color: #730000;
+    font-size: 20px;
 }
 
 .texto-editar {
@@ -201,15 +242,18 @@
 .resumo-linha {
     display: flex;
     flex-direction: column;
-    gap: 4px; /* opcional: espaçamento entre linhas */
+    gap: 4px;
     font-size: 13px;
     font-weight: 500;
     color: #730000;
     margin-bottom: 12px;
 }
 
-.desconto {
-    color: #1a7a1a;
+.resumo-vazio {
+    font-size: 13px;
+    font-weight: 400;
+    color: #730000;
+    opacity: 0.6;
 }
 
 .resumo-divisor {
@@ -227,7 +271,6 @@
     margin-bottom: 20px;
 }
 
-/* botão finalizar */
 .btn-finalizar {
     font-family: 'Montserrat', sans-serif;
     background: #0b4d4d;
@@ -240,9 +283,218 @@
     font-size: 14px;
     width: 100%;
     letter-spacing: 0.02em;
-    transition: background 0.2s, transform 0.1s;
+    transition: background 0.2s;
 }
 
-.btn-finalizar:hover {
+.btn-finalizar:hover:not(:disabled) {
     background: #0d5e5e;
+}
+
+.btn-finalizar:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+/* --- MODAL DE DETALHE --- */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.55);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-overlay.ativo {
+    display: flex;
+    animation: overlay-entrada 0.25s ease forwards;
+}
+
+.modal-produto {
+    max-width: 900px;
+    width: 90%;
+    height: 500px;
+    display: flex;
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 8px;
+    animation: modal-entrada 0.25s ease forwards;
+}
+
+.modal-coluna-esquerda {
+    width: 50%;
+    flex-shrink: 0;
+}
+
+.modal-coluna-esquerda img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.modal-coluna-direita {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 32px;
+    box-sizing: border-box;
+}
+
+.modal-coluna-direita h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    text-align: center;
+    margin: 0 0 8px 0;
+}
+
+.modal-coluna-direita p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    width: 85%;
+    margin: 0 0 4px 0;
+    line-height: 1.5;
+}
+
+.modal-coluna-direita h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+    margin: 18px 0 0 0;
+}
+
+@keyframes modal-entrada {
+    from { opacity: 0; transform: scale(0.92); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes overlay-entrada {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* --- MODAL DE EDIÇÃO DE ESCOLHA --- */
+.modal-editar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.55);
+    z-index: 2100;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-editar-overlay.ativo {
+    display: flex;
+    animation: overlay-entrada 0.25s ease forwards;
+}
+
+.modal-editar {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 8px;
+    animation: modal-entrada 0.25s ease forwards;
+    width: 90%;
+    max-width: 440px;
+    padding: 36px 36px 32px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.modal-editar h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+    margin: 0;
+    color: var(--cor-modal, #730000);
+}
+
+.modal-editar p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    text-align: center;
+    line-height: 1.5;
+    margin: 0 0 10px 0;
+    width: 90%;
+    color: var(--cor-modal, #730000);
+}
+
+/* reutiliza as classes do menu para os radios */
+.modal-editar .modal-opcoes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 24px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.modal-editar .modal-opcao-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.modal-editar .modal-opcao-label input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--cor-modal, #730000);
+    border-radius: 4px;
+    cursor: pointer;
+    flex-shrink: 0;
+    position: relative;
+    transition: background-color 0.2s;
+}
+
+.modal-editar .modal-opcao-label input[type="radio"]:checked {
+    background-color: var(--cor-modal, #730000);
+}
+
+.modal-editar .modal-opcao-label input[type="radio"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 0px;
+    width: 5px;
+    height: 9px;
+    border: 2px solid #fff;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg);
+}
+
+.modal-editar-confirmar {
+    font-family: 'Montserrat', sans-serif;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 32px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: filter 0.2s;
+    width: 100%;
+}
+
+.modal-editar-confirmar:hover {
+    filter: brightness(1.15);
 }
