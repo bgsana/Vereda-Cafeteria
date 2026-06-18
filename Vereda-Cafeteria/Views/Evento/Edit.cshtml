@@ -1,67 +1,56 @@
 @model Vereda_Cafeteria.Models.Evento
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Evento";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>Edit</h1>
+<h1>Editar Evento</h1>
 
-<h4>Evento</h4>
-<hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
             <input type="hidden" asp-for="EventoId" />
             <input type="hidden" asp-for="ImagemUrl" />
-
             <div class="form-group">
                 <label asp-for="Titulo" class="control-label"></label>
                 <input asp-for="Titulo" class="form-control" />
                 <span asp-validation-for="Titulo" class="text-danger"></span>
             </div>
-
             <div class="form-group">
                 <label asp-for="Descricao" class="control-label"></label>
                 <input asp-for="Descricao" class="form-control" />
                 <span asp-validation-for="Descricao" class="text-danger"></span>
             </div>
-
             <div class="form-group">
                 <label class="control-label">Imagem do Evento</label>
-
                 @if (!string.IsNullOrEmpty(Model.ImagemUrl))
                 {
                     <div class="mb-2">
-                        <img src="@Model.ImagemUrl"
+                        <img src="@Model.ImagemUrl" alt="@Model.Titulo"
                              style="width:80px;height:80px;object-fit:cover;border-radius:6px;border:1px solid rgba(55,35,20,0.12);" />
                         <small class="text-muted d-block">Imagem atual</small>
                     </div>
                 }
-
                 <input type="file" name="imagemArquivo" accept="image/*" class="form-control" />
                 <small class="text-muted">Deixe em branco para manter a imagem atual</small>
             </div>
-
             <div class="form-group">
                 <label asp-for="CorFundo" class="control-label"></label>
                 <input asp-for="CorFundo" class="form-control" />
                 <span asp-validation-for="CorFundo" class="text-danger"></span>
             </div>
-
             <div class="form-group">
                 <input type="submit" value="Salvar" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Cancelar</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

@@ -2,43 +2,36 @@
 
 @{
     ViewData["Title"] = "Nosso Ambiente";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml"; // ← adicione isso
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <h1>Nosso Ambiente</h1>
 
 <p>
-    <a asp-action="Create">Adicionar</a>
+    <a asp-action="Create" class="btn btn-primary">Adicionar</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
-            <th>Imagem</th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ordem)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ativo)
-            </th>
-            <th>Ações</th>
+            <th style="width:120px;">Imagem</th>
+            <th>@Html.DisplayNameFor(model => model.Ordem)</th>
+            <th style="text-align:center;">@Html.DisplayNameFor(model => model.Ativo)</th>
+            <th style="text-align:center;">Ações</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td style="text-align:center;">
+                <td>
                     <img src="@item.CaminhoImagem" alt="Imagem"
-                         style="width:160px;height:100px;object-fit:cover;border-radius:6px;border:1px solid rgba(55,35,20,0.12);" />
+                         style="width:100px;height:80px;object-fit:cover;border-radius:6px;border:1px solid rgba(55,35,20,0.12);" />
                 </td>
+                <td>@Html.DisplayFor(modelItem => item.Ordem)</td>
+                <td style="text-align:center;">@Html.DisplayFor(modelItem => item.Ativo)</td>
                 <td style="text-align:center;">
-                    @Html.DisplayFor(modelItem => item.Ordem)
-                </td>
-                <td style="text-align:center;">
-                    @Html.DisplayFor(modelItem => item.Ativo)
-                </td>
-                <td style="text-align:center;">
-                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> 
+                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a>
                     <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a>
                     <a asp-action="Delete" asp-route-id="@item.Id">Excluir</a>
                 </td>

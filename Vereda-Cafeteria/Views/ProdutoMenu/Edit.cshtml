@@ -10,10 +10,10 @@
 
 <h1>Editar Produto</h1>
 
-<hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit" enctype="multipart/form-data">
+        <form asp-controller="ProdutoMenu" asp-action="Edit" asp-route-id="@Model.ProdutoId" method="post"
+              enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ProdutoId" />
             <input type="hidden" asp-for="ImagemUrl" />
@@ -69,5 +69,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
