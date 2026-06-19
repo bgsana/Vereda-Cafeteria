@@ -4,15 +4,12 @@
     ViewData["Title"] = "Adicionar Produto";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
-@section Styles {
-    <link rel="stylesheet" href="~/css/admin-menu.css" />
-}
 
 <h1>Adicionar Produto</h1>
 
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create" enctype="multipart/form-data">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="CategoriaId" class="control-label"></label>
@@ -58,5 +55,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

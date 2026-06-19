@@ -131,6 +131,14 @@ namespace Vereda_Cafeteria.Controllers
 
             ModelState.Remove("ImagemUrl");
 
+            foreach (var erro in ModelState)
+            {
+                foreach (var e in erro.Value.Errors)
+                {
+                    Console.WriteLine($"{erro.Key}: {e.ErrorMessage}");
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 try
@@ -146,7 +154,9 @@ namespace Vereda_Cafeteria.Controllers
                         throw;
                 }
 
-                return RedirectToAction(nameof(Index));
+                Console.WriteLine("CHEGOU NO REDIRECT");
+
+                return Redirect("/Admin/ProdutoMenu/Index");
             }
 
             ViewData["CategoriaId"] = new SelectList(_context.Categorias, "CategoriaId", "Nome", produto.CategoriaId);
@@ -189,5 +199,5 @@ namespace Vereda_Cafeteria.Controllers
             return _context.Produtos.Any(e => e.ProdutoId == id);
         }
     }
-    
-    }
+
+}
