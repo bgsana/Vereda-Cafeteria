@@ -9,7 +9,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@tabler/icons-webfont@latest/tabler-icons.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-<section class="carrinho-container">
+<!-- TELA 1: Formulário -->
+<section class="carrinho-container" id="tela-formulario">
 
     <h1 class="titulo">Finalização do Pedido</h1>
 
@@ -17,44 +18,40 @@
 
         <div class="coluna-itens">
 
-            <!-- Nome e Telefone -->
             <div class="form-grupo">
                 <div class="form-campo campo-nome">
                     <label>Nome Completo</label>
-                    <input type="text" placeholder="Digite seu nome completo">
+                    <input type="text" id="campo-nome" placeholder="Digite seu nome completo">
                 </div>
                 <div class="form-campo">
                     <label>Telefone</label>
-                    <input type="text" placeholder="(14) 99999-9999">
+                    <input type="text" id="campo-telefone" placeholder="(14) 99999-9999">
                 </div>
             </div>
 
             <div class="grupo-cards">
 
-                <!-- Forma de Pagamento -->
                 <div class="card-secao">
                     <h2 class="secao-titulo">Forma de Pagamento</h2>
                     <div class="caixa-pagamento">
                         <label class="opcao">
-                            <input type="radio" name="pagamento" checked>
+                            <input type="radio" name="pagamento" value="Pix" checked>
                             <span><i class="fa-brands fa-pix icon-pag icon-pix"></i>Pix</span>
                         </label>
                         <label class="opcao">
-                            <input type="radio" name="pagamento">
+                            <input type="radio" name="pagamento" value="Dinheiro">
                             <span><i class="ti ti-coin-filled icon-pag icon-dinheiro"></i>Dinheiro</span>
                         </label>
                         <label class="opcao">
-                            <input type="radio" name="pagamento">
+                            <input type="radio" name="pagamento" value="Cartão">
                             <span><i class="fa-solid fa-credit-card icon-pag"></i>Cartão</span>
                         </label>
                     </div>
                 </div>
 
-                <!-- Forma de Recebimento -->
                 <div class="card-secao">
                     <h2 class="secao-titulo">Forma de Recebimento</h2>
                     <div class="caixa-recebimento">
-
                         <div class="entrega-opcoes">
                             <button class="btn-opcao ativo" id="btn-retirada" onclick="selecionarOpcao('retirada')">
                                 <i class="ti ti-building-store"></i>
@@ -66,7 +63,6 @@
                             </button>
                         </div>
 
-                        <!-- Endereço de retirada -->
                         <div class="info-retirada visivel" id="info-retirada">
                             <i class="ti ti-map-pin"></i>
                             <div>
@@ -75,82 +71,82 @@
                             </div>
                         </div>
 
-                        <!-- Campos de endereço para entrega -->
                         <div class="campos-endereco" id="campos-endereco">
-                            <select class="campo-endereco campo-cidade" onchange="this.classList.add('selecionado')">
+                            <select class="campo-endereco campo-cidade" id="campo-cidade" onchange="this.classList.add('selecionado')">
                                 <option value="" disabled selected>Cidade</option>
-                                <option value="barra-bonita">Barra Bonita</option>
-                                <option value="igaracu">Igaraçu do Tietê</option>
+                                <option value="Barra Bonita">Barra Bonita</option>
+                                <option value="Igaraçu do Tietê">Igaraçu do Tietê</option>
                             </select>
-                            <input type="text" class="campo-endereco" placeholder="Rua / Avenida">
+                            <input type="text" id="campo-rua" class="campo-endereco" placeholder="Rua / Avenida">
                             <div class="linha-dois-campos">
-                                <input type="text" class="campo-endereco campo-numero" placeholder="Nº" maxlength="6" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-                                <input type="text" class="campo-endereco campo-bairro" placeholder="Bairro">
+                                <input type="text" id="campo-numero" class="campo-endereco campo-numero" placeholder="Nº" maxlength="6" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                                <input type="text" id="campo-bairro" class="campo-endereco campo-bairro" placeholder="Bairro">
                             </div>
-                            <input type="text" class="campo-endereco" placeholder="Complemento (opcional)">
+                            <input type="text" id="campo-complemento" class="campo-endereco" placeholder="Complemento (opcional)">
                         </div>
-
                     </div>
                 </div>
 
             </div>
         </div>
 
-        <!-- Caixa de resumo -->
         <div class="caixa-resumo">
             <h2 class="resumo-titulo">Resumo do pedido</h2>
-
-            <div class="resumo-linha">
-                <span>2x Pão de Queijo</span>
-                <span>2x Pão de Queijo</span>
-            </div>
-
+            <div class="resumo-linha" id="resumo-linhas"></div>
             <div class="resumo-linha" id="linha-taxa" style="display: none;">
-                <span style="font-weight: 600;">Taxa de entrega</span>
-                <span>R$8,00</span>
+                <span style="font-weight: 600; color: var(--vermelho)">+ Taxa de entrega</span>
+                <span>R$ 8,00</span>
             </div>
-
             <div class="resumo-divisor"></div>
-
             <div class="resumo-total">
                 <span>Total</span>
-                <span id="valor-total">R$10,00</span>
+                <span id="valor-total">R$ 0,00</span>
             </div>
-
-            <button class="btn-finalizar">Confirmar pedido</button>
+            <button class="btn-finalizar" onclick="confirmarPedido()">Confirmar pedido</button>
         </div>
 
     </div>
 
 </section>
 
-<script>
-    const SUBTOTAL = 10;
-    const TAXA_ENTREGA = 8;
+<!-- TELA 2: Pós-confirmação -->
+<section class="carrinho-container" id="tela-confirmacao" style="display:none">
 
-    function selecionarOpcao(opcao) {
-        const btnRetirada = document.getElementById('btn-retirada');
-        const btnEntrega = document.getElementById('btn-entrega');
-        const camposEndereco = document.getElementById('campos-endereco');
-        const infoRetirada = document.getElementById('info-retirada');
-        const linhaTaxa = document.getElementById('linha-taxa');
-        const valorTotal = document.getElementById('valor-total');
+    <h1 class="titulo">Pedido confirmado!</h1>
 
-        if (opcao === 'retirada') {
-            btnRetirada.classList.add('ativo');
-            btnEntrega.classList.remove('ativo');
-            camposEndereco.classList.remove('visivel');
-            infoRetirada.classList.add('visivel');
-            linhaTaxa.style.display = 'none';
-            valorTotal.textContent = `R$${SUBTOTAL.toFixed(2).replace('.', ',')}`;
-        } else {
-            btnEntrega.classList.add('ativo');
-            btnRetirada.classList.remove('ativo');
-            camposEndereco.classList.add('visivel');
-            infoRetirada.classList.remove('visivel');
-            linhaTaxa.style.display = 'flex';
-            const total = SUBTOTAL + TAXA_ENTREGA;
-            valorTotal.textContent = `R$${total.toFixed(2).replace('.', ',')}`;
-        }
-    }
-</script>
+    <div class="confirmacao-layout">
+
+        <!-- Card: deu certo -->
+        <div class="confirmacao-card card-sucesso">
+            <div class="confirmacao-icone">
+                <i class="ti ti-circle-check"></i>
+            </div>
+            <h2>Tudo certo!</h2>
+            <p>Obrigado pelo pedido! Assim que a mensagem chegar pelo WhatsApp, nossa equipe confirma os detalhes e já inicia o preparo com carinho. Fique de olho nas mensagens para acompanhar tudo por lá.</p>
+            <a href="/Menu" class="btn-confirmacao btn-voltar-cardapio">
+                <i class="ti ti-arrow-left"></i>
+                Voltar ao cardápio
+            </a>
+        </div>
+
+        <!-- Card: fallback -->
+        <div class="confirmacao-card card-fallback">
+            <div class="confirmacao-icone icone-aviso">
+                <i class="ti ti-brand-whatsapp"></i>
+            </div>
+            <h2>Não abriu o WhatsApp?</h2>
+            <p>Sem problema! Copie a mensagem abaixo e envie manualmente para o nosso número.</p>
+            <div class="mensagem-copiavel" id="mensagem-copiavel"></div>
+            <button class="btn-confirmacao btn-copiar" onclick="copiarMensagem()">
+                <i class="ti ti-copy"></i>
+                Copiar mensagem
+            </button>
+        </div>
+
+    </div>
+
+</section>
+
+@section Scripts {
+    <script src="~/js/finalizacaopedido.js"></script>
+}
