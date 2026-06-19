@@ -143,28 +143,43 @@ button { cursor: pointer; }
     align-items: center;
     gap: 0.75rem;
     padding: 0.75rem 1rem;
-    color: #c5bdb5;
+    color: rgba(255, 255, 255, 0.9);
     text-decoration: none;
     border-radius: var(--radius-md);
     transition: all 0.2s ease;
     font-weight: 500;
     font-size: 0.9rem;
+    margin: 0.1rem 0;
 }
 
 .nav-link i {
     font-size: 1.15rem;
     width: 20px;
     text-align: center;
+    opacity: 0.9;
 }
 
 .nav-link:hover {
     color: #fff;
+    background: rgba(255, 255, 255, 0.1);
     transform: translateX(4px);
 }
 
-.nav-link.active {
-    background: var(--verde);
-    color: #fff;
+.sidebar-nav .nav-link.active {
+    background-color: #00464B !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    opacity: 1 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+.sidebar-nav .nav-link.active i {
+    color: #ffffff !important;
+    opacity: 1 !important;
+}
+
+.nav-link.active i {
+    opacity: 1;
 }
 
 .badge-count {
@@ -229,49 +244,6 @@ button { cursor: pointer; }
     cursor: pointer;
     display: none;
     color: var(--terra);
-}
-
-.search-box {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.search-box i {
-    position: absolute;
-    left: 12px;
-    color: var(--text-muted);
-    font-size: 0.9rem;
-}
-
-.search-box input {
-    padding: 0.6rem 1rem 0.6rem 2.5rem;
-    width: 260px;
-    border: 1px solid var(--border);
-    border-radius: 50px;
-    background: var(--bg);
-    font-family: inherit;
-    font-size: 0.85rem;
-    transition: all 0.2s;
-    outline: none;
-    color: var(--terra);
-}
-
-.search-box input:focus {
-    background: var(--surface);
-    width: 300px;
-    box-shadow: 0 0 0 3px rgba(0, 70, 75, 0.1);
-    border-color: var(--verde);
-}
-
-.search-shortcut {
-    position: absolute;
-    right: 12px;
-    font-size: 0.7rem;
-    background: #e5e0d8;
-    padding: 2px 5px;
-    border-radius: 4px;
-    color: var(--text-muted);
 }
 
 /* --- ICON BUTTONS --- */
@@ -507,6 +479,7 @@ p > a[href*="create"]:hover {
     text-transform: uppercase;
     border: none;
     white-space: nowrap;
+    text-align: center; /* Centraliza cabeçalho */
 }
 
 .table tbody tr {
@@ -527,16 +500,18 @@ p > a[href*="create"]:hover {
     color: var(--terra);
     vertical-align: middle;
     border: none;
+    text-align: center; /* Centraliza conteúdo das células */
 }
 
-/* Imagem do produto na tabela */
+/* Imagem na tabela - AUMENTADA */
 .table tbody td img {
-    width: 80px;
-    height: 80px;
+    width: 120px; /* Aumentado de 80px para 120px */
+    height: 90px;  /* Ajustado para proporção 4:3 ou similar */
     object-fit: cover;
     border-radius: var(--radius-sm);
     border: 1px solid var(--border);
     display: block;
+    margin: 0 auto; /* Centraliza imagem na célula */
 }
 
 /* Links de ação */
@@ -549,7 +524,7 @@ p > a[href*="create"]:hover {
     border: 1.5px solid transparent;
     transition: all var(--transition);
     display: inline-block;
-    margin-right: 0.25rem;
+    margin: 0.15rem; /* Margem uniforme */
 }
 
 .table tbody td a[href*="Edit"] {
@@ -611,6 +586,7 @@ p > a[href*="create"]:hover {
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--terra-light);
+    text-align: left; /* Garante labels à esquerda */
 }
 
 .form-control {
@@ -778,8 +754,8 @@ p > a[href*="create"]:hover {
 }
 
 /* --- LINKS "Back to List" / "Edit" / "Back to..." (fora da tabela) --- */
-div > a[href*="Index"],
-div > a[href*="index"] {
+div > a[href*="Index"]:not(.nav-link),
+div > a[href*="index"]:not(.nav-link) {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
@@ -795,8 +771,8 @@ div > a[href*="index"] {
     transition: all var(--transition);
 }
 
-div > a[href*="Index"]:hover,
-div > a[href*="index"]:hover {
+div > a[href*="Index"]:not(.nav-link):hover,
+div > a[href*="index"]:not(.nav-link):hover {
     background: var(--agua-muted);
     border-color: var(--agua);
     color: var(--terra);
@@ -871,7 +847,7 @@ dl.row .col-sm-10:last-of-type {
 
 /* Imagem dentro do dl.row (Details/Delete) */
 dl.row .col-sm-10 img {
-    width: 150px;
+    width: 200px; /* Aumentado para visualização melhor nos detalhes */
     height: 150px;
     object-fit: cover;
     border-radius: var(--radius-sm);
