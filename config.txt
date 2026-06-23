@@ -29,4 +29,3 @@ dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design --version 9.
 
 
 dotnet aspnet-codegenerator controller -name EventoController -m Evento -dc AppDbContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries
-

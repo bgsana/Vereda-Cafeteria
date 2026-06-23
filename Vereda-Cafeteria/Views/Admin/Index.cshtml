@@ -1,3 +1,4 @@
+@model Vereda_Cafeteria.ViewModels.DashboardVM
 @{
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     ViewData["Title"] = "DashBoard";
@@ -14,31 +15,42 @@
     </div>
     <div class="topbar-right">
         <span class="date-badge">@DateTime.Now.ToString("dddd, d MMMM yyyy", new System.Globalization.CultureInfo("pt-BR"))</span>
-        <button class="btn btn-ghost">↓ Exportar</button>
-        <button class="btn btn-primary">+ Novo Pedido</button>
+        <button class="btn btn-primary">↓ Exportar</button>
     </div>
 </div>
+
+@if (Model == null)
+{
+    <div class="alert alert-danger">Erro: O modelo de dados não foi carregado. Verifique o AdminController.</div>
+    return;
+}
 
 <div class="kpi-grid">
     <div class="kpi-card k1">
         <div class="kpi-label">Faturamento hoje</div>
-        <div class="kpi-value">R$1.842</div>
-        <div class="kpi-change up">↑ 18% vs ontem</div>
+        <div class="kpi-value">R$@Model.FaturamentoHoje.ToString("N2", new System.Globalization.CultureInfo("pt-BR"))</div>
+        <div class="kpi-change @(Model.PercentualFaturamentoVariacao >= 0 ? "up" : "down")">
+            @(Model.PercentualFaturamentoVariacao >= 0 ? "↑" : "↓") @Math.Abs(Model.PercentualFaturamentoVariacao).ToString("N0")% vs ontem
+        </div>
     </div>
     <div class="kpi-card k2">
         <div class="kpi-label">Pedidos</div>
-        <div class="kpi-value">137</div>
-        <div class="kpi-change up">↑ 11 a mais</div>
+        <div class="kpi-value">@Model.PedidosHoje</div>
+        <div class="kpi-change @(Model.VariacaoPedidos >= 0 ? "up" : "down")">
+            @(Model.VariacaoPedidos >= 0 ? "↑" : "↓") @Math.Abs(Model.VariacaoPedidos) @(Math.Abs(Model.VariacaoPedidos) == 1 ? "a mais" : "a mais")
+        </div>
     </div>
     <div class="kpi-card k3">
         <div class="kpi-label">Ticket médio</div>
-        <div class="kpi-value">R$13,4</div>
-        <div class="kpi-change down">↓ R$0,60</div>
+        <div class="kpi-value">R$@Model.TicketMedio.ToString("N2", new System.Globalization.CultureInfo("pt-BR"))</div>
+        <div class="kpi-change @(Model.VariacaoTicketMedio >= 0 ? "up" : "down")">
+            @(Model.VariacaoTicketMedio >= 0 ? "↑" : "↓") R$@Math.Abs(Model.VariacaoTicketMedio).ToString("N2")
+        </div>
     </div>
     <div class="kpi-card k4">
         <div class="kpi-label">Item mais pedido</div>
-        <div class="kpi-value">Bolinho da Vovó Nice</div>
-        <div class="kpi-change up">↑ 4 pedidos hoje</div>
+        <div class="kpi-value">@(Model.ItemMaisPedido ?? "Nenhum")</div>
+        <div class="kpi-change up">↑ @Model.QtdItemMaisPedido pedidos hoje</div>
     </div>
 </div>
 
@@ -52,45 +64,35 @@
             <svg class="chart-svg" id="lineChart" viewBox="0 0 600 150" preserveAspectRatio="none"></svg>
         </div>
         <div class="x-labels">
-            <span class="x-label">seg</span><span class="x-label">ter</span><span class="x-label">qua</span>
-            <span class="x-label">qui</span><span class="x-label">sex</span><span class="x-label">sáb</span><span class="x-label">dom</span>
+            @if (Model.FaturamentoSemana != null)
+            {
+                foreach (var item in Model.FaturamentoSemana)
+                {
+                    <span class="x-label">@item.Dia</span>
+                }
+            }
         </div>
     </div>
 
     <div class="card">
         <div class="card-header">
             <div class="card-title">Top Produtos</div>
-            <span class="card-sub">hoje</span>
+            <span class="card-sub">Geral</span>
         </div>
         <div class="product-list">
-            <div class="product-row">
-                <div class="product-info"><div class="product-name">Cappuccino</div><div class="product-cat">café</div></div>
-                <div class="product-bar-wrap">
-                    <div class="product-bar-bg"><div class="product-bar-fill" style="width:100%;background:var(--verde);animation-delay:.3s"></div></div>
-                    <span class="product-val">42</span>
-                </div>
-            </div>
-            <div class="product-row">
-                <div class="product-info"><div class="product-name">Pão de queijo</div><div class="product-cat">pratos salgados</div></div>
-                <div class="product-bar-wrap">
-                    <div class="product-bar-bg"><div class="product-bar-fill" style="width:78%;background:var(--terra);animation-delay:.4s"></div></div>
-                    <span class="product-val">33</span>
-                </div>
-            </div>
-            <div class="product-row">
-                <div class="product-info"><div class="product-name">Chocolate Quente</div><div class="product-cat">bebidas</div></div>
-                <div class="product-bar-wrap">
-                    <div class="product-bar-bg"><div class="product-bar-fill" style="width:62%;background:var(--vinho);animation-delay:.5s"></div></div>
-                    <span class="product-val">26</span>
-                </div>
-            </div>
-            <div class="product-row">
-                <div class="product-info"><div class="product-name">Bolo de caneca</div><div class="product-cat">pratos doces</div></div>
-                <div class="product-bar-wrap">
-                    <div class="product-bar-bg"><div class="product-bar-fill" style="width:48%;background:var(--agua);animation-delay:.6s"></div></div>
-                    <span class="product-val">20</span>
-                </div>
-            </div>
+            @if (Model.TopProdutos != null)
+            {
+                foreach (var produto in Model.TopProdutos)
+                {
+                    <div class="product-row">
+                        <div class="product-info"><div class="product-name">@produto.Nome</div><div class="product-cat">@produto.Categoria</div></div>
+                        <div class="product-bar-wrap">
+                            <div class="product-bar-bg"><div class="product-bar-fill" style="width:@produto.Percentual%;background:var(--verde);animation-delay:.3s"></div></div>
+                            <span class="product-val">@produto.Quantidade</span>
+                        </div>
+                    </div>
+                }
+            }
         </div>
     </div>
 </div>
@@ -99,13 +101,20 @@
     <div class="card" style="animation-delay:.42s">
         <div class="card-header"><div class="card-title">Pedidos Recentes</div></div>
         <table class="orders-table">
-            <thead><tr><th>#</th><th>Item</th><th>Status</th></tr></thead>
+            <thead><tr><th>#</th><th>Cliente</th><th>Valor</th><th>Data e Hora</th></tr></thead>
             <tbody>
-                <tr><td style="color:var(--muted);font-size:12px">#137</td><td>Espresso duplo</td><td><span class="badge b-done">Pronto</span></td></tr>
-                <tr><td style="color:var(--muted);font-size:12px">#136</td><td>Croissant + café</td><td><span class="badge b-prep">Preparo</span></td></tr>
-                <tr><td style="color:var(--muted);font-size:12px">#135</td><td>Muffin baunilha</td><td><span class="badge b-done">Pronto</span></td></tr>
-                <tr><td style="color:var(--muted);font-size:12px">#134</td><td>Choc. quente G</td><td><span class="badge b-prep">Preparo</span></td></tr>
-                <tr><td style="color:var(--muted);font-size:12px">#133</td><td>Cappuccino</td><td><span class="badge b-cancel">Cancelado</span></td></tr>
+                @if (Model.PedidosRecentes != null)
+                {
+                    foreach (var pedido in Model.PedidosRecentes)
+                    {
+                        <tr>
+                            <td style="color:var(--muted);font-size:12px">#@pedido.PedidoId</td>
+                            <td>@pedido.NomeCliente</td>
+                            <td>R$@pedido.ValorTotal.ToString("N2")</td>
+                            <td>@pedido.DataPedido.ToString("dd/MM HH:mm")</td>
+                        </tr>
+                    }
+                }
             </tbody>
         </table>
     </div>
@@ -116,41 +125,41 @@
             <div>
                 <div class="mini-stat">
                     <div class="mini-stat-label"><div class="mini-stat-dot" style="background:var(--verde)"></div>Meta mensal</div>
-                    <div class="mini-stat-val">68%</div>
+                    <div class="mini-stat-val">@Model.MetaMensal%</div>
                 </div>
-                <div class="mini-progress"><div class="mini-fill" style="width:68%;background:var(--verde);animation-delay:.5s"></div></div>
+                <div class="mini-progress"><div class="mini-fill" style="width:@Model.MetaMensal%;background:var(--verde);animation-delay:.5s"></div></div>
             </div>
             <div>
                 <div class="mini-stat">
                     <div class="mini-stat-label"><div class="mini-stat-dot" style="background:var(--vinho)"></div>Satisfação</div>
-                    <div class="mini-stat-val">94%</div>
+                    <div class="mini-stat-val">@Model.Satisfacao%</div>
                 </div>
-                <div class="mini-progress"><div class="mini-fill" style="width:94%;background:var(--vinho);animation-delay:.6s"></div></div>
+                <div class="mini-progress"><div class="mini-fill" style="width:@Model.Satisfacao%;background:var(--vinho);animation-delay:.6s"></div></div>
             </div>
             <div>
                 <div class="mini-stat">
                     <div class="mini-stat-label"><div class="mini-stat-dot" style="background:var(--terra)"></div>Estoque OK</div>
-                    <div class="mini-stat-val">81%</div>
+                    <div class="mini-stat-val">@Model.EstoqueOk%</div>
                 </div>
-                <div class="mini-progress"><div class="mini-fill" style="width:81%;background:var(--terra);animation-delay:.7s"></div></div>
+                <div class="mini-progress"><div class="mini-fill" style="width:@Model.EstoqueOk%;background:var(--terra);animation-delay:.7s"></div></div>
             </div>
             <div>
                 <div class="mini-stat">
                     <div class="mini-stat-label"><div class="mini-stat-dot" style="background:var(--agua)"></div>Fidelidade</div>
-                    <div class="mini-stat-val">52%</div>
+                    <div class="mini-stat-val">@Model.Fidelidade%</div>
                 </div>
-                <div class="mini-progress"><div class="mini-fill" style="width:52%;background:var(--agua);animation-delay:.8s"></div></div>
+                <div class="mini-progress"><div class="mini-fill" style="width:@Model.Fidelidade%;background:var(--agua);animation-delay:.8s"></div></div>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    // LINE CHART
-    const vals = [1240, 980, 1580, 1320, 1710, 2100, 1842];
+    // LINE CHART COM DADOS REAIS
+    const vals = [@(Model.FaturamentoSemana != null ? string.Join(",", Model.FaturamentoSemana.Select(f => f.Valor.ToString("F2", System.Globalization.CultureInfo.InvariantCulture))) : "0")];
     const svgEl = document.getElementById('lineChart');
     const W = 600, H = 150, pad = 20;
-    const maxV = Math.max(...vals);
+    const maxV = Math.max(...vals, 1);
     const pts = vals.map((v, i) => [pad + (i / (vals.length - 1)) * (W - pad * 2), H - pad - ((v / maxV) * (H - pad * 2))]);
 
     const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
@@ -195,21 +204,5 @@
             t.textContent = `R$${vals[i].toLocaleString('pt-BR')}`;
             svgEl.appendChild(t);
         }
-    });
-
-    // HEATMAP
-    const intensities = [
-        [3,4,5,5,5,4,3],[4,5,5,4,5,5,4],[3,4,4,3,4,4,3],
-        [2,3,3,2,3,4,3],[2,3,4,3,4,3,2],[1,2,3,3,3,2,1]
-    ];
-    const heatEl = document.getElementById('heatmap');
-    intensities.forEach(row => {
-        row.forEach(v => {
-            const cell = document.createElement('div');
-            cell.className = 'heat-cell';
-            const a = (v / 5) * 0.85 + 0.08;
-            cell.style.background = `rgba(0,70,75,${a.toFixed(2)})`;
-            heatEl.appendChild(cell);
-        });
     });
 </script>
