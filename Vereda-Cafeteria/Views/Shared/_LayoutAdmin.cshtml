@@ -39,11 +39,10 @@
                     <i class="bi bi-grid-1x2"></i>
                     <span>Dashboard</span>
                 </a>
-                <a href="/admin/pedidos"
+                <a asp-controller="Pedidos" asp-action="Index"
                    class="nav-link @(controller == "Pedidos" ? "active" : "")">
                     <i class="bi bi-receipt"></i>
                     <span>Pedidos</span>
-                    <span class="badge-count">12</span>
                 </a>
             </div>
 

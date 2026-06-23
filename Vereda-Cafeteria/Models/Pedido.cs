@@ -42,6 +42,10 @@ public class Pedido
     [Display(Name = "Forma de Recebimento")]
     public FormaRecebimento FormaRecebimento { get; set; }
 
+    [Required]
+    [Display(Name = "Status do Pedido")]
+    public StatusPedido Status { get; set; } = StatusPedido.Pendente;
+
     // Relacionamento: um pedido tem muitos itens
     public virtual Collection<ItemPedido> ItensPedido { get; set; } = new();
 }

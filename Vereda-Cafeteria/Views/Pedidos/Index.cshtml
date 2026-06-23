@@ -1,0 +1,141 @@
+@model IEnumerable<Vereda_Cafeteria.Models.Pedido>
+@using Models
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewData["Title"] = "Gestão de Pedidos";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin-pedido.css" />
+}
+
+<div class="topbar">
+    <div>
+        <div class="page-eyebrow">administração</div>
+        <div class="page-title">Gestão de Pedidos</div>
+    </div>
+</div>
+
+<div class="container-fluid mt-4">
+    <div class="row">
+        @foreach (var pedido in Model)
+        {
+            <div class="col-md-6 col-lg-4">
+                <div class="order-card">
+                    <div class="order-header">
+                        <div>
+                            <strong>#@pedido.PedidoId</strong> - @pedido.NomeCliente
+                            <div class="text-muted" style="font-size: 12px;">@pedido.DataPedido.ToString("dd/MM/yyyy HH:mm")
+                            </div>
+                        </div>
+                        <span class="status-badge status-@pedido.Status.ToString().ToLower()">
+                            @pedido.Status.ToString()
+                        </span>
+                    </div>
+
+                    <div class="order-items">
+                        <ul class="list-unstyled">
+                            @foreach (var item in pedido.ItensPedido)
+                            {
+                                <li>@item.Quantidade x @item.Produto?.Nome (R$ @item.SubTotal.ToString("N2"))</li>
+                            }
+                        </ul>
+                        <div class="text-end">
+                            <strong>Total: R$ @pedido.ValorTotal.ToString("N2")</strong>
+                        </div>
+                    </div>
+
+                    <div class="order-footer">
+                        <div class="text-muted" style="font-size: 12px;">
+                            <i class="bi bi-credit-card"></i> @pedido.FormaPagamento |
+                            <i class="bi bi-box-seam"></i> @pedido.FormaRecebimento
+                        </div>
+                        <div class="dropdown">
+                            <button class="btn btn-status dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                <i class="bi bi-arrow-repeat"></i> Mudar Status
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <button type="button" class="dropdown-item status-action" data-id="@pedido.PedidoId"
+                                            data-status="Preparo">
+                                        <span class="badge bg-info me-2"></span>Em Preparo
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" class="dropdown-item status-action" data-id="@pedido.PedidoId"
+                                            data-status="Pronto">
+                                        <span class="badge bg-success me-2"></span>Pronto
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" class="dropdown-item status-action" data-id="@pedido.PedidoId"
+                                            data-status="Entregue">
+                                        <span class="badge bg-secondary me-2"></span>Entregue
+                                    </button>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <button type="button" class="dropdown-item status-action text-danger"
+                                            data-id="@pedido.PedidoId" data-status="Cancelado">
+                                        <span class="badge bg-danger me-2"></span>Cancelar Pedido
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const statusButtons = document.querySelectorAll('.status-action');
+
+            statusButtons.forEach(button => {
+                button.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const pedidoId = this.getAttribute('data-id');
+                    const novoStatus = this.getAttribute('data-status');
+
+                    // Confirmação para cancelamentos
+                    if (novoStatus === 'Cancelado') {
+                        if (!confirm(`Tem certeza que deseja cancelar o pedido #${pedidoId}?`)) {
+                            return;
+                        }
+                    }
+
+                    // Enviar via fetch
+                    const formData = new FormData();
+                    formData.append('id', pedidoId);
+                    formData.append('novoStatus', novoStatus);
+
+                    fetch('@Url.Action("AlterarStatus", "Pedidos")', {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                location.reload();
+                            } else {
+                                alert('Erro ao alterar status');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Erro:', error);
+                            alert('Erro ao alterar status: ' + error);
+                        });
+                });
+            });
+        });
+    </script>
+}

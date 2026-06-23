@@ -1,0 +1,477 @@
+/* =========================================
+   ADMIN PEDIDOS - STYLESHEET
+   ========================================= */
+
+/* Importar variáveis globais do projeto */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+
+/* =========================================
+   PALETA DE CORES E TOKENS
+   ========================================= */
+:root {
+    /* Cores da Paleta Principal */
+    --vinho:       #730000;
+    --vinho-light: #9a1a1a;
+    --vinho-hover: #5a0000;
+    --vinho-tint:  rgba(115, 0, 0, 0.08);
+
+    --verde:       #00464B;
+    --verde-light: #005c63;
+    --verde-hover: #003a40;
+    --verde-tint:  rgba(0, 70, 75, 0.08);
+
+    --terra:       #372314;
+    --terra-light: #5a3c25;
+    --terra-hover: #2a1a0f;
+    --terra-tint:  rgba(55, 35, 20, 0.06);
+
+    --agua:        #96B9B9;
+    --agua-light:  #b8d4d4;
+    --agua-tint:   rgba(150, 185, 185, 0.12);
+
+    /* Cores de Status */
+    --status-pendente:  #F9E5D3;
+    --status-preparo:   #D4E8F7;
+    --status-pronto:    #D4F1E4;
+    --status-entregue:  #E8E8E8;
+    --status-cancelado: #F5D5D5;
+
+    --text-pendente:    #8B5A1F;
+    --text-preparo:     #0052A3;
+    --text-pronto:      #1B6E4D;
+    --text-entregue:    #4A4A4A;
+    --text-cancelado:   #8B2E2E;
+
+    /* Cores Neutras */
+    --bg-page:    #F5F2EE;
+    --surface:    #FFFFFF;
+    --border:     rgba(55, 35, 20, 0.12);
+    --text-main:  #372314;
+    --text-muted: #8A8A8A;
+    --text-light: #FFFFFF;
+
+    /* Design Tokens */
+    --radius-sm:   6px;
+    --radius-md:   10px;
+    --radius-lg:   16px;
+
+    --shadow-sm:   0 2px 4px rgba(55, 35, 20, 0.06);
+    --shadow-md:   0 4px 12px rgba(55, 35, 20, 0.08);
+    --shadow-lg:   0 8px 24px rgba(55, 35, 20, 0.12);
+    --shadow-hover: 0 12px 32px rgba(55, 35, 20, 0.15);
+
+    --transition:  all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.15s ease;
+}
+
+/* =========================================
+   CONTAINER E LAYOUT
+   ========================================= */
+.container-fluid {
+    background-color: var(--bg-page);
+    padding: 2rem 1.5rem;
+}
+
+/* =========================================
+   STATUS BADGES - ESTILO PREMIUM
+   ========================================= */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    border-radius: var(--radius-lg);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+    min-width: 120px;
+    text-align: center;
+}
+
+.status-pendente {
+    background: var(--status-pendente);
+    color: var(--text-pendente);
+    border: 1px solid rgba(139, 90, 31, 0.2);
+}
+
+.status-pendente:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.status-preparo {
+    background: var(--status-preparo);
+    color: var(--text-preparo);
+    border: 1px solid rgba(0, 82, 163, 0.2);
+}
+
+.status-preparo:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.status-pronto {
+    background: var(--status-pronto);
+    color: var(--text-pronto);
+    border: 1px solid rgba(27, 110, 77, 0.2);
+}
+
+.status-pronto:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.status-entregue {
+    background: var(--status-entregue);
+    color: var(--text-entregue);
+    border: 1px solid rgba(74, 74, 74, 0.2);
+}
+
+.status-entregue:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.status-cancelado {
+    background: var(--status-cancelado);
+    color: var(--text-cancelado);
+    border: 1px solid rgba(139, 46, 46, 0.2);
+}
+
+.status-cancelado:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+/* =========================================
+   ORDER CARDS - DESIGN PRINCIPAL
+   ========================================= */
+.order-card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.order-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--vinho), var(--verde));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: var(--transition);
+}
+
+.order-card:hover::before {
+    transform: scaleX(1);
+}
+
+.order-card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-4px);
+}
+
+/* =========================================
+   ORDER HEADER
+   ========================================= */
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--bg-page);
+    gap: 12px;
+}
+
+.order-header > div:first-child {
+    flex: 1;
+}
+
+.order-header strong {
+    display: block;
+    font-size: 1.1rem;
+    color: var(--terra);
+    margin-bottom: 4px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+}
+
+.order-header .text-muted {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.order-header .status-badge {
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* =========================================
+   ORDER ITEMS
+   ========================================= */
+.order-items {
+    font-size: 0.9375rem;
+    color: var(--terra);
+    margin-bottom: 16px;
+}
+
+.order-items ul {
+    list-style: none;
+    margin-bottom: 12px;
+}
+
+.order-items li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--bg-page);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    transition: var(--transition-fast);
+}
+
+.order-items li:last-child {
+    border-bottom: none;
+}
+
+.order-items li:hover {
+    padding-left: 8px;
+    color: var(--vinho);
+}
+
+.order-items li strong {
+    color: var(--vinho);
+    font-weight: 700;
+    margin-left: 8px;
+}
+
+.order-items .text-end {
+    text-align: right;
+    padding-top: 12px;
+    margin-top: 12px;
+    border-top: 2px solid var(--agua-tint);
+    font-size: 1rem;
+    color: var(--verde);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+}
+
+/* =========================================
+   ORDER FOOTER
+   ========================================= */
+.order-footer {
+    margin-top: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.order-footer > div:first-child {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    min-width: 200px;
+}
+
+.order-footer i {
+    color: var(--vinho);
+    font-size: 1rem;
+}
+
+/* =========================================
+   DROPDOWN - STATUS CHANGE
+   ========================================= */
+.dropdown {
+    display: flex;
+}
+
+.btn-status {
+    padding: 8px 16px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    background: transparent;
+    border: 2px solid var(--agua);
+    color: var(--agua);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    white-space: nowrap;
+    letter-spacing: 0.025em;
+}
+
+.btn-status:hover {
+    background: var(--agua-tint);
+    border-color: var(--agua-light);
+    color: var(--verde);
+}
+
+.btn-status:active {
+    transform: scale(0.98);
+}
+
+.dropdown-menu {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    min-width: 180px;
+    padding: 8px 0;
+}
+
+.dropdown-item {
+    padding: 10px 16px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--terra);
+    transition: var(--transition-fast);
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    display: block;
+}
+
+.dropdown-item:hover {
+    background-color: var(--bg-page);
+    color: var(--vinho);
+    padding-left: 20px;
+}
+
+.dropdown-item.text-danger {
+    color: var(--text-cancelado);
+}
+
+.dropdown-item.text-danger:hover {
+    background-color: rgba(139, 46, 46, 0.08);
+    color: var(--text-cancelado);
+}
+
+.dropdown-divider {
+    margin: 8px 0;
+    border: none;
+    border-top: 1px solid var(--border);
+}
+
+/* =========================================
+   DROPDOWN TOGGLE
+   ========================================= */
+.btn-outline-secondary {
+    border-color: var(--agua);
+    color: var(--agua);
+    background: transparent;
+}
+
+.btn-outline-secondary:hover {
+    background-color: var(--agua-tint);
+    border-color: var(--agua-light);
+    color: var(--verde);
+}
+
+.dropdown-toggle::after {
+    border-color: currentColor transparent transparent transparent;
+    margin-left: 8px;
+}
+
+/* =========================================
+   GRID RESPONSIVO
+   ========================================= */
+.row {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+}
+
+@media (min-width: 768px) {
+    .row {
+        grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    }
+}
+
+@media (min-width: 1200px) {
+    .row {
+        grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    }
+}
+
+@media (min-width: 1400px) {
+    .row {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* =========================================
+   ANIMAÇÕES E TRANSIÇÕES
+   ========================================= */
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.order-card {
+    animation: slideInUp 0.5s ease-out;
+}
+
+.order-card:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.order-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.order-card:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.order-card:nth-child(n + 4) {
+    animation-delay: 0.2s;
+}
+
+.order-card.urgent .order-header strong {
+    color: var(--vinho);
+}
+
+.order-card.urgent::before {
+    background: linear-gradient(90deg, var(--vinho), var(--vinho-light));
+    transform: scaleX(1);
+}
+
+@media print {
+    .order-footer .dropdown {
+        display: none;
+    }
+
+    .order-card {
+        page-break-inside: avoid;
+        box-shadow: none;
+        border: 2px solid var(--terra);
+    }
+}

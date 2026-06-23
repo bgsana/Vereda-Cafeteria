@@ -19,7 +19,8 @@ public class SeedPedido
                 ValorTotal = 45.50m,
                 DataPedido = DateTime.Now.AddDays(-6),
                 FormaPagamento = FormaPagamento.Pix,
-                FormaRecebimento = FormaRecebimento.Retirada
+                FormaRecebimento = FormaRecebimento.Retirada,
+                Status = StatusPedido.Pronto
             },
             new Pedido
             {
@@ -29,7 +30,8 @@ public class SeedPedido
                 ValorTotal = 32.00m,
                 DataPedido = DateTime.Now.AddDays(-5),
                 FormaPagamento = FormaPagamento.Credito,
-                FormaRecebimento = FormaRecebimento.Entrega
+                FormaRecebimento = FormaRecebimento.Entrega,
+                Status = StatusPedido.Preparo
             },
             new Pedido
             {
@@ -49,7 +51,8 @@ public class SeedPedido
                 ValorTotal = 60.00m,
                 DataPedido = DateTime.Now.AddDays(-3),
                 FormaPagamento = FormaPagamento.Pix,
-                FormaRecebimento = FormaRecebimento.Entrega
+                FormaRecebimento = FormaRecebimento.Entrega,
+                Status = StatusPedido.Preparo
             },
             new Pedido
             {
@@ -59,7 +62,8 @@ public class SeedPedido
                 ValorTotal = 25.50m,
                 DataPedido = DateTime.Now.AddDays(-2),
                 FormaPagamento = FormaPagamento.Debito,
-                FormaRecebimento = FormaRecebimento.Retirada
+                FormaRecebimento = FormaRecebimento.Retirada,
+                Status = StatusPedido.Pronto
             },
             new Pedido
             {
@@ -69,7 +73,8 @@ public class SeedPedido
                 ValorTotal = 80.00m,
                 DataPedido = DateTime.Now.AddDays(-1),
                 FormaPagamento = FormaPagamento.Pix,
-                FormaRecebimento = FormaRecebimento.Entrega
+                FormaRecebimento = FormaRecebimento.Entrega,
+                Status = StatusPedido.Preparo
             },
             new Pedido
             {

@@ -15,7 +15,8 @@
     </div>
     <div class="topbar-right">
         <span class="date-badge">@DateTime.Now.ToString("dddd, d MMMM yyyy", new System.Globalization.CultureInfo("pt-BR"))</span>
-        <button class="btn btn-primary">↓ Exportar</button>
+        <button class="btn btn-ghost">↓ Exportar</button>
+        <button class="btn btn-primary">+ Novo Pedido</button>
     </div>
 </div>
 
@@ -101,7 +102,7 @@
     <div class="card" style="animation-delay:.42s">
         <div class="card-header"><div class="card-title">Pedidos Recentes</div></div>
         <table class="orders-table">
-            <thead><tr><th>#</th><th>Cliente</th><th>Valor</th><th>Data e Hora</th></tr></thead>
+            <thead><tr><th>#</th><th>Cliente</th><th>Valor</th><th>Data</th></tr></thead>
             <tbody>
                 @if (Model.PedidosRecentes != null)
                 {
