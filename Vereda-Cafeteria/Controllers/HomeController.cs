@@ -34,10 +34,23 @@ public class HomeController : Controller
     [Route("Menu")]
     public async Task<IActionResult> Menu()
     {
-        // Busca todas as categorias com seus produtos ativos
         var categorias = await _context.Categorias
             .Include(c => c.Produtos!.Where(p => p.Ativo))
                 .ThenInclude(p => p.Opcoes)
+            .Where(c => new[] { 1, 2, 3, 4, 5 }.Contains(c.CategoriaId))
+            .OrderBy(c => c.CategoriaId)
+            .ToListAsync();
+
+        return View(categorias);
+    }
+
+    [Route("Atelie")]
+    public async Task<IActionResult> Atelie()
+    {
+        var categorias = await _context.Categorias
+            .Include(c => c.Produtos!.Where(p => p.Ativo))
+                .ThenInclude(p => p.Opcoes)
+            .Where(c => new[] { 6, 7, 8, 9 }.Contains(c.CategoriaId))
             .OrderBy(c => c.CategoriaId)
             .ToListAsync();
 

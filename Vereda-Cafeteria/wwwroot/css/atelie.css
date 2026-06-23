@@ -114,7 +114,7 @@ h1 {
     transition: 0.5s;
 }
 
-/* --- SEÇÕES DO CARDÁPIO --- */
+/* --- SEÇÕES DO ATELIÊ --- */
 .secao {
     width: 100%;
     max-width: 1000px;
@@ -274,13 +274,13 @@ h1 {
 #modal-secao-opcoes {
     display: none;
     width: 85%;
-    margin: 15px 0 5px 0; /* ← espaçamento acima e abaixo da seção */
+    margin: 15px 0 5px 0;
 }
 
 .modal-opcoes-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 8px 24px; /* ← mais espaço vertical entre linhas */
+    gap: 8px 24px;
 }
 
 .modal-opcao-label {
@@ -300,7 +300,7 @@ h1 {
     width: 16px;
     height: 16px;
     border: 2px solid var(--cor-modal, #730000);
-    border-radius: 4px; /* ← quadrado arredondado como no protótipo */
+    border-radius: 4px;
     cursor: pointer;
     flex-shrink: 0;
     position: relative;

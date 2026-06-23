@@ -1,0 +1,72 @@
+@model Vereda_Cafeteria.Models.Produto
+
+@{
+    ViewData["Title"] = "Editar Produto do Ateliê";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>Editar Produto do Ateliê</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="ProdutoAtelie" asp-action="Edit" asp-route-id="@Model.ProdutoId" method="post"
+              enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ProdutoId" />
+            <input type="hidden" asp-for="ImagemUrl" />
+            <div class="form-group">
+                <label asp-for="CategoriaId" class="control-label"></label>
+                <select asp-for="CategoriaId" class="form-control" asp-items="ViewBag.CategoriaId"></select>
+                <span asp-validation-for="CategoriaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descricao" class="control-label"></label>
+                <input asp-for="Descricao" class="form-control" />
+                <span asp-validation-for="Descricao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QtdEstoque" class="control-label"></label>
+                <input asp-for="QtdEstoque" class="form-control" />
+                <span asp-validation-for="QtdEstoque" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Preco" class="control-label"></label>
+                <input asp-for="Preco" class="form-control" />
+                <span asp-validation-for="Preco" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Imagem do Produto</label>
+                @if (!string.IsNullOrEmpty(Model.ImagemUrl))
+                {
+                    <div class="mb-2">
+                        <img src="@Model.ImagemUrl" alt="@Model.Nome"
+                             style="width:80px;height:80px;object-fit:cover;border-radius:6px;border:1px solid rgba(55,35,20,0.12);" />
+                        <small class="text-muted d-block">Imagem atual</small>
+                    </div>
+                }
+                <input type="file" name="imagemArquivo" accept="image/*" class="form-control" />
+                <small class="text-muted">Deixe em branco para manter a imagem atual</small>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Ativo" /> @Html.DisplayNameFor(model => model.Ativo)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
