@@ -130,69 +130,47 @@ function validar(carrinho) {
 
 // --- Montar mensagem ---
 
-function montarMensagem(carrinho, comEmojis = true) {
-    const nome = document.getElementById('campo-nome').value.trim();
-    const tel = document.getElementById('campo-telefone').value.trim();
+function montarMensagem(carrinho) {
+    const nome      = document.getElementById('campo-nome').value.trim();
+    const tel       = document.getElementById('campo-telefone').value.trim();
     const pagamento = document.querySelector('input[name="pagamento"]:checked').value;
-    const subtotal = calcularSubtotal(carrinho);
-    const total = subtotal + (modoEntrega ? TAXA_ENTREGA : 0);
-    const divisor = comEmojis ? '━━━━━━━━━━━━━━' : '--------------';
-    const bullet = comEmojis ? '• ' : '- ';
-    const traco = comEmojis ? ' — ' : ' - ';
-
-    const e = comEmojis ? {
-        cafe: '☕ ',
-        pessoa: '👤 ',
-        tel: '📞 ',
-        carrinho: '🛒 ',
-        entrega: '🚚 ',
-        retirada: '🛍️ ',
-        cartao: '💳 ',
-        dinheiro: '💵 ',
-    } : {
-        cafe: '',
-        pessoa: '',
-        tel: '',
-        carrinho: '',
-        entrega: '',
-        retirada: '',
-        cartao: '',
-        dinheiro: '',
-    };
+    const subtotal  = calcularSubtotal(carrinho);
+    const total     = subtotal + (modoEntrega ? TAXA_ENTREGA : 0);
+    const divisor   = '--------------';
 
     let msg = '';
-    msg += e.cafe + 'Olá! Vim pelo site da Vereda Cafeteria e gostaria de realizar o seguinte pedido:\n';
+    msg += 'Olá! Vim pelo site da Vereda Cafeteria e gostaria de realizar o seguinte pedido:\n';
     msg += '\n' + divisor + '\n';
-    msg += '\n' + e.pessoa + '*Nome*: ' + nome + '\n';
-    msg += e.tel + '*Telefone*: ' + tel + '\n';
-    msg += '\n' + e.carrinho + '*Itens do Pedido*\n';
+    msg += '\n*Nome*: ' + nome + '\n';
+    msg += '*Telefone*: ' + tel + '\n';
+    msg += '\n*Itens do Pedido*\n';
 
     carrinho.forEach(item => {
         const subtotalItem = item.preco * item.quantidade;
-        msg += '• ' + item.quantidade + 'x ' + item.nome;
+        msg += '- ' + item.quantidade + 'x ' + item.nome;
         if (item.opcao) msg += ' (' + item.opcao + ')';
-        msg += ' — ' + formatarPreco(subtotalItem) + '\n';
+        msg += ' - ' + formatarPreco(subtotalItem) + '\n';
     });
 
     if (modoEntrega) {
-        const cidade = document.getElementById('campo-cidade').value;
-        const rua = document.getElementById('campo-rua').value.trim();
-        const numero = document.getElementById('campo-numero').value.trim();
-        const bairro = document.getElementById('campo-bairro').value.trim();
+        const cidade      = document.getElementById('campo-cidade').value;
+        const rua         = document.getElementById('campo-rua').value.trim();
+        const numero      = document.getElementById('campo-numero').value.trim();
+        const bairro      = document.getElementById('campo-bairro').value.trim();
         const complemento = document.getElementById('campo-complemento').value.trim();
 
-        msg += '\n' + e.entrega + '*Entrega*\n';
-        msg += rua + ', ' + numero + ' — ' + bairro + '\n';
+        msg += '\n*Entrega*\n';
+        msg += rua + ', ' + numero + ' - ' + bairro + '\n';
         msg += cidade + ' - SP\n';
         if (complemento) msg += 'Referência/Complemento: ' + complemento + '\n';
         msg += '\nTaxa de Entrega: ' + formatarPreco(TAXA_ENTREGA) + '\n';
     } else {
-        msg += '\n' + e.retirada + '*Retirada na Vereda*\n';
+        msg += '\n*Retirada na Vereda*\n';
     }
 
-    msg += '\n' + e.cartao + '*Forma de pagamento*: ' + pagamento + '\n';
+    msg += '\n*Forma de pagamento*: ' + pagamento + '\n';
     msg += '\n' + divisor + '\n';
-    msg += '\n' + e.dinheiro + '*TOTAL DO PEDIDO*: ' + formatarPreco(total);
+    msg += '\n*TOTAL DO PEDIDO*: ' + formatarPreco(total);
 
     return msg;
 }
