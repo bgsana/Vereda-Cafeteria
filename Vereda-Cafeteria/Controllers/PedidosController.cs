@@ -31,11 +31,30 @@ public class PedidosController : Controller
     public async Task<IActionResult> AlterarStatus(int id, StatusPedido novoStatus)
     {
         var pedido = await _context.Pedidos.FindAsync(id);
-        if (pedido == null) return NotFound();
+        if (pedido == null)
+            return NotFound();
 
         pedido.Status = novoStatus;
         await _context.SaveChangesAsync();
 
-        return RedirectToAction(nameof(Index));
+        return Ok();
+    }
+
+    public class AlterarStatusRequest
+    {
+        public int Id { get; set; }
+        public StatusPedido NovoStatus { get; set; }
+    }
+    [HttpPost]
+    public async Task<IActionResult> AlterarStatus([FromBody] AlterarStatusRequest request)
+    {
+        var pedido = await _context.Pedidos.FindAsync(request.Id);
+        if (pedido == null)
+            return NotFound();
+
+        pedido.Status = request.NovoStatus;
+        await _context.SaveChangesAsync();
+
+        return Ok();
     }
 }
