@@ -47,6 +47,18 @@ public class HomeController : Controller
         return View();
     }
 
+    [Route("PoliticaDePrivacidade")]
+    public IActionResult PoliticaDePrivacidade()
+    {
+        return View();
+    }
+
+    [Route("TermosDeUso")]
+    public IActionResult TermosDeUso()
+    {
+        return View();
+    }
+
     [Route("SobreNos")]
     public IActionResult SobreNos()
     {

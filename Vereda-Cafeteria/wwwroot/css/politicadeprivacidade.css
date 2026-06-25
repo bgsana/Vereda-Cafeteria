@@ -38,7 +38,7 @@ body {
 }
 
 .conteudo-legal a {
-    color: #000000;
+    color: #00464B;
     text-decoration: underline;
 }
 
@@ -51,7 +51,7 @@ body {
     font-family: 'Montserrat', sans-serif;
     font-size: 17px;
     font-weight: 700;
-    color: #000000;
+    color: #00464B;
     margin-top: 35px;
     margin-bottom: 6px;
 }
