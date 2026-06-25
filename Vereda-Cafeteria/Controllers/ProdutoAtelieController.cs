@@ -14,7 +14,7 @@ namespace Vereda_Cafeteria.Controllers
         private readonly AppDbContext _context;
 
         // IDs das categorias que pertencem ao Ateliê
-        private static readonly int[] CategoriasAtelie = { 6, 7, 8, 9 };
+        private static readonly int[] CategoriasAtelie = { 6, 7, 8, 9, 10 };
 
         public ProdutoAtelieController(AppDbContext context)
         {

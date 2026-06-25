@@ -19,7 +19,7 @@ public class SeedProdutoAtelie
                 Descricao = "Descrição do produto exemplo A1. Feito com carinho e dedicação.",
                 QtdEstoque = 10,
                 Preco = 35.00m,
-                ImagemUrl = "/img/atelie/categoria-a/produto-a1.png",
+                ImagemUrl = "/img/pao-teste.jpg",
                 Ativo = true
             },
             new Produto
@@ -30,7 +30,7 @@ public class SeedProdutoAtelie
                 Descricao = "Descrição do produto exemplo A2. Artesanal e exclusivo da Vereda.",
                 QtdEstoque = 10,
                 Preco = 45.00m,
-                ImagemUrl = "/img/atelie/categoria-a/produto-a2.png",
+                ImagemUrl = "/img/pao-teste.jpg",
                 Ativo = true
             },
 
@@ -46,7 +46,7 @@ public class SeedProdutoAtelie
                 Descricao = "Descrição do produto exemplo B1. Produzido com materiais selecionados.",
                 QtdEstoque = 10,
                 Preco = 55.00m,
-                ImagemUrl = "/img/atelie/categoria-b/produto-b1.png",
+                ImagemUrl = "/img/pao-teste.jpg",
                 Ativo = true
             },
             new Produto
@@ -57,7 +57,7 @@ public class SeedProdutoAtelie
                 Descricao = "Descrição do produto exemplo B2. Um mimo perfeito para presentear.",
                 QtdEstoque = 10,
                 Preco = 60.00m,
-                ImagemUrl = "/img/atelie/categoria-b/produto-b2.png",
+                ImagemUrl = "/img/pao-teste.jpg",
                 Ativo = true
             },
 
@@ -73,7 +73,7 @@ public class SeedProdutoAtelie
                 Descricao = "Descrição do produto exemplo C1. Exclusivo e feito na Vereda.",
                 QtdEstoque = 10,
                 Preco = 75.00m,
-                ImagemUrl = "/img/atelie/categoria-c/produto-c1.png",
+                ImagemUrl = "/img/pao-teste.jpg",
                 Ativo = true
             },
             new Produto
@@ -84,7 +84,7 @@ public class SeedProdutoAtelie
                 Descricao = "Descrição do produto exemplo C2. Artesanal, com identidade regional.",
                 QtdEstoque = 10,
                 Preco = 80.00m,
-                ImagemUrl = "/img/atelie/categoria-c/produto-c2.png",
+                ImagemUrl = "/img/pao-teste.jpg",
                 Ativo = true
             },
 
@@ -100,7 +100,7 @@ public class SeedProdutoAtelie
                 Descricao = "Descrição do produto exemplo D1. Ideal para presentear com afeto.",
                 QtdEstoque = 10,
                 Preco = 90.00m,
-                ImagemUrl = "/img/atelie/categoria-d/produto-d1.png",
+                ImagemUrl = "/img/pao-teste.jpg",
                 Ativo = true
             },
             new Produto
@@ -111,7 +111,34 @@ public class SeedProdutoAtelie
                 Descricao = "Descrição do produto exemplo D2. Peça única feita com muito cuidado.",
                 QtdEstoque = 10,
                 Preco = 100.00m,
-                ImagemUrl = "/img/atelie/categoria-d/produto-d2.png",
+                ImagemUrl = "/img/pao-teste.jpg",
+                Ativo = true
+            },
+
+            #endregion
+
+            #region Categoria E
+
+            new Produto
+            {
+                ProdutoId = 133,
+                CategoriaId = 10,
+                Nome = "Produto Exemplo E1",
+                Descricao = "Descrição do produto exemplo E1. Ideal para presentear com afeto.",
+                QtdEstoque = 10,
+                Preco = 90.00m,
+                ImagemUrl = "/img/pao-teste.jpg",
+                Ativo = true
+            },
+            new Produto
+            {
+                ProdutoId = 134,
+                CategoriaId = 10,
+                Nome = "Produto Exemplo E2",
+                Descricao = "Descrição do produto exemplo E2. Peça única feita com muito cuidado.",
+                QtdEstoque = 10,
+                Preco = 100.00m,
+                ImagemUrl = "/img/pao-teste.jpg",
                 Ativo = true
             },
 

@@ -161,8 +161,8 @@ h1 {
     filter: brightness(1.15);
 }
 
-.card:hover .card-footer[style*="#96B9B9"]:hover,
-.card:hover .card-footer[style*="#CDA05A"]:hover {
+.card:hover .card-footer[style*="#96B9B9"],
+.card:hover .card-footer[style*="#CDA05A"] {
     filter: brightness(1.05);
 }
 

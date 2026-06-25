@@ -15,9 +15,31 @@ public class HomeController : Controller
         _context = context;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        var categoriasAtelie = new[] { 6, 7, 8, 9, 10 };
+
+        var categorias = await _context.Categorias
+            .Include(c => c.Produtos!.Where(p => p.Ativo))
+            .Where(c => categoriasAtelie.Contains(c.CategoriaId))
+            .OrderBy(c => c.CategoriaId)
+            .ToListAsync();
+
+        // Intercala os produtos: 1º de cada cat., depois 2º de cada cat., etc.
+        var maxProdutos = categorias.Any() ? categorias.Max(c => c.Produtos!.Count) : 0;
+        var produtosIntercalados = new List<Produto>();
+
+        for (int i = 0; i < maxProdutos; i++)
+        {
+            foreach (var cat in categorias)
+            {
+                var lista = cat.Produtos!.ToList();
+                if (i < lista.Count)
+                    produtosIntercalados.Add(lista[i]);
+            }
+        }
+
+        return View(produtosIntercalados);
     }
 
     public IActionResult Privacy()
@@ -50,7 +72,7 @@ public class HomeController : Controller
         var categorias = await _context.Categorias
             .Include(c => c.Produtos!.Where(p => p.Ativo))
                 .ThenInclude(p => p.Opcoes)
-            .Where(c => new[] { 6, 7, 8, 9 }.Contains(c.CategoriaId))
+            .Where(c => new[] { 6, 7, 8, 9, 10 }.Contains(c.CategoriaId))
             .OrderBy(c => c.CategoriaId)
             .ToListAsync();
 

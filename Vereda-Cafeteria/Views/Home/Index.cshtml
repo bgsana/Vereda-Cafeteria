@@ -1,4 +1,6 @@
-﻿@{
+@model List<Produto>
+
+@{
     ViewData["Title"] = "Início";
 }
 
@@ -123,123 +125,150 @@
 
 <div class="divider"></div>
 
-<!-- LOJA -->
-<section class="store py-5" id="loja">
-    <div class="container">
-        <h2 class="text-center mb-5 display-5 fw-bold text-success">Loja Vereda</h2>
+<!-- VEREDA ATELIÊ -->
+<section class="store" id="atelie">
+    <h2>Vereda Ateliê</h2>
 
-        <div id="carouselLoja" class="carousel slide" data-bs-ride="carousel">
-            
-            <!-- Indicadores (opcional) -->
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselLoja" data-bs-slide-to="0" class="active"></button>
-                <button type="button" data-bs-target="#carouselLoja" data-bs-slide-to="1"></button>
-                <button type="button" data-bs-target="#carouselLoja" data-bs-slide-to="2"></button>
+    <div class="atelie-carousel-wrapper">
+
+        <button class="atelie-btn-prev" id="atelieBtnPrev" aria-label="Anterior">&#8249;</button>
+
+        <div class="atelie-carousel-viewport">
+            <div class="atelie-carousel-track" id="atelieTrack">
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var produto in Model)
+                    {
+                        <a class="atelie-card"
+                           href="/Atelie#categoria-@produto.CategoriaId"
+                           data-id="@produto.ProdutoId"
+                           data-nome="@produto.Nome"
+                           data-descricao="@produto.Descricao"
+                           data-preco="@produto.Preco.ToString("F2", System.Globalization.CultureInfo.InvariantCulture)"
+                           data-imagem="@produto.ImagemUrl"
+                           data-cor="@produto.Categoria?.CorHex">
+                            <img src="@produto.ImagemUrl" alt="@produto.Nome" loading="lazy">
+                        </a>
+                    }
+                }
             </div>
-
-            <div class="carousel-inner">
-
-                <!-- Slide 1 -->
-                <div class="carousel-item active">
-                    <div class="store-track row g-4 justify-content-center">
-                        <div class="col-md-4 col-sm-6">
-                            <div class="store-card card h-100 shadow-sm border-0">
-                                <img src="https://picsum.photos/id/1060/400/300" class="card-img-top" alt="Café Especial">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">Café Especial Vereda</h5>
-                                    <p class="card-text text-muted small">Torra média • 250g</p>
-                                    <h5 class="text-success fw-bold">R$ 18,90</h5>
-                                    <a href="#" class="btn btn-success btn-sm mt-2">Adicionar</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 col-sm-6">
-                            <div class="store-card card h-100 shadow-sm border-0">
-                                <img src="https://picsum.photos/id/292/400/300" class="card-img-top" alt="Pão de Queijo">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">Pão de Queijo Mineiro</h5>
-                                    <p class="card-text text-muted small">Pacote com 20 unidades</p>
-                                    <h5 class="text-success fw-bold">R$ 22,00</h5>
-                                    <a href="#" class="btn btn-success btn-sm mt-2">Adicionar</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 col-sm-6">
-                            <div class="store-card card h-100 shadow-sm border-0">
-                                <img src="https://picsum.photos/id/431/400/300" class="card-img-top" alt="Doce de Leite">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">Doce de Leite Artesanal</h5>
-                                    <p class="card-text text-muted small">350g • Tradicional</p>
-                                    <h5 class="text-success fw-bold">R$ 14,90</h5>
-                                    <a href="#" class="btn btn-success btn-sm mt-2">Adicionar</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Slide 2 -->
-                <div class="carousel-item">
-                    <div class="store-track row g-4 justify-content-center">
-                        <div class="col-md-4 col-sm-6">
-                            <div class="store-card card h-100 shadow-sm border-0">
-                                <img src="https://picsum.photos/id/669/400/300" class="card-img-top" alt="Bolo de Fubá">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">Bolo de Fubá com Goiabada</h5>
-                                    <p class="card-text text-muted small">Inteiro (1,2kg)</p>
-                                    <h5 class="text-success fw-bold">R$ 45,00</h5>
-                                    <a href="#" class="btn btn-success btn-sm mt-2">Adicionar</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 col-sm-6">
-                            <div class="store-card card h-100 shadow-sm border-0">
-                                <img src="https://picsum.photos/id/870/400/300" class="card-img-top" alt="Queijo Canastra">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">Queijo Canastra</h5>
-                                    <p class="card-text text-muted small">Peça ≈ 800g</p>
-                                    <h5 class="text-success fw-bold">R$ 68,00</h5>
-                                    <a href="#" class="btn btn-success btn-sm mt-2">Adicionar</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 col-sm-6">
-                            <div class="store-card card h-100 shadow-sm border-0">
-                                <img src="https://picsum.photos/id/201/400/300" class="card-img-top" alt="Chá">
-                                <div class="card-body text-center">
-                                    <h5 class="card-title">Chá de Ervas Orgânicas</h5>
-                                    <p class="card-text text-muted small">Caixa com 20 sachês</p>
-                                    <h5 class="text-success fw-bold">R$ 12,90</h5>
-                                    <a href="#" class="btn btn-success btn-sm mt-2">Adicionar</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Controles -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselLoja" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Anterior</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselLoja" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Próximo</span>
-            </button>
         </div>
 
-        <div class="text-center mt-5">
-            <a asp-controller="Loja" asp-action="Index" class="btn btn-success btn-lg px-5">
-                Ver Toda a Loja Vereda →
-            </a>
-        </div>
+        <button class="atelie-btn-next" id="atelieBtnNext" aria-label="Próximo">&#8250;</button>
+
     </div>
+
+    <a asp-controller="Home" asp-action="Atelie" class="atelie-home-link">
+        Ver Vereda Ateliê
+    </a>
 </section>
 
 <div class="divider"></div>
+
+@section Scripts {
+    <script>
+    // ===== CARROSSEL DO ATELIÊ =====
+    (function () {
+        const track    = document.getElementById('atelieTrack');
+        const btnPrev  = document.getElementById('atelieBtnPrev');
+        const btnNext  = document.getElementById('atelieBtnNext');
+        if (!track || !track.children.length) return;
+
+        const CARD_WIDTH  = 300;
+        const GAP         = 48;
+        const STEP        = CARD_WIDTH + GAP;
+        const AUTO_MS     = 3500;   // intervalo do avanço automático
+        const ANIM_MS     = 420;    // duração da transição CSS
+
+        // ---- Clonagem: repete o conjunto 5× para nunca acabar ----
+        const originals = Array.from(track.children);
+        const N = originals.length;
+        const COPIES = 5;   // quantas repetições ao total (incluindo o original)
+
+        // Apaga filhos originais, reconstrói com COPIES repetições
+        track.innerHTML = '';
+        for (let c = 0; c < COPIES; c++) {
+            originals.forEach(orig => {
+                const clone = orig.cloneNode(true);
+                track.appendChild(clone);
+            });
+        }
+
+        // Cards são <a> com href — a navegação ocorre nativamente via cloneNode(true)
+
+        // Posição inicial: começa no 2º bloco (índice N) para ter margem em ambos os lados
+        let pos = N;          // índice do card atual (0-based dentro dos COPIES*N cards)
+        let busy = false;
+        let autoTimer = null;
+
+        function getOffset(index) {
+            return index * STEP;
+        }
+
+        // Aplica posição sem animação
+        function jumpTo(index) {
+            track.style.transition = 'none';
+            track.style.transform  = `translateX(-${getOffset(index)}px)`;
+            pos = index;
+        }
+
+        // Desliza animado para index
+        function slideTo(index, cb) {
+            track.style.transition = `transform ${ANIM_MS}ms ease`;
+            track.style.transform  = `translateX(-${getOffset(index)}px)`;
+            pos = index;
+
+            setTimeout(() => {
+                track.style.transition = 'none';
+                // Reposiciona no bloco equivalente do meio sem que o usuário perceba
+                const normalised = ((pos % N) + N) % N;      // posição dentro de um bloco
+                const target     = N + normalised;            // ancora no 2º bloco
+                if (pos !== target) {
+                    track.style.transform = `translateX(-${getOffset(target)}px)`;
+                    pos = target;
+                }
+                busy = false;
+                if (cb) cb();
+            }, ANIM_MS + 20);   // +20ms de folga
+        }
+
+        function goNext() {
+            if (busy) return;
+            busy = true;
+            stopAuto();
+            slideTo(pos + 1, startAuto);
+        }
+
+        function goPrev() {
+            if (busy) return;
+            busy = true;
+            stopAuto();
+            slideTo(pos - 1, startAuto);
+        }
+
+        function autoStep() {
+            if (busy) return;
+            busy = true;
+            slideTo(pos + 1, null);
+        }
+
+        function startAuto() {
+            stopAuto();
+            autoTimer = setInterval(autoStep, AUTO_MS);
+        }
+
+        function stopAuto() {
+            if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+        }
+
+        // Posição inicial sem animação
+        jumpTo(pos);
+        // Pequeno delay para garantir que o DOM processou o jumpTo antes de ligar o auto
+        setTimeout(startAuto, 50);
+
+        btnNext.addEventListener('click', goNext);
+        btnPrev.addEventListener('click', goPrev);
+    })();
+
+    </script>
+}
