@@ -6,51 +6,54 @@
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="~/css/login.css">
-    <link rel="icon" type="image/png" sizes="16x16"  href="~/img/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/img/favicon.ico">
     <title>Vereda Cafeteria - Login</title>
 </head>
+
 <body>
 
     <div class="container">
         <div class="coluna-esquerda">
             <div class="caixa-login">
                 <h1 class="caixa-login-titulo">Bem-vindo à Área Administrativa</h2>
-                <p class="caixa-login-subtitulo">Faça login para acessar o painel administrativo</p>
+                    <p class="caixa-login-subtitulo">Faça login para acessar o painel administrativo</p>
 
-                <form class="caixa-login-form" id="loginForm" asp-action="Login">
+                    <form class="caixa-login-form" id="loginForm" asp-action="Login">
 
-                    <input asp-for="ReturnUrl">
+                        <input asp-for="ReturnUrl">
 
-                    <div class="campo">
-                        <label class="campo-label" asp-for="Email"></label>
-                        <input class="campo-input" asp-for="Email">
-                        <span class="campo-erro" asp-validationfor="Email"></span>
-                    </div>
-                    
-                    <div class="campo">
-                        <label class="campo-label" asp-for="Senha"></label>
-                        <input class="campo-input" asp-for="Senha">
-                        <span class="campo-erro" asp-validationfor="Senha"></span>
-                    </div>
+                        <div class="campo">
+                            <label class="campo-label" asp-for="Email"></label>
+                            <input class="campo-input" asp-for="Email">
+                            <span class="campo-erro" asp-validationfor="Email"></span>
+                        </div>
 
-                    <label class="campo-checkbox">
-                        <input type="checkbox" asp-for="ManterConectado">
-                        <label class="campo-checkbox-label" asp-for="ManterConectado"></label>
-                    </label>
+                        <div class="campo">
+                            <label class="campo-label" asp-for="Senha"></label>
+                            <input class="campo-input" asp-for="Senha">
+                            <span class="campo-erro" asp-validationfor="Senha"></span>
+                        </div>
 
-                    <button type="submit" class="btn-entrar">Entrar</button>
-                </form>
+                        <label class="campo-checkbox">
+                            <input type="checkbox" asp-for="ManterConectado">
+                            <label class="campo-checkbox-label" asp-for="ManterConectado"></label>
+                        </label>
+
+                        <button type="submit" class="btn-entrar">Entrar</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="coluna-direita">
+                <img src="~/img/logo.png" asp-append-version="true" alt="Logo Vereda" class="logo-login">
             </div>
         </div>
 
-        <div class="coluna-direita">
-            <img src="~/img/imglogin.png" alt="imagem-teste">
-        </div>
-    </div>
+    </body>
 
-</body>
 </html>

@@ -8,33 +8,31 @@
     <link rel="stylesheet" href="~/css/home.css" />
 }
 
-<div id="carouselExampleIndicators" class="carousel slide">
-    <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></button>
+<section class="banner-section">
+    <div class="banner-carousel-wrapper">
+
+        <button class="banner-btn-prev" id="bannerBtnPrev" aria-label="Anterior">&#8249;</button>
+
+        <div class="banner-carousel-viewport">
+            <div class="banner-carousel-clip">
+                <div class="banner-carousel-track" id="bannerTrack">
+                    @if (ViewBag.Banners != null && ((List<Banner>)ViewBag.Banners).Any())
+                    {
+                        @foreach (var banner in (List<Banner>)ViewBag.Banners)
+                        {
+                            <div class="banner-item">
+                                <img src="@banner.ImagemUrl" alt="@banner.Titulo" loading="lazy">
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+        <button class="banner-btn-next" id="bannerBtnNext" aria-label="Próximo">&#8250;</button>
+
     </div>
-
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="~/img/teste1.png" class="d-block w-100">
-        </div>
-        <div class="carousel-item">
-            <img src="~/img/teste2.png" class="d-block w-100">
-        </div>
-        <div class="carousel-item">
-            <img src="~/img/teste3.png" class="d-block w-100">
-        </div>
-    </div>
-
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-    </button>
-
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-    </button>
-</div>
+</section>
 
 <div class="divider"></div>
 
@@ -43,12 +41,11 @@
     <div class="panel panel-brown panel-text">
         <h2>Sobre Nós</h2>
         <p>
-            Lorem ipsum dolor sit amet,<br />
-            consectetur adipiscing elit.<br />
-            In sit amet sollicitudin turpis.
+            Uma pequena ideia que ganhou vida,<br />
+            movida pela paixão e pelo desejo de acolher.
         </p>
 
-        <a asp-controller="SobreNos" asp-action="Index" class="btn-sobre">
+        <a asp-controller="Home" asp-action="SobreNos" class="btn-sobre">
             Conheça nossa história
         </a>
     </div>
@@ -95,7 +92,7 @@
             inspirar e proporcionar momentos especiais.
         </p>
 
-        <a asp-controller="NossoAmbiente" asp-action="Index" class="btn-ambiente">
+        <a asp-controller="Home" asp-action="NossoAmbiente" class="btn-ambiente">
             Galeria de fotos
         </a>
     </div>
@@ -106,18 +103,19 @@
 <!-- CARDÁPIO -->
 <section class="section menu-section" id="cardapio">
     <div class="panel panel-teal panel-text">
-        <h2>Cardápio</h2>
+        <h2>Menu</h2>
         <p>
-            Descubra sabores preparados com carinho.
+            Receitas artesanais feitas na hora,<br />
+            com sabor de casa, carinho e aquele toque especial.
         </p>
 
         <a asp-controller="Menu" asp-action="" class="btn-cardapio">
-            Ver cardápio
+            Descubra nossas delícias
         </a>
     </div>
 
     <div class="photo single-photo">
-        <video controls width="100%">
+        <video autoplay muted loop playsinline width="100%">
             <source src="~/img/Inicio/video.mov" type="video/mp4">
         </video>
     </div>
@@ -128,6 +126,7 @@
 <!-- VEREDA ATELIÊ -->
 <section class="store" id="atelie">
     <h2>Vereda Ateliê</h2>
+    <p class="atelie-subtitulo">Produtos artesanais criados com afeto para levar um pedaço da Vereda para casa.</p>
 
     <div class="atelie-carousel-wrapper">
 
@@ -159,7 +158,7 @@
     </div>
 
     <a asp-controller="Home" asp-action="Atelie" class="atelie-home-link">
-        Ver Vereda Ateliê
+        Conheça o Vereda Ateliê
     </a>
 </section>
 
@@ -167,6 +166,105 @@
 
 @section Scripts {
     <script>
+    // ===== CARROSSEL DE BANNERS =====
+    (function () {
+        const track = document.getElementById('bannerTrack');
+        const btnPrev = document.getElementById('bannerBtnPrev');
+        const btnNext = document.getElementById('bannerBtnNext');
+        if (!track || !track.children.length) return;
+
+        const originals = Array.from(track.children);
+        const N = originals.length;
+        const COPIES = 5;
+
+        track.innerHTML = '';
+        for (let c = 0; c < COPIES; c++) {
+            originals.forEach(orig => {
+                const clone = orig.cloneNode(true);
+                track.appendChild(clone);
+            });
+        }
+
+        let pos = N;
+        let busy = false;
+        let autoTimer = null;
+        const AUTO_MS = 7000;
+        const ANIM_MS = 600;
+
+        const GAP = 48;
+        function getStep() {
+            return track.children[0].getBoundingClientRect().width + GAP;
+        }
+
+        function getOffset(index) {
+            return index * getStep();
+        }
+
+        function jumpTo(index) {
+            track.style.transition = 'none';
+            track.style.transform  = `translateX(-${getOffset(index)}px)`;
+            pos = index;
+        }
+
+        function slideTo(index, cb) {
+            track.style.transition = `transform ${ANIM_MS}ms ease`;
+            track.style.transform  = `translateX(-${getOffset(index)}px)`;
+            pos = index;
+
+            setTimeout(() => {
+                track.style.transition = 'none';
+                const normalised = ((pos % N) + N) % N;
+                const target     = N + normalised;
+                if (pos !== target) {
+                    track.style.transform = `translateX(-${getOffset(target)}px)`;
+                    pos = target;
+                }
+                busy = false;
+                if (cb) cb();
+            }, ANIM_MS + 20);
+        }
+
+        function goNext() {
+            if (busy) return;
+            busy = true;
+            stopAuto();
+            slideTo(pos + 1, startAuto);
+        }
+
+        function goPrev() {
+            if (busy) return;
+            busy = true;
+            stopAuto();
+            slideTo(pos - 1, startAuto);
+        }
+
+        function autoStep() {
+            if (busy) return;
+            busy = true;
+            slideTo(pos + 1, null);
+        }
+
+        function startAuto() {
+            stopAuto();
+            autoTimer = setInterval(autoStep, AUTO_MS);
+        }
+
+        // Garante que o timer pare se o mouse passar por cima ou ao interagir
+        function stopAuto() {
+            if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+        }
+
+        window.addEventListener('resize', () => {
+            jumpTo(pos);
+        });
+
+        jumpTo(pos);
+        setTimeout(startAuto, 50);
+
+        btnNext.addEventListener('click', goNext);
+        btnPrev.addEventListener('click', goPrev);
+    })();
+
     // ===== CARROSSEL DO ATELIÊ =====
     (function () {
         const track    = document.getElementById('atelieTrack');

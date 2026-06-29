@@ -12,8 +12,22 @@ public class SeedBanner
             new Banner
             {
                 BannerId = 1,
-                Titulo = "Banner sobre ...",
-                ImagemUrl = "/img/usuarios/foto.png",
+                Titulo = "Banner sobre a linha de Bolos de Caneca",
+                ImagemUrl = "/img/Banners/banner-bolo-caneca.png",
+                Ativo = true
+            },
+            new Banner
+            {
+                BannerId = 2,
+                Titulo = "Banner sobre o Bolinho de Chuva da Vó Nice",
+                ImagemUrl = "/img/Banners/banner-bolinho-chuva.png",
+                Ativo = true
+            },
+            new Banner
+            {
+                BannerId = 3,
+                Titulo = "Banner sobre o Café Coado na Mesa",
+                ImagemUrl = "/img/Banners/banner-cafe-coado.png",
                 Ativo = true
             }
         };

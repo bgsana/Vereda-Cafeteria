@@ -21,12 +21,13 @@ html {
   }
 }
 
-html, body {
+html {
   height: 100%;
   margin: 0;
 }
 
 body {
+  min-height: 100%;
   margin: 0;
   font-family: 'Montserrat', sans-serif;
   font-size: 15px;
@@ -127,7 +128,7 @@ main{
 .footer {
   background-color: #730000;
   color: #ffffff;
-  padding: 50px 40px 30px;
+  padding: 40px 40px 30px;
 }
 
 .footer-container {

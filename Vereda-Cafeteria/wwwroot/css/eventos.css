@@ -10,8 +10,10 @@
 
 h1 {
     font-family: 'Playlist Script', cursive;
-    color: #0b4d4d;
-    font-size: 3rem;
+    color: #730000;
+    font-size: 52px;
+    font-weight: normal;
+    font-style: normal;
     text-align: center;
     margin: 50px 0 25px 0;
 }
@@ -60,7 +62,7 @@ h1 {
 
 .evento-vereda h3 {
     font-family: 'Playlist Script', cursive;
-    color: #7b1a1a; /* vermelho escuro do protótipo */
+    color: #00464B;
     font-size: 2.4rem;
     margin-bottom: 8px;
 }
@@ -103,7 +105,7 @@ h1 {
 
 .eventos-anteriores h3 {
     font-family: 'Playlist Script', cursive;
-    color: #7b1a1a;
+    color: #00464B;
     font-size: 2.4rem;
     text-align: center;
     margin-bottom: 30px;

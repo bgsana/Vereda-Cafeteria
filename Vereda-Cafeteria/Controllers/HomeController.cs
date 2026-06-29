@@ -39,6 +39,10 @@ public class HomeController : Controller
             }
         }
 
+        ViewBag.Banners = await _context.Banners
+            .Where(b => b.Ativo)
+            .ToListAsync();
+
         return View(produtosIntercalados);
     }
 
@@ -96,9 +100,7 @@ public class HomeController : Controller
     {
         var viewModel = new EventosViewModel
         {
-            BannerAtivo = await _context.Banners
-                .Where(b => b.Ativo)
-                .FirstOrDefaultAsync(),
+            BannerAtivo = null, // Banner desativado por enquanto — exibe aviso genérico no lugar
 
             UltimosEventos = await _context.Eventos
                 .OrderByDescending(e => e.EventoId)

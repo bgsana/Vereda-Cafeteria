@@ -118,29 +118,45 @@
 
         <!-- Card: deu certo -->
         <div class="confirmacao-card card-sucesso">
-            <div class="confirmacao-icone">
-                <i class="ti ti-circle-check"></i>
+            <div class="confirmacao-cabecalho">
+                <div class="confirmacao-icone">
+                    <i class="ti ti-circle-check"></i>
+                </div>
+                <h2>Tudo certo!</h2>
             </div>
-            <h2>Tudo certo!</h2>
-            <p>Obrigado pelo pedido! Assim que a mensagem chegar pelo WhatsApp, nossa equipe confirma os detalhes e já inicia o preparo com carinho. Fique de olho nas mensagens para acompanhar tudo por lá.</p>
-            <a href="/Menu" class="btn-confirmacao btn-voltar-cardapio">
-                <i class="ti ti-arrow-left"></i>
-                Voltar ao cardápio
-            </a>
+            <p>Obrigado pelo pedido! Assim que a mensagem chegar pelo WhatsApp, nossa equipe confirma os detalhes e já inicia o preparo com carinho.<br>Fique de olho nas mensagens para acompanhar tudo por lá.</p>
+            <div class="confirmacao-botoes-grupo">
+                <a href="/" class="btn-confirmacao btn-voltar-home">
+                    <i class="ti ti-home"></i>
+                    Voltar ao Início
+                </a>
+                <a href="/Menu" class="btn-confirmacao btn-voltar-cardapio">
+                    <i class="ti ti-notebook"></i>
+                    Voltar ao Menu
+                </a>
+                <a href="/Atelie" class="btn-confirmacao btn-voltar-atelie">
+                    <i class="ti ti-building-store"></i>
+                    Voltar ao Vereda Ateliê
+                </a>
+            </div>
         </div>
 
         <!-- Card: fallback -->
         <div class="confirmacao-card card-fallback">
-            <div class="confirmacao-icone icone-aviso">
-                <i class="ti ti-brand-whatsapp"></i>
+            <div class="confirmacao-cabecalho">
+                <div class="confirmacao-icone icone-aviso">
+                    <i class="ti ti-brand-whatsapp"></i>
+                </div>
+                <h2>Não abriu o WhatsApp?</h2>
             </div>
-            <h2>Não abriu o WhatsApp?</h2>
-            <p>Sem problema! Copie a mensagem abaixo e envie manualmente para o nosso número.</p>
-            <div class="mensagem-copiavel" id="mensagem-copiavel"></div>
-            <button class="btn-confirmacao btn-copiar" onclick="copiarMensagem()">
-                <i class="ti ti-copy"></i>
-                Copiar mensagem
-            </button>
+            <p>Sem problema! Copie a mensagem abaixo e envie manualmente para o nosso número: <strong>14 99885-9509</strong>.</p>
+            <div class="confirmacao-corpo-fallback">
+                <div class="mensagem-copiavel" id="mensagem-copiavel"></div>
+                <button class="btn-confirmacao btn-copiar" onclick="copiarMensagem()">
+                    <i class="ti ti-copy"></i>
+                    Copiar mensagem
+                </button>
+            </div>
         </div>
 
     </div>
