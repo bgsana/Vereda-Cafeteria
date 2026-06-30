@@ -17,7 +17,7 @@ public class SeedItemPedido
             // Pedido 2
             new ItemPedido { ItemPedidoId = 4, PedidoId = 2, ProdutoId = 10, Quantidade = 2, PrecoUnitario = 5.00m, SubTotal = 10.00m },
             new ItemPedido { ItemPedidoId = 5, PedidoId = 2, ProdutoId = 24, Quantidade = 1, PrecoUnitario = 15.00m, SubTotal = 15.00m },
-            new ItemPedido { ItemPedidoId = 6, PedidoId = 2, ProdutoId = 124, Quantidade = 1, PrecoUnitario = 7.00m, SubTotal = 7.00m },
+            new ItemPedido { ItemPedidoId = 6, PedidoId = 2, ProdutoId = 41, Quantidade = 1, PrecoUnitario = 7.00m, SubTotal = 7.00m },
 
             // Pedido 3
             new ItemPedido { ItemPedidoId = 7, PedidoId = 3, ProdutoId = 24, Quantidade = 1, PrecoUnitario = 15.00m, SubTotal = 15.00m },
@@ -28,7 +28,7 @@ public class SeedItemPedido
 
             // Pedido 5
             new ItemPedido { ItemPedidoId = 10, PedidoId = 5, ProdutoId = 1, Quantidade = 3, PrecoUnitario = 5.00m, SubTotal = 15.00m },
-            new ItemPedido { ItemPedidoId = 11, PedidoId = 5, ProdutoId = 111, Quantidade = 1, PrecoUnitario = 10.50m, SubTotal = 10.50m },
+            new ItemPedido { ItemPedidoId = 11, PedidoId = 5, ProdutoId = 42, Quantidade = 1, PrecoUnitario = 10.50m, SubTotal = 10.50m },
 
             // Pedido 6
             new ItemPedido { ItemPedidoId = 12, PedidoId = 6, ProdutoId = 15, Quantidade = 5, PrecoUnitario = 16.00m, SubTotal = 80.00m },
@@ -36,12 +36,12 @@ public class SeedItemPedido
             // Pedido 7
             new ItemPedido { ItemPedidoId = 13, PedidoId = 7, ProdutoId = 7, Quantidade = 4, PrecoUnitario = 15.95m, SubTotal = 63.80m },
             new ItemPedido { ItemPedidoId = 14, PedidoId = 7, ProdutoId = 34, Quantidade = 3, PrecoUnitario = 18.55m, SubTotal = 55.65m },
-            new ItemPedido { ItemPedidoId = 15, PedidoId = 7, ProdutoId = 111, Quantidade = 1, PrecoUnitario = 1.05m, SubTotal = 1.05m },
+            new ItemPedido { ItemPedidoId = 15, PedidoId = 7, ProdutoId = 43, Quantidade = 1, PrecoUnitario = 1.05m, SubTotal = 1.05m },
 
             // Pedido 8
             new ItemPedido { ItemPedidoId = 16, PedidoId = 8, ProdutoId = 22, Quantidade = 2, PrecoUnitario = 16.00m, SubTotal = 32.00m },
-            new ItemPedido { ItemPedidoId = 17, PedidoId = 8, ProdutoId = 124, Quantidade = 3, PrecoUnitario = 7.00m, SubTotal = 21.00m },
-            new ItemPedido { ItemPedidoId = 18, PedidoId = 8, ProdutoId = 111, Quantidade = 2, PrecoUnitario = 1.00m, SubTotal = 2.00m }
+            new ItemPedido { ItemPedidoId = 17, PedidoId = 8, ProdutoId = 44, Quantidade = 3, PrecoUnitario = 7.00m, SubTotal = 21.00m },
+            new ItemPedido { ItemPedidoId = 18, PedidoId = 8, ProdutoId = 45, Quantidade = 2, PrecoUnitario = 1.00m, SubTotal = 2.00m }
         );
     }
 }

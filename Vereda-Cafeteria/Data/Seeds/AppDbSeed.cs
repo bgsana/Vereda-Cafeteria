@@ -16,5 +16,7 @@ public class AppDbSeed
         new SeedOpcaoProduto(builder);
         new SeedCategoriaAtelie(builder);
         new SeedProdutoAtelie(builder);
+        new SeedPedido(builder);
+        new SeedItemPedido(builder);
     }
 }

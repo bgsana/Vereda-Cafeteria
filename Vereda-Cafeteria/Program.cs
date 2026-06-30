@@ -42,8 +42,12 @@ builder.Services.AddTransient<IUsuarioService, UsuarioService>();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.LoginPath = "/Conta/Login"; // ← aponta para o seu controller
+    options.LoginPath = "/Conta/Login";
     options.AccessDeniedPath = "/Conta/Login";
+    options.ExpireTimeSpan = TimeSpan.FromHours(8);
+    options.SlidingExpiration = true;
+    options.Cookie.HttpOnly = true;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
 });
 // --- CRIA A APLICAÇÂO ---
 

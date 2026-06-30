@@ -434,6 +434,10 @@ body.modal-aberto {
     color: var(--cor-modal, #730000);
 }
 
+#modal-editar-overlay .modal-editar h2 {
+    margin-bottom: 8px !important;
+}
+
 .modal-editar p {
     font-family: 'Montserrat', sans-serif;
     font-size: 13px;
@@ -498,15 +502,52 @@ body.modal-aberto {
     font-family: 'Montserrat', sans-serif;
     color: #fff;
     border: none;
-    border-radius: 12px;
     padding: 10px 32px;
     font-size: 15px;
     font-weight: 600;
     cursor: pointer;
     transition: filter 0.2s;
     width: 100%;
+    border-radius: 12px !important;
 }
 
 .modal-editar-confirmar:hover {
     filter: brightness(1.15);
+}
+
+/* Ajustes específicos para o Modal de Exclusão */
+.modal-excluir-texto {
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    line-height: 1.4 !important;
+    margin-bottom: 20px !important;
+}
+
+.modal-excluir-acoes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.btn-excluir-confirmar {
+    background-color: #730000 !important;
+    border-radius: 12px !important;
+    padding: 12px !important;
+    transition: all 0.2s ease;
+
+}
+
+.btn-excluir-cancelar {
+    background-color: transparent !important;
+    color: #730000 !important;
+    border: 2px solid #730000 !important;
+    border-radius: 12px !important;
+    padding: 10px !important; /* Ajuste compensando a borda */
+    transition: all 0.2s ease;
+}
+
+.btn-excluir-cancelar:hover {
+    background-color: rgba(115, 0, 0, 0.05) !important;
+    filter: none !important;
 }

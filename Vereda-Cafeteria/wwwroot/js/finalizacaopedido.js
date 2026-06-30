@@ -175,11 +175,77 @@ function montarMensagem(carrinho) {
     return msg;
 }
 
+// --- Mapeamento para os enums do back-end ---
+// FormaPagamento: Pix=1, Dinheiro=2, Credito=3, Debito=4
+// FormaRecebimento: Retirada=1, Entrega=2
+const MAPA_PAGAMENTO = {
+    'Pix': 1,
+    'Dinheiro': 2,
+    'Cartão': 3 // não há distinção Crédito/Débito no formulário; assume Crédito
+};
+
+function obterTokenAntiForgery() {
+    const input = document.querySelector('input[name="__RequestVerificationToken"]');
+    return input ? input.value : '';
+}
+
+// --- Salvar pedido no banco ---
+
+async function salvarPedidoNoBanco(carrinho) {
+    const pagamentoTexto = document.querySelector('input[name="pagamento"]:checked').value;
+
+    const payload = {
+        nomeCliente: document.getElementById('campo-nome').value.trim(),
+        telefone: document.getElementById('campo-telefone').value.trim(),
+        formaPagamento: MAPA_PAGAMENTO[pagamentoTexto] ?? 1,
+        formaRecebimento: modoEntrega ? 2 : 1,
+        taxaEntrega: modoEntrega ? TAXA_ENTREGA : 0,
+        itens: carrinho.map(item => ({
+            produtoId: item.id,
+            quantidade: item.quantidade,
+            precoUnitario: item.preco
+        }))
+    };
+
+    const resposta = await fetch('/Pedidos/Criar', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'RequestVerificationToken': obterTokenAntiForgery()
+        },
+        body: JSON.stringify(payload)
+    });
+
+    if (!resposta.ok) {
+        throw new Error('Falha ao salvar o pedido no banco de dados.');
+    }
+
+    return resposta.json();
+}
+
 // --- Confirmar pedido ---
 
-function confirmarPedido() {
+async function confirmarPedido() {
     const carrinho = obterCarrinho();
     if (!validar(carrinho)) return;
+
+    const btnFinalizar = document.querySelector('.btn-finalizar');
+    const textoOriginalBtn = btnFinalizar ? btnFinalizar.textContent : '';
+    if (btnFinalizar) {
+        btnFinalizar.disabled = true;
+        btnFinalizar.textContent = 'Enviando pedido...';
+    }
+
+    try {
+        await salvarPedidoNoBanco(carrinho);
+    } catch (erro) {
+        alert('Não foi possível registrar o pedido agora. Verifique sua conexão e tente novamente.');
+        if (btnFinalizar) {
+            btnFinalizar.disabled = false;
+            btnFinalizar.textContent = textoOriginalBtn;
+        }
+        return;
+    }
 
     mensagemGerada = montarMensagem(carrinho);
 

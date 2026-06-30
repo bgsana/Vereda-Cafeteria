@@ -140,11 +140,42 @@ function alterarQuantidade(index, delta) {
   renderizarResumo(carrinho);
 }
 
+let indexExcluindo = null;
+
 function excluirItem(index) {
   const carrinho = obterCarrinho();
-  carrinho.splice(index, 1);
+  const item = carrinho[index];
+  const cor = item.cor || '#730000';
+
+  indexExcluindo = index;
+
+  document.getElementById('modal-excluir-nome').textContent = item.nome;
+  document.getElementById('modal-excluir-nome').style.color = cor;
+  document.getElementById('modal-excluir-confirmar').style.backgroundColor = cor;
+
+  document.getElementById('modal-excluir-overlay').classList.add('ativo');
+  bloquearScroll();
+}
+
+function confirmarExclusao() {
+  if (indexExcluindo === null) return;
+  const carrinho = obterCarrinho();
+  carrinho.splice(indexExcluindo, 1);
   salvarCarrinho(carrinho);
+  fecharModalExcluir();
   renderizar();
+}
+
+function fecharModalExcluir() {
+  document.getElementById('modal-excluir-overlay').classList.remove('ativo');
+  liberarScroll();
+  indexExcluindo = null;
+}
+
+function fecharModalExcluirOverlay(event) {
+  if (event.target === document.getElementById('modal-excluir-overlay')) {
+    fecharModalExcluir();
+  }
 }
 
 // --- Modal de edição de escolha ---
@@ -160,9 +191,6 @@ function abrirEditar(index) {
 
   document.getElementById("modal-editar-nome").textContent = item.nome;
   document.getElementById("modal-editar-nome").style.color = cor;
-  document.getElementById("modal-editar-descricao").textContent =
-    item.descricao || "";
-  document.getElementById("modal-editar-descricao").style.color = cor;
 
   const btnConfirmar = document.getElementById("modal-editar-confirmar");
   btnConfirmar.style.backgroundColor = cor;
@@ -298,6 +326,7 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
     fecharModal();
     fecharModalEditar();
+    fecharModalExcluir();
   }
 });
 

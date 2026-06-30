@@ -431,3 +431,7 @@ h1 {
 .modal-overlay.ativo .modal-produto {
     animation: modal-entrada 0.25s ease forwards;
 }
+
+.secao:last-of-type {
+    margin-bottom: 80px; /* ajuste o valor conforme desejar */
+}

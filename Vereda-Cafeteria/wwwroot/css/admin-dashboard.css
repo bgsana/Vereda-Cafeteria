@@ -11,25 +11,22 @@
 }
 
 /* =========================================
-   VARIÁVEIS DE CORES (BASEADO NA SUA PALETA)
+   VARIÁVEIS DE CORES
    ========================================= */
 :root {
-    /* Cores da Paleta */
-    --vinho:    #730000;   /* Ações principais / Alertas */
-    --verde:    #00464B;   /* Sidebar / Fundo de elementos fixos / Gráficos */
-    --terra:    #372314;   /* Textos principais / Bordas */
-    --agua:     #96B9B9;   /* Fundos secundários / Inputs / Elementos de fundo */
-    
-    /* Cores derivadas e utilitárias */
-    --bg-page:  #F5F5F5;    /* Fundo geral da página (cinza muito claro) */
+    --vinho:    #730000;
+    --verde:    #00464B;
+    --terra:    #372314;
+    --agua:     #96B9B9;
+
+    --bg-page:  #ffffff;
     --white:    #FFFFFF;
-    --muted:    #8A8A8A;    /* Textos secundários */
-    --surface:  #F9F8F6;    /* Fundo dos cards */
-    
-    /* Bordas e Sombras */
+    --muted:    #8A8A8A;
+    --surface:  #ffffff;
+
     --border:  rgba(55, 35, 20, 0.1);
-    --shadow:  0 4px 12px rgba(55, 35, 20, 0.06);
-    --shadow-hover: 0 6px 16px rgba(55, 35, 20, 0.1);
+    --shadow:  0 2px 16px rgba(55, 35, 20, 0.10), 0 1px 4px rgba(55, 35, 20, 0.07);
+    --shadow-hover: 0 6px 20px rgba(55, 35, 20, 0.14);
 }
 
 /* =========================================
@@ -112,11 +109,13 @@ body {
 .btn-ghost {
     background: transparent;
     color: var(--terra);
+    border: 1.5px solid var(--border);
 }
 
 .btn-ghost:hover {
     background: rgba(55, 35, 20, 0.05);
     color: var(--verde);
+    border-color: var(--verde);
 }
 
 .btn-primary {
@@ -146,6 +145,7 @@ body {
     padding: 1.5rem;
     border-radius: 12px;
     border: 1px solid var(--border);
+    box-shadow: var(--shadow);
     position: relative;
     overflow: hidden;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -156,7 +156,6 @@ body {
     box-shadow: var(--shadow-hover);
 }
 
-/* Indicador visual no topo */
 .kpi-card::before {
     content: '';
     position: absolute;
@@ -210,19 +209,31 @@ body {
 /* =========================================
    CARDS GERAIS
    ========================================= */
-.row2, .row3 {
+.row2 {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 1.25rem;
     margin-bottom: 2rem;
 }
 
+/* Row3 ocupa largura total */
+.row3-full {
+    margin-bottom: 2rem;
+}
+
 .card {
-    background: var(--surface);
+    background: var(--white);
     padding: 1.5rem;
     border-radius: 16px;
     box-shadow: var(--shadow);
     border: 1px solid var(--border);
+}
+
+/* Cards mais altos para não distorcer o gráfico */
+.card-tall {
+    min-height: 340px;
+    display: flex;
+    flex-direction: column;
 }
 
 .card-header {
@@ -250,9 +261,14 @@ body {
    ========================================= */
 .chart-area {
     width: 100%;
-    height: 150px;
+    height: 200px;
     position: relative;
     margin-bottom: 0.5rem;
+    flex: 1;
+}
+
+.chart-area-tall {
+    height: 220px;
 }
 
 .chart-svg {
@@ -265,6 +281,7 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 0 20px;
+    margin-top: 4px;
 }
 
 .x-label {
@@ -279,24 +296,20 @@ body {
 .product-list {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.1rem;
+    /* Alinhado ao topo, sem centralização vertical */
+    align-items: stretch;
+    /* Scroll interno caso ultrapasse a altura do card */
+    max-height: 260px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 4px;
 }
 
 .product-row {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-}
-
-.product-rank {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--muted);
-    width: 1rem;
-}
-
-.product-emoji {
-    font-size: 1.25rem;
 }
 
 .product-info {
@@ -345,7 +358,7 @@ body {
 }
 
 /* =========================================
-   TABELA DE PEDIDOS
+   TABELA DE PEDIDOS CONFIRMADOS
    ========================================= */
 .orders-table {
     width: 100%;
@@ -372,80 +385,6 @@ body {
     border-bottom: none;
 }
 
-/* Badges de Status */
-.badge {
-    display: inline-block;
-    padding: 0.2rem 0.6rem;
-    border-radius: 12px;
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-}
-
-.b-done {
-    background: rgba(0, 70, 75, 0.1);
-    color: var(--verde);
-}
-
-.b-prep {
-    background: rgba(150, 185, 185, 0.3);
-    color: #2F4F4F;
-}
-
-.b-cancel {
-    background: rgba(115, 0, 0, 0.08);
-    color: var(--vinho);
-}
-
-/* =========================================
-   MINI STATS (METAS)
-   ========================================= */
-.mini-stats {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-}
-
-.mini-stat {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.25rem;
-}
-
-.mini-stat-label {
-    font-size: 0.8rem;
-    color: var(--terra);
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-}
-
-.mini-stat-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-}
-
-.mini-stat-val {
-    font-size: 0.875rem;
-    font-weight: 700;
-    color: var(--terra);
-}
-
-.mini-progress {
-    height: 5px;
-    background: rgba(55, 35, 20, 0.08);
-    border-radius: 3px;
-    overflow: hidden;
-}
-
-.mini-fill {
-    height: 100%;
-    border-radius: 3px;
-    transition: width 0.8s ease;
-}
-
 /* =========================================
    RESPONSIVIDADE
    ========================================= */
@@ -453,8 +392,8 @@ body {
     .kpi-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    
-    .row2, .row3 {
+
+    .row2 {
         grid-template-columns: 1fr;
     }
 }
@@ -465,13 +404,13 @@ body {
         align-items: flex-start;
         gap: 1rem;
     }
-    
+
     .topbar-right {
         width: 100%;
         justify-content: space-between;
         flex-wrap: wrap;
     }
-    
+
     .kpi-grid {
         grid-template-columns: 1fr;
     }

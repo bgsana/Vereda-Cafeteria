@@ -27,7 +27,7 @@
     --agua-light:  #b8d4d4;
     --agua-muted:  rgba(150, 185, 185, 0.20);
 
-    --bg:          #f5f2ee;
+    --bg:          #ffffff;
     --surface:     #ffffff;
     --border:      rgba(55, 35, 20, 0.12);
 
@@ -35,19 +35,22 @@
     --radius-md:   10px;
     --radius-lg:   16px;
 
-    --shadow-card: 0 2px 12px rgba(55, 35, 20, 0.08), 0 1px 3px rgba(55, 35, 20, 0.06);
+    --shadow-card: 0 2px 16px rgba(55, 35, 20, 0.10), 0 1px 4px rgba(55, 35, 20, 0.07);
     --shadow-btn:  0 2px 8px rgba(0, 70, 75, 0.25);
 
     --font-main:   'Montserrat', sans-serif;
 
     --transition: 0.2s ease;
 
-    /* Layout specific tokens */
     --sidebar-width: 260px;
     --topbar-height: 70px;
 }
 
 /* --- RESET & BASE --- */
+html {
+    overflow-y: scroll;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -155,14 +158,17 @@ button { cursor: pointer; }
 .nav-link i {
     font-size: 1.15rem;
     width: 20px;
+    min-width: 20px; /* garante largura fixa, sem deslocamento ao ativar/desativar */
     text-align: center;
     opacity: 0.9;
+    flex-shrink: 0;
 }
 
 .nav-link:hover {
     color: #fff;
     background: rgba(255, 255, 255, 0.1);
-    transform: translateX(4px);
+    /* transform: translateX(4px) removido — causava deslocamento
+       dos itens ao trocar de seção */
 }
 
 .sidebar-nav .nav-link.active {
@@ -388,6 +394,7 @@ button { cursor: pointer; }
     padding: 2rem 2.5rem;
     flex: 1;
     animation: fadeIn 0.3s ease both;
+    background-color: #ffffff;
 }
 
 @keyframes fadeIn {
@@ -479,7 +486,7 @@ p > a[href*="create"]:hover {
     text-transform: uppercase;
     border: none;
     white-space: nowrap;
-    text-align: center; /* Centraliza cabeçalho */
+    text-align: center;
 }
 
 .table tbody tr {
@@ -500,18 +507,17 @@ p > a[href*="create"]:hover {
     color: var(--terra);
     vertical-align: middle;
     border: none;
-    text-align: center; /* Centraliza conteúdo das células */
+    text-align: center;
 }
 
-/* Imagem na tabela - AUMENTADA */
 .table tbody td img {
-    width: 120px; /* Aumentado de 80px para 120px */
-    height: 90px;  /* Ajustado para proporção 4:3 ou similar */
+    width: 120px;
+    height: 90px;
     object-fit: cover;
     border-radius: var(--radius-sm);
     border: 1px solid var(--border);
     display: block;
-    margin: 0 auto; /* Centraliza imagem na célula */
+    margin: 0 auto;
 }
 
 /* Links de ação */
@@ -524,7 +530,7 @@ p > a[href*="create"]:hover {
     border: 1.5px solid transparent;
     transition: all var(--transition);
     display: inline-block;
-    margin: 0.15rem; /* Margem uniforme */
+    margin: 0.15rem;
 }
 
 .table tbody td a[href*="Edit"] {
@@ -564,13 +570,15 @@ p > a[href*="create"]:hover {
 }
 
 /* --- FORMULÁRIO — Create / Edit --- */
+/* Largura total para formulários de edição/criação */
 .row > .col-md-4 {
     background: var(--surface);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-card);
     border: 1px solid var(--border);
     padding: 2rem;
-    max-width: 520px;
+    max-width: 100%;
+    width: 100%;
 }
 
 .form-group {
@@ -586,7 +594,7 @@ p > a[href*="create"]:hover {
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--terra-light);
-    text-align: left; /* Garante labels à esquerda */
+    text-align: left;
 }
 
 .form-control {
@@ -594,7 +602,7 @@ p > a[href*="create"]:hover {
     padding: 0.65rem 0.95rem;
     border: 1.5px solid var(--border);
     border-radius: var(--radius-sm);
-    background: var(--bg);
+    background: #fafafa;
     font-family: var(--font-main);
     font-size: 0.875rem;
     color: var(--terra);
@@ -635,7 +643,7 @@ p > a[href*="create"]:hover {
     align-items: center;
     gap: 0.6rem;
     padding: 0.65rem 0.95rem;
-    background: var(--bg);
+    background: #fafafa;
     border: 1.5px solid var(--border);
     border-radius: var(--radius-sm);
     cursor: pointer;
@@ -802,7 +810,6 @@ div > a[href*="Edit"]:hover {
     color: #fff;
 }
 
-/* Separador "|" entre links na página Details/Delete */
 div > a + * {
     margin-left: 0.25rem;
 }
@@ -845,9 +852,8 @@ dl.row .col-sm-10:last-of-type {
     border-bottom: none;
 }
 
-/* Imagem dentro do dl.row (Details/Delete) */
 dl.row .col-sm-10 img {
-    width: 200px; /* Aumentado para visualização melhor nos detalhes */
+    width: 200px;
     height: 150px;
     object-fit: cover;
     border-radius: var(--radius-sm);
@@ -884,19 +890,19 @@ form[action*="delete"] {
     .sidebar {
         transform: translateX(-100%);
     }
-    
+
     .sidebar.active {
         transform: translateX(0);
     }
-    
+
     .main-wrapper {
         margin-left: 0;
     }
-    
+
     .menu-toggle {
         display: block;
     }
-    
+
     .search-box {
         display: none;
     }
@@ -905,4 +911,9 @@ form[action*="delete"] {
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+.profile-role {
+    font-size: 0.75rem;
+    color: #F0ECE5;
 }

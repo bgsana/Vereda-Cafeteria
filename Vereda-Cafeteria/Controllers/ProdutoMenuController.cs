@@ -1,3 +1,4 @@
+using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,6 +13,9 @@ namespace Vereda_Cafeteria.Controllers
     public class ProdutoMenuController : Controller
     {
         private readonly AppDbContext _context;
+
+        // IDs das categorias que pertencem ao Menu (Cardápio)
+        private static readonly int[] CategoriasMenu = { 1, 2, 3, 4, 5 };
 
         public ProdutoMenuController(AppDbContext context)
         {
@@ -43,7 +47,7 @@ namespace Vereda_Cafeteria.Controllers
         // GET: ProdutoMenu/Create
         public IActionResult Create()
         {
-            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "CategoriaId", "Nome");
+            ViewData["CategoriaId"] = new SelectList(_context.Categorias.Where(c => CategoriasMenu.Contains(c.CategoriaId)), "CategoriaId", "Nome");
             return View();
         }
 
@@ -77,7 +81,7 @@ namespace Vereda_Cafeteria.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "CategoriaId", "Nome", produto.CategoriaId);
+            ViewData["CategoriaId"] = new SelectList(_context.Categorias.Where(c => CategoriasMenu.Contains(c.CategoriaId)), "CategoriaId", "Nome", produto.CategoriaId);
             return View(produto);
         }
 
@@ -92,7 +96,7 @@ namespace Vereda_Cafeteria.Controllers
             if (produto == null)
                 return NotFound();
 
-            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "CategoriaId", "Nome", produto.CategoriaId);
+            ViewData["CategoriaId"] = new SelectList(_context.Categorias.Where(c => CategoriasMenu.Contains(c.CategoriaId)), "CategoriaId", "Nome", produto.CategoriaId);
             return View(produto);
         }
 
@@ -159,7 +163,7 @@ namespace Vereda_Cafeteria.Controllers
                 return Redirect("/Admin/ProdutoMenu/Index");
             }
 
-            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "CategoriaId", "Nome", produto.CategoriaId);
+            ViewData["CategoriaId"] = new SelectList(_context.Categorias.Where(c => CategoriasMenu.Contains(c.CategoriaId)), "CategoriaId", "Nome", produto.CategoriaId);
             return View(produto);
         }
 
@@ -182,9 +186,9 @@ namespace Vereda_Cafeteria.Controllers
         // POST: ProdutoMenu/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int ProdutoId)
         {
-            var produto = await _context.Produtos.FindAsync(id);
+            var produto = await _context.Produtos.FindAsync(ProdutoId);
 
             if (produto != null)
             {

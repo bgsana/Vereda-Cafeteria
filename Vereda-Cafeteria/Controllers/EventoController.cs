@@ -57,8 +57,26 @@ namespace Vereda_Cafeteria.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EventoId,Titulo,Descricao,ImagemUrl,CorFundo")] Evento evento)
+        public async Task<IActionResult> Create([Bind("EventoId,Titulo,Descricao,ImagemUrl,CorFundo")] Evento evento, IFormFile imagemArquivo)
         {
+            if (imagemArquivo != null && imagemArquivo.Length > 0)
+            {
+                var nomeArquivo = Path.GetFileName(imagemArquivo.FileName);
+                var pasta = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img", "Eventos");
+
+                if (!Directory.Exists(pasta))
+                    Directory.CreateDirectory(pasta);
+
+                var caminhoCompleto = Path.Combine(pasta, nomeArquivo);
+
+                using (var stream = new FileStream(caminhoCompleto, FileMode.Create))
+                    await imagemArquivo.CopyToAsync(stream);
+
+                evento.ImagemUrl = "/img/Eventos/" + nomeArquivo;
+            }
+
+            ModelState.Remove("ImagemUrl");
+
             if (ModelState.IsValid)
             {
                 _context.Add(evento);
@@ -90,8 +108,26 @@ namespace Vereda_Cafeteria.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(
-    [Bind("EventoId,Titulo,Descricao,ImagemUrl,CorFundo")] Evento evento)
+    [Bind("EventoId,Titulo,Descricao,ImagemUrl,CorFundo")] Evento evento, IFormFile imagemArquivo)
         {
+            if (imagemArquivo != null && imagemArquivo.Length > 0)
+            {
+                var nomeArquivo = Path.GetFileName(imagemArquivo.FileName);
+                var pasta = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img", "Eventos");
+
+                if (!Directory.Exists(pasta))
+                    Directory.CreateDirectory(pasta);
+
+                var caminhoCompleto = Path.Combine(pasta, nomeArquivo);
+
+                using (var stream = new FileStream(caminhoCompleto, FileMode.Create))
+                    await imagemArquivo.CopyToAsync(stream);
+
+                evento.ImagemUrl = "/img/Eventos/" + nomeArquivo;
+            }
+
+            ModelState.Remove("ImagemUrl");
+
             if (!ModelState.IsValid)
             {
                 foreach (var erro in ModelState.Values.SelectMany(v => v.Errors))
@@ -131,9 +167,9 @@ namespace Vereda_Cafeteria.Controllers
         // POST: Evento/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int EventoId)
         {
-            var evento = await _context.Eventos.FindAsync(id);
+            var evento = await _context.Eventos.FindAsync(EventoId);
             if (evento != null)
             {
                 _context.Eventos.Remove(evento);

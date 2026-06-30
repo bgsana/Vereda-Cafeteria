@@ -1,143 +1,254 @@
 @model IEnumerable<Vereda_Cafeteria.Models.Pedido>
 @using Models
+
 @{
+    ViewData["Title"] = "Pedidos";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-    ViewData["Title"] = "Gestão de Pedidos";
+
+    var pendentes    = Model.Where(p => p.Status == StatusPedido.Pendente).ToList();
+    var confirmados  = Model.Where(p => p.Status == StatusPedido.Confirmado).ToList();
+    var cancelados   = Model.Where(p => p.Status == StatusPedido.Cancelado).ToList();
 }
 
 @section Styles {
-    <link rel="stylesheet" href="~/css/admin-pedido.css" />
+    <link rel="stylesheet" href="~/css/admin-pedido.css" asp-append-version="true" />
 }
 
-<div class="topbar">
-    <div>
-        <div class="page-title">Gestão de Pedidos</div>
-    </div>
-</div>
+<h1>Pedidos</h1>
 
-<div class="container-fluid mt-4">
-    <div class="row">
-        @foreach (var pedido in Model)
-        {
-            <div class="col-md-6 col-lg-4">
-                <div class="order-card">
+<!-- ===================== PENDENTES ===================== -->
+<div class="secao-pedidos">
+    <div class="secao-header secao-pendente">
+        <div class="secao-header-info">
+            <i class="bi bi-clock-history"></i>
+            <span>Pendentes</span>
+            <span class="secao-count">@pendentes.Count</span>
+        </div>
+        <p class="secao-descricao">Pedidos aguardando confirmação da equipe.</p>
+    </div>
+
+    @if (!pendentes.Any())
+    {
+        <div class="secao-vazia">
+            <i class="bi bi-inbox"></i>
+            <span>Nenhum pedido pendente no momento.</span>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var pedido in pendentes)
+            {
+                <div class="order-card order-card-pendente" id="card-@pedido.PedidoId">
                     <div class="order-header">
                         <div>
-                            <strong>#@pedido.PedidoId</strong> - @pedido.NomeCliente
-                            <div class="text-muted" style="font-size: 12px;">@pedido.DataPedido.ToString("dd/MM/yyyy HH:mm")
-                            </div>
+                            <strong>@pedido.NomeCliente</strong>
+                            <span class="text-muted">#@pedido.PedidoId · @pedido.Telefone</span>
                         </div>
-                        <span class="status-badge status-@pedido.Status.ToString().ToLower()">
-                            @pedido.Status.ToString()
-                        </span>
+                        <span class="status-badge status-pendente">Pendente</span>
                     </div>
 
                     <div class="order-items">
-                        <ul class="list-unstyled">
+                        <ul>
                             @foreach (var item in pedido.ItensPedido)
                             {
-                                <li>@item.Quantidade x @item.Produto?.Nome (R$ @item.SubTotal.ToString("N2"))</li>
+                                <li>
+                                    <span>@item.Quantidade× @(item.Produto?.Nome ?? "Produto")</span>
+                                    <strong>R$ @item.SubTotal.ToString("N2")</strong>
+                                </li>
                             }
                         </ul>
-                        <div class="text-end">
-                            <strong>Total: R$ @pedido.ValorTotal.ToString("N2")</strong>
-                        </div>
+                        <div class="text-end">Total: R$ @pedido.ValorTotal.ToString("N2")</div>
                     </div>
 
                     <div class="order-footer">
-                        <div class="text-muted" style="font-size: 12px;">
-                            <i class="bi bi-credit-card"></i> @pedido.FormaPagamento |
-                            <i class="bi bi-box-seam"></i> @pedido.FormaRecebimento
+                        <div>
+                            <span class="footer-info-item">
+                                <i class="bi bi-calendar3"></i>
+                                @pedido.DataPedido.ToString("dd/MM/yyyy HH:mm")
+                            </span>
+                            <span class="footer-separador">·</span>
+                            <span class="footer-info-item">
+                                <i class="bi bi-wallet2"></i>
+                                @pedido.FormaPagamento
+                            </span>
+                            <span class="footer-separador">·</span>
+                            <span class="footer-info-item">
+                                <i class="bi bi-geo-alt"></i>
+                                @pedido.FormaRecebimento
+                            </span>
                         </div>
-                        <div class="dropdown">
-                            <button class="btn btn-status dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                <i class="bi bi-arrow-repeat"></i> Mudar Status
+                        <div class="acoes-pedido">
+                            <button class="btn-acao btn-confirmar" onclick="alterarStatus(@pedido.PedidoId, 'Confirmar')">
+                                <i class="bi bi-check-circle"></i> Confirmar
                             </button>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li>
-                                    <button type="button" class="dropdown-item status-action" data-id="@pedido.PedidoId"
-                                            data-status="Preparo">
-                                        <span class="badge bg-info me-2"></span>Em Preparo
-                                    </button>
-                                </li>
-                                <li>
-                                    <button type="button" class="dropdown-item status-action" data-id="@pedido.PedidoId"
-                                            data-status="Pronto">
-                                        <span class="badge bg-success me-2"></span>Pronto
-                                    </button>
-                                </li>
-                                <li>
-                                    <button type="button" class="dropdown-item status-action" data-id="@pedido.PedidoId"
-                                            data-status="Entregue">
-                                        <span class="badge bg-secondary me-2"></span>Entregue
-                                    </button>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li>
-                                    <button type="button" class="dropdown-item status-action text-danger"
-                                            data-id="@pedido.PedidoId" data-status="Cancelado">
-                                        <span class="badge bg-danger me-2"></span>Cancelar Pedido
-                                    </button>
-                                </li>
-                            </ul>
+                            <button class="btn-acao btn-cancelar" onclick="alterarStatus(@pedido.PedidoId, 'Cancelar')">
+                                <i class="bi bi-x-circle"></i> Cancelar
+                            </button>
                         </div>
                     </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
+    }
+</div>
+
+<!-- ===================== CONFIRMADOS ===================== -->
+<div class="secao-pedidos">
+    <div class="secao-header secao-confirmado">
+        <div class="secao-header-info">
+            <i class="bi bi-check-circle-fill"></i>
+            <span>Confirmados</span>
+            <span class="secao-count">@confirmados.Count</span>
+        </div>
+        <p class="secao-descricao">Pedidos confirmados e em preparo ou já entregues.</p>
     </div>
+
+    @if (!confirmados.Any())
+    {
+        <div class="secao-vazia">
+            <i class="bi bi-inbox"></i>
+            <span>Nenhum pedido confirmado.</span>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var pedido in confirmados)
+            {
+                <div class="order-card order-card-confirmado" id="card-@pedido.PedidoId">
+                    <div class="order-header">
+                        <div>
+                            <strong>@pedido.NomeCliente</strong>
+                            <span class="text-muted">#@pedido.PedidoId · @pedido.Telefone</span>
+                        </div>
+                        <span class="status-badge status-confirmado">Confirmado</span>
+                    </div>
+
+                    <div class="order-items">
+                        <ul>
+                            @foreach (var item in pedido.ItensPedido)
+                            {
+                                <li>
+                                    <span>@item.Quantidade× @(item.Produto?.Nome ?? "Produto")</span>
+                                    <strong>R$ @item.SubTotal.ToString("N2")</strong>
+                                </li>
+                            }
+                        </ul>
+                        <div class="text-end">Total: R$ @pedido.ValorTotal.ToString("N2")</div>
+                    </div>
+
+                    <div class="order-footer">
+                        <div>
+                            <span class="footer-info-item">
+                                <i class="bi bi-calendar3"></i>
+                                @pedido.DataPedido.ToString("dd/MM/yyyy HH:mm")
+                            </span>
+                            <span class="footer-separador">·</span>
+                            <span class="footer-info-item">
+                                <i class="bi bi-wallet2"></i>
+                                @pedido.FormaPagamento
+                            </span>
+                            <span class="footer-separador">·</span>
+                            <span class="footer-info-item">
+                                <i class="bi bi-geo-alt"></i>
+                                @pedido.FormaRecebimento
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+<!-- ===================== CANCELADOS ===================== -->
+<div class="secao-pedidos">
+    <div class="secao-header secao-cancelado">
+        <div class="secao-header-info">
+            <i class="bi bi-x-circle-fill"></i>
+            <span>Cancelados</span>
+            <span class="secao-count">@cancelados.Count</span>
+        </div>
+        <p class="secao-descricao">Pedidos que foram cancelados.</p>
+    </div>
+
+    @if (!cancelados.Any())
+    {
+        <div class="secao-vazia">
+            <i class="bi bi-inbox"></i>
+            <span>Nenhum pedido cancelado.</span>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var pedido in cancelados)
+            {
+                <div class="order-card order-card-cancelado" id="card-@pedido.PedidoId">
+                    <div class="order-header">
+                        <div>
+                            <strong>@pedido.NomeCliente</strong>
+                            <span class="text-muted">#@pedido.PedidoId · @pedido.Telefone</span>
+                        </div>
+                        <span class="status-badge status-cancelado">Cancelado</span>
+                    </div>
+
+                    <div class="order-items">
+                        <ul>
+                            @foreach (var item in pedido.ItensPedido)
+                            {
+                                <li>
+                                    <span>@item.Quantidade× @(item.Produto?.Nome ?? "Produto")</span>
+                                    <strong>R$ @item.SubTotal.ToString("N2")</strong>
+                                </li>
+                            }
+                        </ul>
+                        <div class="text-end">Total: R$ @pedido.ValorTotal.ToString("N2")</div>
+                    </div>
+
+                    <div class="order-footer">
+                        <div>
+                            <span class="footer-info-item">
+                                <i class="bi bi-calendar3"></i>
+                                @pedido.DataPedido.ToString("dd/MM/yyyy HH:mm")
+                            </span>
+                            <span class="footer-separador">·</span>
+                            <span class="footer-info-item">
+                                <i class="bi bi-wallet2"></i>
+                                @pedido.FormaPagamento
+                            </span>
+                            <span class="footer-separador">·</span>
+                            <span class="footer-info-item">
+                                <i class="bi bi-geo-alt"></i>
+                                @pedido.FormaRecebimento
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
 </div>
 
 @section Scripts {
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const statusButtons = document.querySelectorAll('.status-action');
-
-            statusButtons.forEach(button => {
-                button.addEventListener('click', function (e) {
-                    e.preventDefault();
-
-                    const pedidoId = this.getAttribute('data-id');
-                    const novoStatus = this.getAttribute('data-status');
-
-                    // Confirmação para cancelamentos
-                    if (novoStatus === 'Cancelado') {
-                        if (!confirm(`Tem certeza que deseja cancelar o pedido #${pedidoId}?`)) {
-                            return;
-                        }
-                    }
-
-                    // Enviar via fetch
-                    const formData = new FormData();
-                    formData.append('id', pedidoId);
-                    formData.append('novoStatus', novoStatus);
-
-                    fetch('@Url.Action("AlterarStatus", "Pedidos")', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-Requested-With': 'XMLHttpRequest'
-                        },
-                        body: JSON.stringify({
-                            id: pedidoId,
-                            novoStatus: novoStatus
-                        })
-                    })
-                        .then(response => {
-                            if (response.ok) {
-                                location.reload();
-                            } else {
-                                alert('Erro ao alterar status');
-                            }
-                        })
-                        .catch(error => {
-                            console.error(error);
-                        });
-                });
-            });
+<script>
+async function alterarStatus(id, acao) {
+    const url = `/Pedidos/${acao}/${id}`;
+    try {
+        const resp = await fetch(url, {
+            method: 'POST',
+            headers: { 'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value ?? '' }
         });
-    </script>
+        if (resp.ok) {
+            window.location.reload();
+        } else {
+            alert('Erro ao atualizar o pedido. Tente novamente.');
+        }
+    } catch (e) {
+        alert('Erro de conexão.');
+    }
+}
+</script>
+@Html.AntiForgeryToken()
 }

@@ -199,10 +199,10 @@ namespace Vereda_Cafeteria.Controllers
         // POST: Admin/ProdutoAtelie/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int ProdutoId)
         {
             var produto = await _context.Produtos
-                .FirstOrDefaultAsync(p => p.ProdutoId == id && CategoriasAtelie.Contains(p.CategoriaId));
+                .FirstOrDefaultAsync(p => p.ProdutoId == ProdutoId && CategoriasAtelie.Contains(p.CategoriaId));
 
             if (produto != null)
             {

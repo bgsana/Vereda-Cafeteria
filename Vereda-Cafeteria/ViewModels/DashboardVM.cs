@@ -11,20 +11,14 @@ public class DashboardVM
     public decimal TicketMedio { get; set; }
     public string ItemMaisPedido { get; set; }
     public int QtdItemMaisPedido { get; set; }
-    
+
     public decimal PercentualFaturamentoVariacao { get; set; }
     public int VariacaoPedidos { get; set; }
     public decimal VariacaoTicketMedio { get; set; }
 
     public List<FaturamentoDiario> FaturamentoSemana { get; set; }
     public List<TopProduto> TopProdutos { get; set; }
-    public List<Pedido> PedidosRecentes { get; set; }
-    
-    // Metas (Mockadas por enquanto, mas estruturadas)
-    public int MetaMensal { get; set; } = 68;
-    public int Satisfacao { get; set; } = 94;
-    public int EstoqueOk { get; set; } = 81;
-    public int Fidelidade { get; set; } = 52;
+    public List<Pedido> PedidosConfirmados { get; set; }
 }
 
 public class FaturamentoDiario

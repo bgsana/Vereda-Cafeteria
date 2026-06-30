@@ -59,11 +59,28 @@
 <div class="modal-editar-overlay" id="modal-editar-overlay" onclick="fecharModalEditarOverlay(event)">
     <div class="modal-editar">
         <h2 id="modal-editar-nome"></h2>
-        <p id="modal-editar-descricao"></p>
         <div id="modal-editar-opcoes"></div>
         <button class="modal-editar-confirmar" id="modal-editar-confirmar" onclick="confirmarEdicao()">
             Confirmar escolha
         </button>
+    </div>
+</div>
+
+<!-- Modal de confirmação de exclusão -->
+<div class="modal-editar-overlay" id="modal-excluir-overlay" onclick="fecharModalExcluirOverlay(event)">
+    <div class="modal-editar">
+        <h2 id="modal-excluir-nome"></h2>
+        <p class="modal-excluir-texto">Tem certeza que deseja remover <br> este item do carrinho?</p>
+        <div class="modal-excluir-acoes">
+            <button class="modal-editar-confirmar btn-excluir-confirmar" id="modal-excluir-confirmar"
+                    onclick="confirmarExclusao()">
+                Confirmar exclusão
+            </button>
+            <button class="modal-editar-confirmar btn-excluir-cancelar" id="modal-excluir-cancelar"
+                    onclick="fecharModalExcluir()">
+                Cancelar
+            </button>
+        </div>
     </div>
 </div>
 
