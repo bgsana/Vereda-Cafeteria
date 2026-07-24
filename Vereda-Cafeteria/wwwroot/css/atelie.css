@@ -17,7 +17,6 @@ body {
     background: rgb(255, 255, 255);
 }
 
-/* Impede o shift de layout ao abrir o modal */
 body.modal-aberto {
     overflow: hidden;
     padding-right: var(--scrollbar-width, 0px);
@@ -34,7 +33,6 @@ h1 {
     margin-bottom: 0;
 }
 
-/* --- BARRA DE CATEGORIAS --- */
 .barra-categorias {
     position: sticky;
     top: 35px;
@@ -114,7 +112,6 @@ h1 {
     transition: 0.5s;
 }
 
-/* --- SEÇÕES DO ATELIÊ --- */
 .secao {
     width: 100%;
     max-width: 1000px;
@@ -132,7 +129,6 @@ h1 {
     margin-bottom: 0;
 }
 
-/* --- CARDS --- */
 .secao-cards {
     display: flex;
     flex-wrap: wrap;
@@ -192,7 +188,6 @@ h1 {
     line-height: 1.2;
 }
 
-/* --- MODAL --- */
 .modal-overlay {
     display: none;
     position: fixed;
@@ -270,7 +265,6 @@ h1 {
     margin: 12px 0 18px 0;
 }
 
-/* --- SEÇÃO DE OPÇÕES --- */
 #modal-secao-opcoes {
     display: none;
     width: 85%;
@@ -433,5 +427,5 @@ h1 {
 }
 
 .secao:last-of-type {
-    margin-bottom: 80px; /* ajuste o valor conforme desejar */
+    margin-bottom: 80px;
 }

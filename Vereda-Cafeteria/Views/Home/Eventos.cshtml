@@ -25,34 +25,36 @@
 
 <section class="evento-vereda">
     <h3>Faça seu evento na Vereda!</h3>
-    <p>O espaço verde, o ambiente acolhedor e o cuidado com cada detalhe fazem da Vereda o cenário ideal para momentos especiais. Workshops, comemorações, reuniões ou celebrações, estamos prontos para criar com você uma experiência inesquecível.</p>
-    <a href="https://wa.link/s2u61n" target="_blank">
-        <i class="fa-brands fa-whatsapp"></i>
-        <span>Saiba mais</span>
-    </a>
-</section>
+    <p>O espaço verde, o ambiente acolhedor e o cuidado com cada detalhe fazem da Vereda o cenário ideal para momentos
+        especiais. Workshops, comemorações, reuniões ou celebrações, estamos prontos para criar com você uma experiência
+        inesquecível.</p>
+        <a href="https://wa.link/s2u61n" target="_blank">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span>Saiba mais</span>
+        </a>
+    </section>
 
-<section class="eventos-anteriores">
-    <h3>Conheça nossos últimos eventos</h3>
+    <section class="eventos-anteriores">
+        <h3>Conheça nossos últimos eventos</h3>
 
-    <div class="eventos-cards">
-        @foreach (var evento in Model.UltimosEventos)
-        {
-            @* Gera a cor do título levemente mais escura via CSS filter *@
-            <div class="evento-item" style="background-color: @evento.CorFundo;">
+        <div class="eventos-cards">
+            @foreach (var evento in Model.UltimosEventos)
+            {
+                @* Gera a cor do título levemente mais escura via CSS filter *@
+                <div class="evento-item" style="background-color: @evento.CorFundo;">
 
-                <div class="evento-conteudo">
-                    <div>
-                        <h4 style="color: color-mix(in srgb, @evento.CorFundo 40%, #000 60%);">@evento.Titulo</h4>
-                        <p>@evento.Descricao</p>
+                    <div class="evento-conteudo">
+                        <div>
+                            <h4 style="color: color-mix(in srgb, @evento.CorFundo 40%, #000 60%);">@evento.Titulo</h4>
+                            <p>@evento.Descricao</p>
+                        </div>
                     </div>
-                </div>
 
-                <div class="evento-imagem">
-                    <img src="@evento.ImagemUrl" alt="@evento.Titulo">
-                </div>
+                    <div class="evento-imagem">
+                        <img src="@evento.ImagemUrl" alt="@evento.Titulo">
+                    </div>
 
-            </div>
-        }
-    </div>
-</section>
+                </div>
+            }
+        </div>
+    </section>

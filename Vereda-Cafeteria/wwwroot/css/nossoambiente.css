@@ -39,7 +39,7 @@
     line-height: 1.6;
 }
 
-/* 🔥 GALERIA MASONRY (IGUAL AO PRINT) */
+/*GALERIA*/
 .nosso-ambiente-grid {
     column-count: 3;
     column-gap: 25px;
@@ -66,6 +66,44 @@
 /* HOVER SUAVE */
 .nosso-ambiente-item:hover {
     transform: translateY(-4px);
+}
+
+.ambiente-img {
+    cursor: zoom-in;
+    transition: transform 0.2s ease;
+}
+
+.ambiente-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.ambiente-modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+.ambiente-modal-img {
+    width: auto;
+    height: auto;
+    max-width: min(85vw, 1000px);
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 8px;
+    transform: scale(0.9);
+    transition: transform 0.25s ease;
+    cursor: default;
+}
+
+.ambiente-modal-overlay.active .ambiente-modal-img {
+    transform: scale(1);
 }
 
 /* RESPONSIVO */

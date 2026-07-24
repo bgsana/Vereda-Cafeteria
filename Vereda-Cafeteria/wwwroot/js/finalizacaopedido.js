@@ -1,7 +1,3 @@
-// =============================================
-// VEREDA CAFETERIA — Finalização do Pedido JS
-// =============================================
-
 const CHAVE_CARRINHO = 'vereda_carrinho';
 const CHAVE_TIMESTAMP = 'vereda_carrinho_ts';
 const EXPIRACAO_MS = 4 * 60 * 60 * 1000;
@@ -10,8 +6,6 @@ const NUMERO_WHATSAPP = '5514991941596';
 
 let modoEntrega = false;
 let mensagemGerada = '';
-
-// --- Carrinho ---
 
 function obterCarrinho() {
     const ts = localStorage.getItem(CHAVE_TIMESTAMP);
@@ -32,8 +26,6 @@ function limparCarrinho() {
 function formatarPreco(valor) {
     return 'R$ ' + valor.toFixed(2).replace('.', ',');
 }
-
-// --- Resumo ---
 
 function calcularSubtotal(carrinho) {
     return carrinho.reduce((soma, item) => soma + item.preco * item.quantidade, 0);
@@ -64,8 +56,6 @@ function atualizarTotal() {
     document.getElementById('valor-total').textContent = formatarPreco(total);
 }
 
-// --- Forma de recebimento ---
-
 function selecionarOpcao(opcao) {
     const btnRetirada = document.getElementById('btn-retirada');
     const btnEntrega = document.getElementById('btn-entrega');
@@ -91,8 +81,6 @@ function selecionarOpcao(opcao) {
 
     atualizarTotal();
 }
-
-// --- Validação ---
 
 function validar(carrinho) {
     const nome = document.getElementById('campo-nome').value.trim();
@@ -127,8 +115,6 @@ function validar(carrinho) {
 
     return true;
 }
-
-// --- Montar mensagem ---
 
 function montarMensagem(carrinho) {
     const nome      = document.getElementById('campo-nome').value.trim();
@@ -175,21 +161,16 @@ function montarMensagem(carrinho) {
     return msg;
 }
 
-// --- Mapeamento para os enums do back-end ---
-// FormaPagamento: Pix=1, Dinheiro=2, Credito=3, Debito=4
-// FormaRecebimento: Retirada=1, Entrega=2
 const MAPA_PAGAMENTO = {
     'Pix': 1,
     'Dinheiro': 2,
-    'Cartão': 3 // não há distinção Crédito/Débito no formulário; assume Crédito
+    'Cartão': 3
 };
 
 function obterTokenAntiForgery() {
     const input = document.querySelector('input[name="__RequestVerificationToken"]');
     return input ? input.value : '';
 }
-
-// --- Salvar pedido no banco ---
 
 async function salvarPedidoNoBanco(carrinho) {
     const pagamentoTexto = document.querySelector('input[name="pagamento"]:checked').value;
@@ -222,8 +203,6 @@ async function salvarPedidoNoBanco(carrinho) {
 
     return resposta.json();
 }
-
-// --- Confirmar pedido ---
 
 async function confirmarPedido() {
     const carrinho = obterCarrinho();
@@ -261,8 +240,6 @@ async function confirmarPedido() {
     window.open(url, '_blank');
 }
 
-// --- Copiar mensagem ---
-
 function copiarMensagem() {
     navigator.clipboard.writeText(mensagemGerada).then(() => {
         const btn = document.querySelector('.btn-copiar');
@@ -279,5 +256,4 @@ function copiarMensagem() {
     });
 }
 
-// --- Init ---
 document.addEventListener('DOMContentLoaded', renderizarResumo);

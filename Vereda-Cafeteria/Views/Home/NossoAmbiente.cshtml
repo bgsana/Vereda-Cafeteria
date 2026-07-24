@@ -14,7 +14,8 @@
         <h5>Um oásis no coração de Barra Bonita</h5>
         <p>
             Aqui o tempo desacelera. Entre plantas, luz natural e um ambiente cuidado nos mínimos detalhes,
-            a Vereda oferece um refúgio verdadeiro no centro de Barra Bonita, para reuniões, pausas ou simplesmente experimentar nossos sabores.
+            a Vereda oferece um refúgio verdadeiro no centro de Barra Bonita, para reuniões, pausas ou simplesmente
+            experimentar nossos sabores.
         </p>
     </div>
 
@@ -22,8 +23,16 @@
         @foreach (AmbienteImagem imagem in Model)
         {
             <div class="nosso-ambiente-item">
-                <img src="@Url.Content(imagem.CaminhoImagem)"/>
+                <img src="@Url.Content(imagem.CaminhoImagem)" class="ambiente-img" />
             </div>
         }
     </div>
+
+    <div class="ambiente-modal-overlay" id="ambienteModalOverlay">
+        <img src="" alt="" class="ambiente-modal-img" id="ambienteModalImg" />
+    </div>
+
+    @section Scripts {
+        <script src="~/js/nossoambiente.js"></script>
+    }
 </section>

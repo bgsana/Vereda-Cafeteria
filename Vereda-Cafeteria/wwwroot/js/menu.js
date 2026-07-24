@@ -1,13 +1,6 @@
-// =============================================
-// VEREDA CAFETERIA — Menu JS
-// Responsável: modal de produto + carrinho (localStorage)
-// =============================================
-
 const CHAVE_CARRINHO  = 'vereda_carrinho';
 const CHAVE_TIMESTAMP = 'vereda_carrinho_ts';
-const EXPIRACAO_MS    = 4 * 60 * 60 * 1000; // 4 horas
-
-// --- Carrinho helpers ---
+const EXPIRACAO_MS    = 4 * 60 * 60 * 1000;
 
 function obterCarrinho() {
     const ts = localStorage.getItem(CHAVE_TIMESTAMP);
@@ -37,8 +30,6 @@ function atualizarBadge() {
     badge.textContent = totalItens(obterCarrinho());
 }
 
-// --- Scroll lock sem layout shift ---
-
 function bloquearScroll() {
     const larguraScrollbar = window.innerWidth - document.documentElement.clientWidth;
     document.documentElement.style.setProperty('--scrollbar-width', larguraScrollbar + 'px');
@@ -49,8 +40,6 @@ function liberarScroll() {
     document.body.classList.remove('modal-aberto');
     document.documentElement.style.removeProperty('--scrollbar-width');
 }
-
-// --- Modal ---
 
 let produtoAtual = null;
 
@@ -144,8 +133,6 @@ function alterarQuantidade(delta) {
     }
 }
 
-// --- Adicionar ao carrinho ---
-
 function adicionarAoCarrinho() {
     if (!produtoAtual) return;
 
@@ -186,13 +173,9 @@ function adicionarAoCarrinho() {
     fecharModal();
 }
 
-// --- Fechar com Esc ---
-
 document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') fecharModal();
 });
-
-// --- Init ---
 
 document.addEventListener('DOMContentLoaded', function () {
     atualizarBadge();

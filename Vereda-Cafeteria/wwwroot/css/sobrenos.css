@@ -24,7 +24,6 @@ h1 {
     margin-bottom: -10px
 }
 
-/* --- HISTÓRIA ---*/
 .historia {
     max-width: 1000px;
     margin: 0 auto;
@@ -64,18 +63,12 @@ h1 {
     display: flex;
     width: 100%;
     max-height: 450px;
+}
+
+.proposito {
     margin-top: 25px;
 }
 
-.valores {
-    margin-bottom: 25px;
-}
-
-/* ─── LADO DO TEXTO ───────────────────────────────────────────────────────────
-   padding: topo  direita  baixo  esquerda
-   O valor "direita" é o lado que toca a imagem — diminua para aproximar o texto.
-   Para cada seção individualmente, sobrescreva abaixo com .visao-conteudo { ... }
-────────────────────────────────────────────────────────────────────────────── */
 .proposito-conteudo,
 .missao-conteudo,
 .visao-conteudo,
@@ -95,8 +88,6 @@ h1 {
 .visao-conteudo     { background-color: #00464B; }
 .valores-conteudo   { background-color: #96B9B9; }
 
-/* Missão e Valores: conteúdo fica no lado direito, então o lado que toca a
-   imagem é a esquerda — ajuste o 4º valor do padding para esses dois. */
 .missao-conteudo { padding: 40px 40px 40px 0px; }
 .valores-conteudo { padding: 40px 40px 40px 0px; }
 
@@ -148,11 +139,6 @@ h1 {
     font-size: 18px;
 }
 
-/* ─── LADO DA IMAGEM ──────────────────────────────────────────────────────────
-   padding: espaço ao redor da imagem dentro do card colorido.
-   Diminua para a imagem crescer; aumente para dar mais respiro.
-   Para cada seção individualmente, sobrescreva abaixo com .visao-imagem { ... }
-────────────────────────────────────────────────────────────────────────────── */
 .proposito-imagem,
 .missao-imagem,
 .visao-imagem,
@@ -170,7 +156,6 @@ h1 {
 .visao-imagem     { background-color: #00464B; }
 .valores-imagem   { background-color: #96B9B9; padding: 32px 0px 32px 32px; }
 
-/* Visão: menos padding = imagem maior */
 .visao-imagem { padding: 12px 12px 12px 0px; }
 
 .proposito-imagem img,

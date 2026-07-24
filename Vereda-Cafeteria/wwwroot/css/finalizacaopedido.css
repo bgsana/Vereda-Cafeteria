@@ -51,7 +51,6 @@
     text-align: left;
 }
 
-/* --- Campos nome e telefone --- */
 .form-grupo {
     display: flex;
     gap: 16px;
@@ -338,13 +337,9 @@
 
 .btn-finalizar:hover { background: var(--teal-hover); }
 
-/* ════════════════════════════════════════
-   TELA DE CONFIRMAÇÃO — dois cards separados
-   ════════════════════════════════════════ */
-
 .confirmacao-layout {
     display: flex;
-    flex-direction: column; /* Um embaixo do outro */
+    flex-direction: column;
     gap: 24px;
     align-items: center;
     justify-content: center;
@@ -357,7 +352,7 @@
     padding: 36px 32px;
     display: flex;
     flex-direction: column;
-    gap: 18px; /* Espaçamento interno entre as 3 linhas */
+    gap: 18px;
     background: #fff;
     box-shadow: var(--sombra-card);
     border-radius: var(--radius-card);

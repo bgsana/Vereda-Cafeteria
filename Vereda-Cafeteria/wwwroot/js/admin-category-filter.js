@@ -1,5 +1,3 @@
-// Filtro por categoria (seleção múltipla) usado nas listagens
-// administrativas de Menu e Vereda Ateliê.
 (function () {
     function initCategoryFilter(filterEl) {
         var toggle = filterEl.querySelector('.category-filter-toggle');

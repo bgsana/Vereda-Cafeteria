@@ -136,7 +136,6 @@
     </div>
 </div>
 
-@* Dados serializados para o PDF — tipo application/json evita execução pelo browser *@
 <script id="dashboardData" type="application/json">
 {
     "faturamentoHoje": "@Model.FaturamentoHoje.ToString("N2", new System.Globalization.CultureInfo("pt-BR"))",
@@ -156,7 +155,7 @@
 @section Scripts {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
-// ── LINE CHART ──────────────────────────────────────────────────────────────
+
 const vals = [@(Model.FaturamentoSemana != null
     ? string.Join(",", Model.FaturamentoSemana.Select(f => f.Valor.ToString("F2", System.Globalization.CultureInfo.InvariantCulture)))
     : "0")];
@@ -169,7 +168,6 @@ const pts  = vals.map((v, i) => [
     H - pad - ((v / maxV) * (H - pad * 2))
 ]);
 
-// gradiente
 const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
 defs.innerHTML = `<linearGradient id="ag" x1="0" y1="0" x2="0" y2="1">
     <stop offset="0%"   stop-color="#00464B" stop-opacity=".22"/>
@@ -177,7 +175,6 @@ defs.innerHTML = `<linearGradient id="ag" x1="0" y1="0" x2="0" y2="1">
 </linearGradient>`;
 svgEl.appendChild(defs);
 
-// linhas de grade
 [0, .5, 1].forEach(f => {
     const y = pad + (1 - f) * (H - pad * 2);
     const g = document.createElementNS('http://www.w3.org/2000/svg', 'line');
@@ -187,13 +184,11 @@ svgEl.appendChild(defs);
     svgEl.appendChild(g);
 });
 
-// área preenchida
 const area = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 area.setAttribute('d', `M${pts[0][0]},${H-pad} ${pts.map(p=>`L${p[0]},${p[1]}`).join(' ')} L${pts[pts.length-1][0]},${H-pad} Z`);
 area.setAttribute('fill', 'url(#ag)');
 svgEl.appendChild(area);
 
-// linha
 const line = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 line.setAttribute('d', `M${pts.map(p=>`${p[0]},${p[1]}`).join(' L')}`);
 line.setAttribute('fill', 'none'); line.setAttribute('stroke', '#00464B');
@@ -201,7 +196,6 @@ line.setAttribute('stroke-width', '2.5');
 line.setAttribute('stroke-linejoin', 'round'); line.setAttribute('stroke-linecap', 'round');
 svgEl.appendChild(line);
 
-// pontos + labels
 pts.forEach(([x, y], i) => {
     const isMax = vals[i] === Math.max(...vals) && vals[i] > 0;
     const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');

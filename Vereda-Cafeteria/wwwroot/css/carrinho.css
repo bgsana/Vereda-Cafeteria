@@ -234,7 +234,7 @@ body.modal-aberto {
 .caixa-resumo {
     width: 260px;
     flex-shrink: 0;
-    align-self: flex-start; /* Impede que o card estique para a altura total do flex container */
+    align-self: flex-start;
     background-color: #ffffff;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 8px;
     border-radius: 16px;
@@ -449,7 +449,6 @@ body.modal-aberto {
     color: var(--cor-modal, #730000);
 }
 
-/* reutiliza as classes do menu para os radios */
 .modal-editar .modal-opcoes-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;

@@ -158,7 +158,7 @@ button { cursor: pointer; }
 .nav-link i {
     font-size: 1.15rem;
     width: 20px;
-    min-width: 20px; /* garante largura fixa, sem deslocamento ao ativar/desativar */
+    min-width: 20px;
     text-align: center;
     opacity: 0.9;
     flex-shrink: 0;
@@ -167,8 +167,6 @@ button { cursor: pointer; }
 .nav-link:hover {
     color: #fff;
     background: rgba(255, 255, 255, 0.1);
-    /* transform: translateX(4px) removido — causava deslocamento
-       dos itens ao trocar de seção */
 }
 
 .sidebar-nav .nav-link.active {
@@ -570,7 +568,6 @@ p > a[href*="create"]:hover {
 }
 
 /* --- FORMULÁRIO — Create / Edit --- */
-/* Largura total para formulários de edição/criação */
 .row > .col-md-4 {
     background: var(--surface);
     border-radius: var(--radius-lg);
@@ -626,7 +623,6 @@ p > a[href*="create"]:hover {
     box-shadow: 0 0 0 3px rgba(115, 0, 0, 0.12);
 }
 
-/* Preview da imagem atual no Edit */
 .img-preview {
     width: 80px;
     height: 80px;
@@ -637,7 +633,6 @@ p > a[href*="create"]:hover {
     margin-bottom: 0.5rem;
 }
 
-/* Checkbox */
 .form-group.form-check {
     flex-direction: row;
     align-items: center;
@@ -677,7 +672,6 @@ p > a[href*="create"]:hover {
     margin: 0;
 }
 
-/* Validação */
 .field-validation-error,
 .text-danger {
     font-size: 0.75rem;
@@ -786,7 +780,6 @@ div > a[href*="index"]:not(.nav-link):hover {
     color: var(--terra);
 }
 
-/* Link Edit na página Details */
 div > a[href*="Edit"] {
     display: inline-flex;
     align-items: center;
@@ -814,7 +807,6 @@ div > a + * {
     margin-left: 0.25rem;
 }
 
-/* --- DL.ROW — Details / Delete --- */
 dl.row {
     margin: 0;
     background: var(--surface);

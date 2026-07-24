@@ -17,7 +17,6 @@ body {
     background: rgb(255, 255, 255);
 }
 
-/* Impede o shift de layout ao abrir o modal */
 body.modal-aberto {
     overflow: hidden;
     padding-right: var(--scrollbar-width, 0px);
@@ -34,7 +33,6 @@ h1 {
     margin-bottom: 0;
 }
 
-/* --- BARRA DE CATEGORIAS --- */
 .barra-categorias {
     position: sticky;
     top: 35px;
@@ -114,7 +112,6 @@ h1 {
     transition: 0.5s;
 }
 
-/* --- SEÇÕES DO CARDÁPIO --- */
 .secao {
     width: 100%;
     max-width: 1000px;
@@ -132,7 +129,6 @@ h1 {
     margin-bottom: 0;
 }
 
-/* --- CARDS --- */
 .secao-cards {
     display: flex;
     flex-wrap: wrap;
@@ -192,7 +188,6 @@ h1 {
     line-height: 1.2;
 }
 
-/* --- MODAL --- */
 .modal-overlay {
     display: none;
     position: fixed;
@@ -270,17 +265,16 @@ h1 {
     margin: 12px 0 18px 0;
 }
 
-/* --- SEÇÃO DE OPÇÕES --- */
 #modal-secao-opcoes {
     display: none;
     width: 85%;
-    margin: 15px 0 5px 0; /* ← espaçamento acima e abaixo da seção */
+    margin: 15px 0 5px 0;
 }
 
 .modal-opcoes-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 8px 24px; /* ← mais espaço vertical entre linhas */
+    gap: 8px 24px;
 }
 
 .modal-opcao-label {
@@ -300,7 +294,7 @@ h1 {
     width: 16px;
     height: 16px;
     border: 2px solid var(--cor-modal, #730000);
-    border-radius: 4px; /* ← quadrado arredondado como no protótipo */
+    border-radius: 4px;
     cursor: pointer;
     flex-shrink: 0;
     position: relative;
@@ -324,7 +318,6 @@ h1 {
     transform: rotate(45deg);
 }
 
-/* --- BOTÕES DO MODAL --- */
 .modal-botoes {
     display: flex;
     justify-content: center;
@@ -407,7 +400,6 @@ h1 {
     margin-left: 0;
 }
 
-/* --- ANIMAÇÃO DO MODAL --- */
 @keyframes modal-entrada {
     from {
         opacity: 0;
@@ -433,5 +425,5 @@ h1 {
 }
 
 .secao:last-of-type {
-    margin-bottom: 80px; /* ajuste o valor conforme desejar */
+    margin-bottom: 80px;
 }

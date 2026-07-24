@@ -7,7 +7,6 @@
   src: url('/fonts/PlaylistScript.otf') format('opentype');
 }
 
-/* VARIÁVEIS */
 :root {
   --brown: #372314;
   --deep-red: #730000;
@@ -16,7 +15,6 @@
   --white: #ffffff;
 }
 
-/* RESET */
 * {
   box-sizing: border-box;
 }
@@ -26,12 +24,10 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
-/* DIVIDER */
 .divider {
   height: 40px;
 }
 
-/* SECTIONS */
 .section {
   width: 100%;
 }
@@ -48,7 +44,6 @@ body {
   min-height: 450px;
 }
 
-/* PAINEL TEXTO */
 .panel {
   display: flex;
   align-items: center;
@@ -73,7 +68,6 @@ body {
   max-width: 500px;
 }
 
-/* CORES */
 .panel-brown {
   background: var(--brown);
 }
@@ -85,8 +79,6 @@ body {
 .panel-teal {
   background: var(--teal);
 }
-
-/* ===== BOTÕES ===== */
 
 .btn-sobre {
   border: 2px solid #271202;
@@ -148,8 +140,6 @@ body {
   background-color: #6A9898;
 }
 
-/* ===== FOTOS ===== */
-
 .photo-layout-about {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -185,7 +175,6 @@ body {
   object-fit: cover;
 }
 
-/* CARDÁPIO VIDEO */
 .single-photo video {
   width: 100%;
   height: 450px;
@@ -193,29 +182,27 @@ body {
   display: block;
 }
 
-/* ===== VEREDA ATELIÊ — SEÇÃO HOME ===== */
-
 .store {
   background: var(--store-bg);
-  padding: 40px 0 56px; /* Removido padding lateral para ganhar espaço */
+  padding: 40px 0 56px;
   text-align: center;
-  overflow: hidden; /* Garante que nada escape lateralmente da seção */
+  overflow: hidden;
 }
 
 .store h2 {
   font-family: 'Playlist Script';
-  font-size: 42px;   /* igual ao .panel h2 das outras seções */
+  font-size: 42px;
   color: #ffffff;
-  margin-bottom: 15px; /* igual ao .panel h2 das outras seções */
+  margin-bottom: 15px;
 }
 
 .atelie-subtitulo {
   font-family: 'Montserrat', sans-serif;
-  font-size: 17px;   /* igual ao .panel p das outras seções */
+  font-size: 17px;
   font-weight: 400;
-  color: #ffffff;    /* mesma cor do .panel p (branco puro, como nas outras seções) */
-  margin: 0 auto 32px; /* 32px embaixo antes do carrossel — mesmo ritmo das outras seções */
-  max-width: 420px;  /* igual ao .panel p das outras seções */
+  color: #ffffff;
+  margin: 0 auto 32px;
+  max-width: 420px;
   line-height: 1.5;
   text-align: center;
 }
@@ -223,18 +210,17 @@ body {
 .atelie-carousel-wrapper {
   position: relative;
   width: 100%;
-  max-width: 1156px; /* Aumentado de 1116px para 1156px para acomodar o padding lateral de 80px */
+  max-width: 1156px;
   margin: 0 auto;
-  padding: 0 80px; /* Aumentado de 60px para 80px para dar mais distância entre os botões e os cards */
+  padding: 0 80px;
 }
 
 .atelie-carousel-viewport {
-  overflow: hidden; /* Oculta os cards que estão fora da área visível */
-  padding: 20px 20px 30px; /* Espaço suficiente para não cortar a sombra e o efeito hover */
-  margin: -20px -20px -30px; /* Margem negativa para compensar o padding e manter os cards no alinhamento original */
+  overflow: hidden;
+  padding: 20px 20px 30px;
+  margin: -20px -20px -30px;
 }
 
-/* A faixa que desliza */
 .atelie-carousel-track {
   display: flex;
   gap: 48px;
@@ -242,21 +228,20 @@ body {
   will-change: transform;
 }
 
-/* ===== CARD DO ATELIÊ ===== */
 .atelie-card {
   flex: 0 0 300px;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 8px; /* Ajustado para bater com Menu/Atelie */
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 8px;
   cursor: pointer;
-  transition: transform 0.5s; /* Ajustado para transição suave idêntica ao Menu/Atelie */
+  transition: transform 0.5s;
   line-height: 0;
   text-decoration: none;
   display: block;
 }
 
 .atelie-card:hover {
-  transform: translateY(-2px); /* Ajustado para deslocamento de -2px idêntico ao Menu/Atelie */
+  transform: translateY(-2px);
 }
 
 .atelie-card img {
@@ -266,17 +251,16 @@ body {
   object-fit: cover;
 }
 
-/* ===== BOTÕES DE NAVEGAÇÃO ===== */
 .atelie-btn-prev,
 .atelie-btn-next {
   position: absolute;
-  top: 150px; /* Centralizado verticalmente em relação ao card de 300px */
+  top: 150px;
   transform: translateY(-50%);
-  background: transparent; /* Sem fundo */
-  border: none; /* Sem borda */
+  background: transparent;
+  border: none;
   color: #ffffff;
-  font-size: 64px; /* Tamanho aumentado */
-  font-weight: 400; /* Chevron mais fino e elegante */
+  font-size: 64px;
+  font-weight: 400;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -285,23 +269,22 @@ body {
   z-index: 10;
   line-height: 1;
   padding: 0;
-  opacity: 0.8; /* Opacidade inicial leve */
+  opacity: 0.8;
 }
 
 .atelie-btn-prev:hover,
 .atelie-btn-next:hover {
-  opacity: 1; /* Fica totalmente visível ao passar o mouse */
+  opacity: 1;
 }
 
 .atelie-btn-prev {
-  left: 20px; /* Aumentado o distanciamento lateral */
+  left: 20px;
 }
 
 .atelie-btn-next {
-  right: 20px; /* Aumentado o distanciamento lateral */
+  right: 20px;
 }
 
-/* ===== BOTÃO VER ATELIÊ ===== */
 .atelie-home-link {
   display: inline-block;
   margin-top: 32px;
@@ -321,24 +304,22 @@ body {
   color: #ffffff;
 }
 
-/* ===== SEÇÃO DO BANNER INICIAL ===== */
 .banner-section {
   width: 100%;
   background: #ffffff;
-  padding: 50px 0 50px; /* Alinhado com margin-top: 50px das demais páginas; 50px abaixo + 40px do divider = 90px até o Sobre Nós */
+  padding: 50px 0 50px;
 }
 
 .banner-carousel-wrapper {
   position: relative;
   width: 100%;
-  max-width: 1156px; /* Mesma largura máxima útil do Ateliê */
+  max-width: 1156px;
   margin: 0 auto;
-  padding: 0 80px; /* Mesmos paddings laterais */
+  padding: 0 80px;
   box-sizing: border-box;
 }
 
 .banner-carousel-viewport {
-  /* Outer: dá espaço para sombras não serem cortadas */
   padding: 15px 20px 25px;
   margin: -15px -20px -25px;
   width: 100%;
@@ -346,9 +327,8 @@ body {
 }
 
 .banner-carousel-clip {
-  /* Inner: faz o clip real — esconde banners adjacentes sem cortar sombras */
   overflow: hidden;
-  border-radius: 16px; /* Clippa o track aqui também para garantir cantos durante transição */
+  border-radius: 16px;
   width: 100%;
 }
 
@@ -360,7 +340,6 @@ body {
 }
 
 .banner-item {
-  /* flex-basis calculado em relação ao .banner-carousel-clip (que tem width: 100% real) */
   flex: 0 0 100%;
   min-width: 0;
   aspect-ratio: 996 / 500;
@@ -378,16 +357,15 @@ body {
   display: block;
 }
 
-/* ===== BOTÕES DE NAVEGAÇÃO DO BANNER ===== */
 .banner-btn-prev,
 .banner-btn-next {
   position: absolute;
-  top: 265px; /* Centralizado verticalmente em relação ao banner (250px + 15px de padding top do viewport) */
+  top: 265px;
   transform: translateY(-50%);
   background: transparent;
   border: none;
   color: #ffffff;
-  font-size: 72px; /* Aumentado para 72px para bater visualmente com o tamanho do Ateliê */
+  font-size: 72px;
   font-weight: 300;
   cursor: pointer;
   display: flex;
@@ -398,7 +376,7 @@ body {
   line-height: 1;
   padding: 0;
   opacity: 0.7;
-  text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.4); /* Sombra para garantir visibilidade em qualquer imagem */
+  text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.4);
 }
 
 .banner-btn-prev:hover,
@@ -407,9 +385,9 @@ body {
 }
 
 .banner-btn-prev {
-  left: 20px; /* 80px wrapper padding − 20px viewport margin-offset = seta alinhada à borda visual do banner */
+  left: 20px;
 }
 
 .banner-btn-next {
-  right: 20px; /* Simétrico ao prev */
+  right: 20px;
 }

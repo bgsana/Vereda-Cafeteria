@@ -1,6 +1,3 @@
-/* =========================================
-   ADMIN PEDIDOS - STYLESHEET
-   ========================================= */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
 @font-face {
     font-family: 'Playlist Script';
@@ -9,9 +6,6 @@
     font-style: normal;
 }
 
-/* =========================================
-   TOKENS DE COR
-   ========================================= */
 :root {
     --vinho:       #730000;
     --vinho-light: #9a1a1a;
@@ -62,9 +56,6 @@
     --transition-fast: all 0.15s ease;
 }
 
-/* =========================================
-   SEÇÕES
-   ========================================= */
 .secao-pedidos {
     margin-bottom: 2.5rem;
 }
@@ -151,9 +142,6 @@
     opacity: 0.5;
 }
 
-/* =========================================
-   STATUS BADGES
-   ========================================= */
 .status-badge {
     display: inline-flex;
     align-items: center;
@@ -194,9 +182,6 @@
     border: 1px solid rgba(139, 46, 46, 0.2);
 }
 
-/* =========================================
-   ORDER CARDS
-   ========================================= */
 .order-card {
     background: var(--surface);
     border-radius: var(--radius-lg);
@@ -248,9 +233,6 @@
     opacity: 1;
 }
 
-/* =========================================
-   ORDER HEADER
-   ========================================= */
 .order-header {
     display: flex;
     justify-content: space-between;
@@ -279,9 +261,6 @@
     font-weight: 500;
 }
 
-/* =========================================
-   ORDER ITEMS
-   ========================================= */
 .order-items {
     font-size: 0.9rem;
     color: var(--terra);
@@ -322,9 +301,6 @@
     font-weight: 700;
 }
 
-/* =========================================
-   ORDER FOOTER
-   ========================================= */
 .order-footer {
     margin-top: 14px;
     display: flex;
@@ -377,9 +353,6 @@
     font-weight: 500;
 }
 
-/* =========================================
-   BOTÕES DE AÇÃO (PENDENTES)
-   ========================================= */
 .acoes-pedido {
     display: flex;
     gap: 8px;
@@ -452,9 +425,6 @@
     color: #fff;
 }
 
-/* =========================================
-   GRID RESPONSIVO
-   ========================================= */
 .row {
     display: grid;
     gap: 18px;
@@ -473,9 +443,6 @@
     }
 }
 
-/* =========================================
-   ANIMAÇÕES
-   ========================================= */
 @keyframes slideInUp {
     from { opacity: 0; transform: translateY(16px); }
     to   { opacity: 1; transform: translateY(0); }

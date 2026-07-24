@@ -66,8 +66,6 @@
     </div>
 </section>
 
-<div class="divider"></div>
-
 <!-- AMBIENTE -->
 <section class="section environment" id="ambiente">
     <div class="photo-layout photo-layout-environment">
@@ -98,8 +96,6 @@
     </div>
 </section>
 
-<div class="divider"></div>
-
 <!-- CARDÁPIO -->
 <section class="section menu-section" id="cardapio">
     <div class="panel panel-teal panel-text">
@@ -121,7 +117,6 @@
     </div>
 </section>
 
-<div class="divider"></div>
 
 <!-- VEREDA ATELIÊ -->
 <section class="store" id="atelie">
@@ -162,11 +157,9 @@
     </a>
 </section>
 
-<div class="divider"></div>
 
 @section Scripts {
     <script>
-    // ===== CARROSSEL DE BANNERS =====
     (function () {
         const track = document.getElementById('bannerTrack');
         const btnPrev = document.getElementById('bannerBtnPrev');
@@ -249,7 +242,6 @@
             autoTimer = setInterval(autoStep, AUTO_MS);
         }
 
-        // Garante que o timer pare se o mouse passar por cima ou ao interagir
         function stopAuto() {
             if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
         }
@@ -265,7 +257,6 @@
         btnPrev.addEventListener('click', goPrev);
     })();
 
-    // ===== CARROSSEL DO ATELIÊ =====
     (function () {
         const track    = document.getElementById('atelieTrack');
         const btnPrev  = document.getElementById('atelieBtnPrev');
@@ -275,15 +266,13 @@
         const CARD_WIDTH  = 300;
         const GAP         = 48;
         const STEP        = CARD_WIDTH + GAP;
-        const AUTO_MS     = 3500;   // intervalo do avanço automático
-        const ANIM_MS     = 420;    // duração da transição CSS
-
-        // ---- Clonagem: repete o conjunto 5× para nunca acabar ----
+        const AUTO_MS     = 3500;
+        const ANIM_MS     = 420;
+        
         const originals = Array.from(track.children);
         const N = originals.length;
-        const COPIES = 5;   // quantas repetições ao total (incluindo o original)
-
-        // Apaga filhos originais, reconstrói com COPIES repetições
+        const COPIES = 5;
+        
         track.innerHTML = '';
         for (let c = 0; c < COPIES; c++) {
             originals.forEach(orig => {
@@ -292,10 +281,7 @@
             });
         }
 
-        // Cards são <a> com href — a navegação ocorre nativamente via cloneNode(true)
-
-        // Posição inicial: começa no 2º bloco (índice N) para ter margem em ambos os lados
-        let pos = N;          // índice do card atual (0-based dentro dos COPIES*N cards)
+        let pos = N;
         let busy = false;
         let autoTimer = null;
 
@@ -303,14 +289,12 @@
             return index * STEP;
         }
 
-        // Aplica posição sem animação
         function jumpTo(index) {
             track.style.transition = 'none';
             track.style.transform  = `translateX(-${getOffset(index)}px)`;
             pos = index;
         }
 
-        // Desliza animado para index
         function slideTo(index, cb) {
             track.style.transition = `transform ${ANIM_MS}ms ease`;
             track.style.transform  = `translateX(-${getOffset(index)}px)`;
@@ -318,16 +302,15 @@
 
             setTimeout(() => {
                 track.style.transition = 'none';
-                // Reposiciona no bloco equivalente do meio sem que o usuário perceba
-                const normalised = ((pos % N) + N) % N;      // posição dentro de um bloco
-                const target     = N + normalised;            // ancora no 2º bloco
+                const normalised = ((pos % N) + N) % N;
+                const target     = N + normalised;
                 if (pos !== target) {
                     track.style.transform = `translateX(-${getOffset(target)}px)`;
                     pos = target;
                 }
                 busy = false;
                 if (cb) cb();
-            }, ANIM_MS + 20);   // +20ms de folga
+            }, ANIM_MS + 20);
         }
 
         function goNext() {
@@ -359,9 +342,7 @@
             if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
         }
 
-        // Posição inicial sem animação
         jumpTo(pos);
-        // Pequeno delay para garantir que o DOM processou o jumpTo antes de ligar o auto
         setTimeout(startAuto, 50);
 
         btnNext.addEventListener('click', goNext);
