@@ -3,13 +3,43 @@
 @{
     ViewData["Title"] = "Produtos do Ateliê";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+    var categorias = Model
+        .Where(p => p.Categoria != null)
+        .Select(p => p.Categoria!)
+        .GroupBy(c => c.CategoriaId)
+        .Select(g => g.First())
+        .OrderBy(c => c.CategoriaId)
+        .ToList();
 }
 
 <h1>Produtos do Ateliê</h1>
 
-<p>
-    <a asp-action="Create">Adicionar</a>
-</p>
+<div class="list-toolbar">
+    <a asp-action="Create" class="btn btn-primary">Adicionar</a>
+
+    <div class="category-filter" id="categoryFilter">
+        <button type="button" class="category-filter-toggle" id="categoryFilterToggle">
+            <i class="bi bi-funnel"></i>
+            <span class="category-filter-label">Selecione os assuntos</span>
+            <i class="bi bi-chevron-down category-filter-arrow"></i>
+        </button>
+        <div class="category-filter-menu">
+            <div class="category-filter-list">
+                @foreach (var categoria in categorias)
+                {
+                    <label class="category-filter-item">
+                        <input type="checkbox" class="category-filter-checkbox" value="@categoria.CategoriaId" />
+                        <span>@categoria.Nome</span>
+                    </label>
+                }
+            </div>
+            <div class="category-filter-footer">
+                <button type="button" class="category-filter-clear">Mostrar todos</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <table class="table">
     <thead>
@@ -25,7 +55,7 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+            <tr data-categoria-id="@item.CategoriaId">
                 <td>
                     <img src="@item.ImagemUrl" alt="@item.Nome"
                          style="width:80px;height:80px;object-fit:cover;border-radius:6px;border:1px solid rgba(55,35,20,0.12);" />
@@ -43,3 +73,7 @@
         }
     </tbody>
 </table>
+
+@section Scripts {
+    <script src="~/js/admin-category-filter.js"></script>
+}

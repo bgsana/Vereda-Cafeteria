@@ -25,7 +25,14 @@ namespace Vereda_Cafeteria.Controllers
         // GET: ProdutoMenu
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Produtos.Include(p => p.Categoria).ToListAsync());
+            var produtos = await _context.Produtos
+                .Include(p => p.Categoria)
+                .Where(p => CategoriasMenu.Contains(p.CategoriaId))
+                .OrderBy(p => p.CategoriaId)
+                .ThenBy(p => p.Nome)
+                .ToListAsync();
+
+            return View(produtos);
         }
 
         // GET: ProdutoMenu/Details/5

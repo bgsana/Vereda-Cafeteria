@@ -20,7 +20,7 @@ public class SeedPedido
                 NomeCliente = "João Silva",
                 Telefone = "14991941596",
                 ValorTotal = 45.50m,
-                DataPedido = new DateTime(2026, 6, 23, 10, 30, 0),
+                DataPedido = new DateTime(2026, 7, 23, 10, 30, 0),
                 FormaPagamento = FormaPagamento.Pix,
                 FormaRecebimento = FormaRecebimento.Retirada,
                 Status = StatusPedido.Confirmado
@@ -31,7 +31,7 @@ public class SeedPedido
                 NomeCliente = "Maria Oliveira",
                 Telefone = "14988888888",
                 ValorTotal = 32.00m,
-                DataPedido = new DateTime(2026, 6, 24, 11, 0, 0),
+                DataPedido = new DateTime(2026, 7, 23, 11, 0, 0),
                 FormaPagamento = FormaPagamento.Credito,
                 FormaRecebimento = FormaRecebimento.Entrega,
                 Status = StatusPedido.Confirmado
@@ -42,7 +42,7 @@ public class SeedPedido
                 NomeCliente = "Pedro Santos",
                 Telefone = "14977777777",
                 ValorTotal = 15.00m,
-                DataPedido = new DateTime(2026, 6, 25, 9, 15, 0),
+                DataPedido = new DateTime(2026, 7, 23, 9, 15, 0),
                 FormaPagamento = FormaPagamento.Dinheiro,
                 FormaRecebimento = FormaRecebimento.Retirada,
                 Status = StatusPedido.Pendente
@@ -53,7 +53,7 @@ public class SeedPedido
                 NomeCliente = "Ana Costa",
                 Telefone = "14966666666",
                 ValorTotal = 60.00m,
-                DataPedido = new DateTime(2026, 6, 26, 14, 20, 0),
+                DataPedido = new DateTime(2026, 7, 24, 14, 20, 0),
                 FormaPagamento = FormaPagamento.Pix,
                 FormaRecebimento = FormaRecebimento.Entrega,
                 Status = StatusPedido.Confirmado
@@ -64,7 +64,7 @@ public class SeedPedido
                 NomeCliente = "Lucas Mendes",
                 Telefone = "14955555555",
                 ValorTotal = 25.50m,
-                DataPedido = new DateTime(2026, 6, 27, 16, 45, 0),
+                DataPedido = new DateTime(2026, 7, 24, 16, 45, 0),
                 FormaPagamento = FormaPagamento.Debito,
                 FormaRecebimento = FormaRecebimento.Retirada,
                 Status = StatusPedido.Confirmado
@@ -75,7 +75,7 @@ public class SeedPedido
                 NomeCliente = "Julia Lima",
                 Telefone = "14944444444",
                 ValorTotal = 80.00m,
-                DataPedido = new DateTime(2026, 6, 28, 10, 0, 0),
+                DataPedido = new DateTime(2026, 7, 24, 10, 0, 0),
                 FormaPagamento = FormaPagamento.Pix,
                 FormaRecebimento = FormaRecebimento.Entrega,
                 Status = StatusPedido.Cancelado
@@ -86,7 +86,7 @@ public class SeedPedido
                 NomeCliente = "Carlos Ferreira",
                 Telefone = "14933333333",
                 ValorTotal = 120.50m,
-                DataPedido = new DateTime(2026, 6, 28, 8, 30, 0),
+                DataPedido = new DateTime(2026, 7, 24, 8, 30, 0),
                 FormaPagamento = FormaPagamento.Credito,
                 FormaRecebimento = FormaRecebimento.Retirada,
                 Status = StatusPedido.Confirmado
@@ -97,7 +97,7 @@ public class SeedPedido
                 NomeCliente = "Fernanda Souza",
                 Telefone = "14922222222",
                 ValorTotal = 55.00m,
-                DataPedido = new DateTime(2026, 6, 29, 9, 10, 0),
+                DataPedido = new DateTime(2026, 7, 24, 9, 10, 0),
                 FormaPagamento = FormaPagamento.Pix,
                 FormaRecebimento = FormaRecebimento.Entrega,
                 Status = StatusPedido.Confirmado

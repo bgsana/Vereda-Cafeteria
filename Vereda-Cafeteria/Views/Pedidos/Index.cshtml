@@ -1,5 +1,6 @@
 @model IEnumerable<Vereda_Cafeteria.Models.Pedido>
 @using Models
+@using Vereda_Cafeteria.Helpers
 
 @{
     ViewData["Title"] = "Pedidos";
@@ -7,12 +8,15 @@
 
     var pendentes    = Model.Where(p => p.Status == StatusPedido.Pendente).ToList();
     var confirmados  = Model.Where(p => p.Status == StatusPedido.Confirmado).ToList();
+    var finalizados  = Model.Where(p => p.Status == StatusPedido.Finalizado).ToList();
     var cancelados   = Model.Where(p => p.Status == StatusPedido.Cancelado).ToList();
 }
 
 @section Styles {
     <link rel="stylesheet" href="~/css/admin-pedido.css" asp-append-version="true" />
 }
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <h1>Pedidos</h1>
 
@@ -43,7 +47,7 @@
                     <div class="order-header">
                         <div>
                             <strong>@pedido.NomeCliente</strong>
-                            <span class="text-muted">#@pedido.PedidoId · @pedido.Telefone</span>
+                            <span class="text-muted">@Helper.FormatarTelefone(pedido.Telefone)</span>
                         </div>
                         <span class="status-badge status-pendente">Pendente</span>
                     </div>
@@ -101,14 +105,14 @@
             <span>Confirmados</span>
             <span class="secao-count">@confirmados.Count</span>
         </div>
-        <p class="secao-descricao">Pedidos confirmados e em preparo ou já entregues.</p>
+        <p class="secao-descricao">Pedidos confirmados e enviados para produção.</p>
     </div>
 
     @if (!confirmados.Any())
     {
         <div class="secao-vazia">
             <i class="bi bi-inbox"></i>
-            <span>Nenhum pedido confirmado.</span>
+            <span>Nenhum pedido confirmado no momento.</span>
         </div>
     }
     else
@@ -120,9 +124,83 @@
                     <div class="order-header">
                         <div>
                             <strong>@pedido.NomeCliente</strong>
-                            <span class="text-muted">#@pedido.PedidoId · @pedido.Telefone</span>
+                            <span class="text-muted">@Helper.FormatarTelefone(pedido.Telefone)</span>
                         </div>
                         <span class="status-badge status-confirmado">Confirmado</span>
+                    </div>
+
+                    <div class="order-items">
+                        <ul>
+                            @foreach (var item in pedido.ItensPedido)
+                            {
+                                <li>
+                                    <span>@item.Quantidade× @(item.Produto?.Nome ?? "Produto")</span>
+                                    <strong>R$ @item.SubTotal.ToString("N2")</strong>
+                                </li>
+                            }
+                        </ul>
+                        <div class="text-end">Total: R$ @pedido.ValorTotal.ToString("N2")</div>
+                    </div>
+
+                    <div class="order-footer">
+                        <div>
+                            <span class="footer-info-item">
+                                <i class="bi bi-calendar3"></i>
+                                @pedido.DataPedido.ToString("dd/MM/yyyy HH:mm")
+                            </span>
+                            <span class="footer-separador">·</span>
+                            <span class="footer-info-item">
+                                <i class="bi bi-wallet2"></i>
+                                @pedido.FormaPagamento
+                            </span>
+                            <span class="footer-separador">·</span>
+                            <span class="footer-info-item">
+                                <i class="bi bi-geo-alt"></i>
+                                @pedido.FormaRecebimento
+                            </span>
+                        </div>
+                        <div class="acoes-pedido">
+                            <button class="btn-acao btn-finalizar" onclick="alterarStatus(@pedido.PedidoId, 'Finalizar')">
+                                <i class="fa-solid fa-check"></i> Finalizar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+<!-- ===================== FINALIZADOS ===================== -->
+<div class="secao-pedidos">
+    <div class="secao-header secao-finalizado">
+        <div class="secao-header-info">
+            <i class="bi bi-check-circle-fill"></i>
+            <span>Finalizados</span>
+            <span class="secao-count">@finalizados.Count</span>
+        </div>
+        <p class="secao-descricao">Pedidos concluídos, prontos para retirada ou entrega.</p>
+    </div>
+
+    @if (!finalizados.Any())
+    {
+        <div class="secao-vazia">
+            <i class="bi bi-inbox"></i>
+            <span>Nenhum pedido finalizado no momento.</span>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var pedido in finalizados)
+            {
+                <div class="order-card order-card-finalizado" id="card-@pedido.PedidoId">
+                    <div class="order-header">
+                        <div>
+                            <strong>@pedido.NomeCliente</strong>
+                            <span class="text-muted">@Helper.FormatarTelefone(pedido.Telefone)</span>
+                        </div>
+                        <span class="status-badge status-finalizado">Finalizado</span>
                     </div>
 
                     <div class="order-items">
@@ -177,7 +255,7 @@
     {
         <div class="secao-vazia">
             <i class="bi bi-inbox"></i>
-            <span>Nenhum pedido cancelado.</span>
+            <span>Nenhum pedido cancelado no momento.</span>
         </div>
     }
     else
@@ -189,7 +267,7 @@
                     <div class="order-header">
                         <div>
                             <strong>@pedido.NomeCliente</strong>
-                            <span class="text-muted">#@pedido.PedidoId · @pedido.Telefone</span>
+                            <span class="text-muted">@Helper.FormatarTelefone(pedido.Telefone)</span>
                         </div>
                         <span class="status-badge status-cancelado">Cancelado</span>
                     </div>

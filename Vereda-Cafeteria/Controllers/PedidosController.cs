@@ -36,9 +36,12 @@ public class PedidosController : Controller
 
     public async Task<IActionResult> Index()
     {
+        var hoje = DateTime.Today;
+
         var pedidos = await _context.Pedidos
             .Include(p => p.ItensPedido)
             .ThenInclude(i => i.Produto)
+            .Where(p => p.DataPedido.Date == hoje)
             .OrderByDescending(p => p.DataPedido)
             .ToListAsync();
         return View(pedidos);
@@ -114,6 +117,18 @@ public class PedidosController : Controller
         if (pedido == null) return NotFound();
 
         pedido.Status = StatusPedido.Cancelado;
+        await _context.SaveChangesAsync();
+        return Ok();
+    }
+
+    [Authorize]
+    [HttpPost]
+    public async Task<IActionResult> Finalizar(int id)
+    {
+        var pedido = await _context.Pedidos.FindAsync(id);
+        if (pedido == null) return NotFound();
+
+        pedido.Status = StatusPedido.Finalizado;
         await _context.SaveChangesAsync();
         return Ok();
     }

@@ -11,5 +11,8 @@ public enum StatusPedido
     Confirmado = 2,
 
     [Display(Name = "Cancelado")]
-    Cancelado = 3
+    Cancelado = 3,
+
+    [Display(Name = "Finalizado")]
+    Finalizado = 4
 }
