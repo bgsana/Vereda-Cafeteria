@@ -11,7 +11,7 @@
 <div class="topbar">
     <div>
         <div class="page-eyebrow">visão geral</div>
-        <div class="page-title">Bom dia, Vereda!</div>
+        <div class="page-title">Olá, Vereda!</div>
     </div>
     <div class="topbar-right">
         <span class="date-badge">@DateTime.Now.ToString("dddd, d MMMM yyyy", new System.Globalization.CultureInfo("pt-BR"))</span>
@@ -108,8 +108,7 @@
 <div class="row3-full">
     <div class="card" style="animation-delay:.42s">
         <div class="card-header">
-            <div class="card-title">Pedidos Confirmados</div>
-            <span class="card-sub">recentes</span>
+            <div class="card-title">Pedidos Finalizados da Semana</div>
         </div>
         <table class="orders-table">
             <thead>
@@ -118,10 +117,12 @@
             <tbody>
                 @if (Model.PedidosConfirmados != null)
                 {
+                    var numeroPedido = 0;
                     foreach (var pedido in Model.PedidosConfirmados)
                     {
+                        numeroPedido++;
                         <tr>
-                            <td style="color:var(--muted);font-size:12px">#@pedido.PedidoId</td>
+                            <td style="color:var(--muted);font-size:12px">#@numeroPedido</td>
                             <td>@pedido.NomeCliente</td>
                             <td>@pedido.Telefone</td>
                             <td>R$@pedido.ValorTotal.ToString("N2")</td>
@@ -136,6 +137,7 @@
     </div>
 </div>
 
+@* Dados serializados para o PDF — tipo application/json evita execução pelo browser *@
 <script id="dashboardData" type="application/json">
 {
     "faturamentoHoje": "@Model.FaturamentoHoje.ToString("N2", new System.Globalization.CultureInfo("pt-BR"))",
@@ -148,14 +150,14 @@
     "variacaoTicket": @Model.VariacaoTicketMedio.ToString("F2", System.Globalization.CultureInfo.InvariantCulture),
     "semana": [@(Model.FaturamentoSemana != null ? string.Join(",", Model.FaturamentoSemana.Select(f => $"{{\"dia\":\"{f.Dia}\",\"valor\":{f.Valor.ToString("F2", System.Globalization.CultureInfo.InvariantCulture)}}}")) : "")],
     "topProdutos": [@(Model.TopProdutos != null ? string.Join(",", Model.TopProdutos.Select(p => $"{{\"nome\":\"{p.Nome.Replace("\"","\\\"")}\",\"categoria\":\"{p.Categoria.Replace("\"","\\\"")}\",\"quantidade\":{p.Quantidade},\"percentual\":{p.Percentual}}}")) : "")],
-    "pedidosConfirmados": [@(Model.PedidosConfirmados != null ? string.Join(",", Model.PedidosConfirmados.Select(p => $"{{\"id\":{p.PedidoId},\"cliente\":\"{p.NomeCliente.Replace("\"","\\\"")}\",\"telefone\":\"{p.Telefone}\",\"valor\":{p.ValorTotal.ToString("F2", System.Globalization.CultureInfo.InvariantCulture)},\"pagamento\":\"{p.FormaPagamento}\",\"recebimento\":\"{p.FormaRecebimento}\",\"data\":\"{p.DataPedido.ToString("dd/MM HH:mm")}\"}}")) : "")]
+    "pedidosConfirmados": [@(Model.PedidosConfirmados != null ? string.Join(",", Model.PedidosConfirmados.Select((p, idx) => $"{{\"id\":{idx + 1},\"cliente\":\"{p.NomeCliente.Replace("\"","\\\"")}\",\"telefone\":\"{p.Telefone}\",\"valor\":{p.ValorTotal.ToString("F2", System.Globalization.CultureInfo.InvariantCulture)},\"pagamento\":\"{p.FormaPagamento}\",\"recebimento\":\"{p.FormaRecebimento}\",\"data\":\"{p.DataPedido.ToString("dd/MM HH:mm")}\"}}")) : "")]
 }
 </script>
 
 @section Scripts {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
-
+// ── LINE CHART ──────────────────────────────────────────────────────────────
 const vals = [@(Model.FaturamentoSemana != null
     ? string.Join(",", Model.FaturamentoSemana.Select(f => f.Valor.ToString("F2", System.Globalization.CultureInfo.InvariantCulture)))
     : "0")];
@@ -168,6 +170,7 @@ const pts  = vals.map((v, i) => [
     H - pad - ((v / maxV) * (H - pad * 2))
 ]);
 
+// gradiente
 const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
 defs.innerHTML = `<linearGradient id="ag" x1="0" y1="0" x2="0" y2="1">
     <stop offset="0%"   stop-color="#00464B" stop-opacity=".22"/>
@@ -175,6 +178,7 @@ defs.innerHTML = `<linearGradient id="ag" x1="0" y1="0" x2="0" y2="1">
 </linearGradient>`;
 svgEl.appendChild(defs);
 
+// linhas de grade
 [0, .5, 1].forEach(f => {
     const y = pad + (1 - f) * (H - pad * 2);
     const g = document.createElementNS('http://www.w3.org/2000/svg', 'line');
@@ -184,11 +188,13 @@ svgEl.appendChild(defs);
     svgEl.appendChild(g);
 });
 
+// área preenchida
 const area = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 area.setAttribute('d', `M${pts[0][0]},${H-pad} ${pts.map(p=>`L${p[0]},${p[1]}`).join(' ')} L${pts[pts.length-1][0]},${H-pad} Z`);
 area.setAttribute('fill', 'url(#ag)');
 svgEl.appendChild(area);
 
+// linha
 const line = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 line.setAttribute('d', `M${pts.map(p=>`${p[0]},${p[1]}`).join(' L')}`);
 line.setAttribute('fill', 'none'); line.setAttribute('stroke', '#00464B');
@@ -196,6 +202,7 @@ line.setAttribute('stroke-width', '2.5');
 line.setAttribute('stroke-linejoin', 'round'); line.setAttribute('stroke-linecap', 'round');
 svgEl.appendChild(line);
 
+// pontos + labels
 pts.forEach(([x, y], i) => {
     const isMax = vals[i] === Math.max(...vals) && vals[i] > 0;
     const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');

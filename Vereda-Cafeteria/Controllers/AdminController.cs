@@ -43,43 +43,43 @@ public class AdminController : Controller
         var ontem = hoje.AddDays(-1);
         var seteDiasAtras = hoje.AddDays(-6); // hoje é o 7º dia, então -6 cobre 7 dias
 
-        // ── Faturamento Hoje (confirmados) ──────────────────────────────
+        // ── Faturamento Hoje (finalizados) ──────────────────────────────
         var faturamentoHoje = await _context.Pedidos
-            .Where(p => p.DataPedido.Date == hoje && p.Status == StatusPedido.Confirmado)
+            .Where(p => p.DataPedido.Date == hoje && p.Status == StatusPedido.Finalizado)
             .SumAsync(p => p.ValorTotal);
 
         var faturamentoOntem = await _context.Pedidos
-            .Where(p => p.DataPedido.Date == ontem && p.Status == StatusPedido.Confirmado)
+            .Where(p => p.DataPedido.Date == ontem && p.Status == StatusPedido.Finalizado)
             .SumAsync(p => p.ValorTotal);
 
-        // ── Pedidos Confirmados Hoje ────────────────────────────────────
+        // ── Pedidos Finalizados Hoje ─────────────────────────────────────
         var pedidosHoje = await _context.Pedidos
-            .CountAsync(p => p.DataPedido.Date == hoje && p.Status == StatusPedido.Confirmado);
+            .CountAsync(p => p.DataPedido.Date == hoje && p.Status == StatusPedido.Finalizado);
 
         var pedidosOntem = await _context.Pedidos
-            .CountAsync(p => p.DataPedido.Date == ontem && p.Status == StatusPedido.Confirmado);
+            .CountAsync(p => p.DataPedido.Date == ontem && p.Status == StatusPedido.Finalizado);
 
         // ── Ticket Médio ────────────────────────────────────────────────
         var ticketMedio = pedidosHoje > 0 ? faturamentoHoje / pedidosHoje : 0;
         var ticketMedioOntem = pedidosOntem > 0 ? faturamentoOntem / pedidosOntem : 0;
 
-        // ── Item mais pedido ESTA SEMANA (confirmados) ──────────────────
+        // ── Item mais pedido ESTA SEMANA (finalizados) ───────────────────
         // Consideramos "hoje" como o dia atual, semana = últimos 7 dias
         var itemMaisPedidoData = await _context.ItensPedido
             .Include(i => i.Produto)
             .Where(i => i.Pedido.DataPedido.Date >= seteDiasAtras
                      && i.Pedido.DataPedido.Date <= hoje
-                     && i.Pedido.Status == StatusPedido.Confirmado)
+                     && i.Pedido.Status == StatusPedido.Finalizado)
             .GroupBy(i => i.Produto.Nome)
             .Select(g => new { Nome = g.Key, Total = g.Sum(i => i.Quantidade) })
             .OrderByDescending(g => g.Total)
             .FirstOrDefaultAsync();
 
-        // ── Faturamento da Semana (últimos 7 dias, confirmados) ─────────
+        // ── Faturamento da Semana (últimos 7 dias, finalizados) ──────────
         var faturamentoSemana = await _context.Pedidos
             .Where(p => p.DataPedido.Date >= seteDiasAtras
                      && p.DataPedido.Date <= hoje
-                     && p.Status == StatusPedido.Confirmado)
+                     && p.Status == StatusPedido.Finalizado)
             .GroupBy(p => p.DataPedido.Date)
             .Select(g => new { Dia = g.Key, Total = g.Sum(p => p.ValorTotal) })
             .ToListAsync();
@@ -97,13 +97,13 @@ public class AdminController : Controller
             });
         }
 
-        // ── Top Produtos da SEMANA (confirmados) ────────────────────────
+        // ── Top Produtos da SEMANA (finalizados) ─────────────────────────
         var topProdutosData = await _context.ItensPedido
             .Include(i => i.Produto)
             .ThenInclude(p => p.Categoria)
             .Where(i => i.Pedido.DataPedido.Date >= seteDiasAtras
                      && i.Pedido.DataPedido.Date <= hoje
-                     && i.Pedido.Status == StatusPedido.Confirmado)
+                     && i.Pedido.Status == StatusPedido.Finalizado)
             .GroupBy(i => new { i.Produto.Nome, Categoria = i.Produto.Categoria.Nome })
             .Select(g => new TopProduto
             {
@@ -121,9 +121,11 @@ public class AdminController : Controller
             p.Percentual = (p.Quantidade * 100) / maxQtd;
         }
 
-        // ── Pedidos Confirmados Recentes ────────────────────────────────
+        // ── Pedidos Finalizados da Semana ───────────────────────────────
         var pedidosConfirmados = await _context.Pedidos
-            .Where(p => p.Status == StatusPedido.Confirmado)
+            .Where(p => p.Status == StatusPedido.Finalizado
+                     && p.DataPedido.Date >= seteDiasAtras
+                     && p.DataPedido.Date <= hoje)
             .OrderByDescending(p => p.DataPedido)
             .Take(8)
             .ToListAsync();
